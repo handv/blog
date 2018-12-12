@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://handv.github.io/blog/2018/11/redux-thunk%E7%9A%84%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90.html</loc>
+    
+    <lastmod>2018-12-12T19:04:20.357Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://handv.github.io/tags/index.html</loc>
+    
+    <lastmod>2018-12-12T18:53:30.254Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://handv.github.io/categories/index.html</loc>
+    
+    <lastmod>2018-12-12T18:53:18.553Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://handv.github.io/blog/2018/08/literallycanvas%E7%AE%80%E4%BB%8B.html</loc>
     
     <lastmod>2018-12-12T18:48:03.660Z</lastmod>
@@ -16,30 +37,9 @@
   </url>
   
   <url>
-    <loc>https://handv.github.io/tags/index.html</loc>
-    
-    <lastmod>2018-12-12T18:11:17.913Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://handv.github.io/categories/index.html</loc>
-    
-    <lastmod>2018-12-12T18:11:02.772Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://handv.github.io/blog/2018/10/React%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%AE%9E%E6%88%98.html</loc>
     
     <lastmod>2018-12-12T17:43:35.107Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://handv.github.io/blog/2018/12/hello-world.html</loc>
-    
-    <lastmod>2018-12-12T16:38:39.256Z</lastmod>
     
   </url>
   
