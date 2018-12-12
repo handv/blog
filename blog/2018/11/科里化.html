@@ -90,7 +90,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="React,Redux-thunk,Redux,">
+  <meta name="keywords" content="curry,js基础,">
 
 
 
@@ -106,18 +106,18 @@
 
 
 
-<meta name="description" content="参考文档：redux-thunk的原理解析 个人理解：1、首先了解redux的中间件原理const store = createStore(reducer, applyMiddleware(thunk))在createStore的时候，如果应用了中间件，那么store的属性dispatch、getState可能会被重写而在redux-thunk中，dispatch就被重写了2、redux-thun">
-<meta name="keywords" content="React,Redux-thunk,Redux">
+<meta name="description" content="bind的概念  12var result = fun.bind(thisArg[, arg1[, arg2[, ...]]]) result(newArg1, newArg2...) bind返回一个新的函数，这个函数要绑定的this对象指向第一个参数，后面的参数是传入新函数的参数。这个函数的功能和fun函数的功能一样。所以，上面的bind函数可以等价于：1result(newArg1, ne">
+<meta name="keywords" content="curry,js基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="redux-thunk的原理解析">
-<meta property="og:url" content="https://handv.github.io/blog/2018/11/redux-thunk的原理解析.html">
+<meta property="og:title" content="科里化">
+<meta property="og:url" content="https://handv.github.io/blog/2018/11/科里化.html">
 <meta property="og:site_name" content="han&#39;s bolg - 年糕記">
-<meta property="og:description" content="参考文档：redux-thunk的原理解析 个人理解：1、首先了解redux的中间件原理const store = createStore(reducer, applyMiddleware(thunk))在createStore的时候，如果应用了中间件，那么store的属性dispatch、getState可能会被重写而在redux-thunk中，dispatch就被重写了2、redux-thun">
+<meta property="og:description" content="bind的概念  12var result = fun.bind(thisArg[, arg1[, arg2[, ...]]]) result(newArg1, newArg2...) bind返回一个新的函数，这个函数要绑定的this对象指向第一个参数，后面的参数是传入新函数的参数。这个函数的功能和fun函数的功能一样。所以，上面的bind函数可以等价于：1result(newArg1, ne">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-12T19:11:01.824Z">
+<meta property="og:updated_time" content="2018-12-12T19:15:31.591Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="redux-thunk的原理解析">
-<meta name="twitter:description" content="参考文档：redux-thunk的原理解析 个人理解：1、首先了解redux的中间件原理const store = createStore(reducer, applyMiddleware(thunk))在createStore的时候，如果应用了中间件，那么store的属性dispatch、getState可能会被重写而在redux-thunk中，dispatch就被重写了2、redux-thun">
+<meta name="twitter:title" content="科里化">
+<meta name="twitter:description" content="bind的概念  12var result = fun.bind(thisArg[, arg1[, arg2[, ...]]]) result(newArg1, newArg2...) bind返回一个新的函数，这个函数要绑定的this对象指向第一个参数，后面的参数是传入新函数的参数。这个函数的功能和fun函数的功能一样。所以，上面的bind函数可以等价于：1result(newArg1, ne">
 
 
 
@@ -145,7 +145,7 @@
 
 
 
-  <link rel="canonical" href="https://handv.github.io/blog/2018/11/redux-thunk的原理解析.html">
+  <link rel="canonical" href="https://handv.github.io/blog/2018/11/科里化.html">
 
 
 
@@ -168,7 +168,7 @@
 </style>
 
 
-  <title> redux-thunk的原理解析 | han's bolg - 年糕記 </title>
+  <title> 科里化 | han's bolg - 年糕記 </title>
 </head>
 
 <body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -301,7 +301,7 @@
   
 
   <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://handv.github.io/blog/2018/11/redux-thunk的原理解析.html">
+  <link itemprop="mainEntityOfPage" href="https://handv.github.io/blog/2018/11/科里化.html">
 
   <span style="display:none" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
     <meta itemprop="name" content="handv">
@@ -325,7 +325,7 @@
             
             
               
-                redux-thunk的原理解析
+                科里化
               
             
           </h2>
@@ -434,11 +434,21 @@
       
 
       
-        <p>参考文档：<a href="https://medium.com/@gethylgeorge/understanding-how-redux-thunk-works-72de3bdebc50" target="_blank" rel="noopener">redux-thunk的原理解析</a></p>
-<h2 id="个人理解："><a href="#个人理解：" class="headerlink" title="个人理解："></a>个人理解：</h2><p>1、首先了解redux的中间件原理<br>const store = createStore(reducer, applyMiddleware(thunk))<br>在createStore的时候，如果应用了中间件，那么store的属性dispatch、getState可能会被重写<br>而在redux-thunk中，dispatch就被重写了<br>2、redux-thunk</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createThunkMiddleware</span>(<span class="params">extraArgument</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">&#123; dispatch, getState &#125;</span>) =&gt;</span> next =&gt; <span class="function"><span class="params">action</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> action === <span class="string">'function'</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> action(dispatch, getState, extraArgument);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> next(action);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> thunk = createThunkMiddleware();</span><br><span class="line">thunk.withExtraArgument = createThunkMiddleware;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> thunk;</span><br></pre></td></tr></table></figure>
-<p>应用了redux-thunk后，dispatch变成了一个可以传function参数的dispatch，当遇到action为function时，执行该function的action，如果是正常的action，则执行dispatch</p>
-<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">dispatch=<span class="function"><span class="keyword">function</span><span class="params">(store.dispatch)</span></span>&#123;</span><br><span class="line">   <span class="keyword">action</span> =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (typeof <span class="keyword">action</span> === <span class="string">'function'</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">action</span>(store.dispatch, getState, extraArgument);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> store.dispatch(<span class="keyword">action</span>);</span><br><span class="line">  &#125;; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <ol>
+<li><a href="https://juejin.im/entry/59310327b123db0064f7ebbf" target="_blank" rel="noopener">bind的概念</a></li>
+</ol>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="function"><span class="keyword">fun</span>.<span class="title">bind</span><span class="params">(thisArg[, arg1[, arg2[, ...]]])</span></span> </span><br><span class="line">result(newArg1, newArg2...)</span><br></pre></td></tr></table></figure>
+<p>bind返回一个新的函数，这个函数要绑定的this对象指向第一个参数，后面的参数是传入新函数的参数。<br>这个函数的功能和fun函数的功能一样。所以，上面的bind函数可以等价于：<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result(<span class="keyword">new</span><span class="type">Arg1</span>, <span class="keyword">new</span><span class="type">Arg2</span>...) = thisArg.fun(<span class="keyword">new</span><span class="type">Arg1</span>, <span class="keyword">new</span><span class="type">Arg2</span>...)</span><br></pre></td></tr></table></figure></p>
+<ol start="2">
+<li><a href="https://juejin.im/post/5b18dedce51d45069d226534" target="_blank" rel="noopener">科里化的概念</a></li>
+</ol>
+<p>1）科里化的目的<br><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">把<span class="function"><span class="keyword">func</span><span class="params">(arg1, arg2, arg3...)</span>类型的函数</span></span><br><span class="line">转换成</span><br><span class="line"><span class="function"><span class="keyword">func</span><span class="params">(arg1)</span><span class="params">(arg2)</span><span class="params">(arg3)</span><span class="params">(...)</span>类型</span></span><br></pre></td></tr></table></figure></p>
+<p>2）科里化的返回值</p>
+<p>所以科里化的返回值仍然是一个函数，这样才能继续执行后面的参数(arg2)(arg3)(…)</p>
+<p>3）科里化的定义</p>
+<p><strong>将函数与其参数的一个子集绑定起来后返回个新函数。</strong></p>
+<p>所以要绑定，就需要bind方法</p>
+<p>4）科里化的实现<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> currying = <span class="function"><span class="keyword">function</span></span>(fn) &#123;</span><br><span class="line">    <span class="keyword">var</span> args = [].slice.call(arguments, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span></span>() &#123;</span><br><span class="line">        <span class="keyword">var</span> <span class="keyword">new</span><span class="type">Args</span> = args.concat([].slice.call(arguments));</span><br><span class="line">        <span class="keyword">return</span> fn.apply(<span class="literal">null</span>, <span class="keyword">new</span><span class="type">Args</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -452,11 +462,9 @@
   
         <div class="post-tags">
           
-            <a href="/tags/React/" rel="tag"># React</a>
+            <a href="/tags/curry/" rel="tag"># curry</a>
           
-            <a href="/tags/Redux-thunk/" rel="tag"># Redux-thunk</a>
-          
-            <a href="/tags/Redux/" rel="tag"># Redux</a>
+            <a href="/tags/js基础/" rel="tag"># js基础</a>
           
         </div>
       
@@ -482,12 +490,12 @@
 
         <li class="post-copyright-link">
           <strong>本文标题：</strong>
-          <a href="https://handv.github.io/blog/2018/11/redux-thunk的原理解析.html" title="redux-thunk的原理解析">redux-thunk的原理解析</a>
+          <a href="https://handv.github.io/blog/2018/11/科里化.html" title="科里化">科里化</a>
         </li>
 
         <li class="post-copyright-link">
           <strong>本文链接：</strong>
-          <a href="https://handv.github.io/blog/2018/11/redux-thunk的原理解析.html" title="redux-thunk的原理解析">https://handv.github.io/blog/2018/11/redux-thunk的原理解析.html</a>
+          <a href="https://handv.github.io/blog/2018/11/科里化.html" title="科里化">https://handv.github.io/blog/2018/11/科里化.html</a>
         </li>
 
         <li class="post-copyright-date">
@@ -505,8 +513,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2018/11/科里化.html" rel="next" title="科里化">
-                <i class="fa fa-chevron-left"></i> 科里化
+              <a href="/blog/2018/10/React单元测试实战.html" rel="next" title="React单元测试实战">
+                <i class="fa fa-chevron-left"></i> React单元测试实战
               </a>
             
           </div>
@@ -515,8 +523,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/blog/2018/11/Mac高效开发.html" rel="prev" title="Mac高效开发小技巧">
-                Mac高效开发小技巧 <i class="fa fa-chevron-right"></i>
+              <a href="/blog/2018/11/redux-thunk的原理解析.html" rel="prev" title="redux-thunk的原理解析">
+                redux-thunk的原理解析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -564,17 +572,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="handv">
           <p class="site-author-name" itemprop="name">handv</p>
@@ -639,22 +638,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#个人理解："><span class="nav-number">1.</span> <span class="nav-text">个人理解：</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
     </div>

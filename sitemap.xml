@@ -2,9 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://handv.github.io/blog/2018/11/%E7%A7%91%E9%87%8C%E5%8C%96.html</loc>
+    
+    <lastmod>2018-12-12T19:15:31.591Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://handv.github.io/blog/2018/11/redux-thunk%E7%9A%84%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90.html</loc>
     
-    <lastmod>2018-12-12T19:04:20.357Z</lastmod>
+    <lastmod>2018-12-12T19:11:01.824Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://handv.github.io/blog/2018/10/React%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%AE%9E%E6%88%98.html</loc>
+    
+    <lastmod>2018-12-12T19:10:57.423Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://handv.github.io/blog/2018/08/literallycanvas%E7%AE%80%E4%BB%8B.html</loc>
+    
+    <lastmod>2018-12-12T19:10:52.282Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://handv.github.io/blog/2018/11/Mac%E9%AB%98%E6%95%88%E5%BC%80%E5%8F%91.html</loc>
+    
+    <lastmod>2018-12-12T19:10:39.060Z</lastmod>
     
   </url>
   
@@ -23,23 +51,9 @@
   </url>
   
   <url>
-    <loc>https://handv.github.io/blog/2018/08/literallycanvas%E7%AE%80%E4%BB%8B.html</loc>
-    
-    <lastmod>2018-12-12T18:48:03.660Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://handv.github.io/about/index.html</loc>
     
     <lastmod>2018-12-12T18:14:19.148Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://handv.github.io/blog/2018/10/React%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%AE%9E%E6%88%98.html</loc>
-    
-    <lastmod>2018-12-12T17:43:35.107Z</lastmod>
     
   </url>
   
