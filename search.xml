@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[重构一时爽...]]></title>
+    <url>%2F%2Fblog%2F2019%2F01%2F%E9%87%8D%E6%9E%84%E4%B8%80%E6%97%B6%E7%88%BD.html</url>
+    <content type="text"><![CDATA[俗话说的好，“重构一时爽，全家火葬场”。这两天就遇到了这么个事。 本来一个老项目要加一点新需求，挺简单的事，前端一两天就干完了。偏偏遇到了后端大佬把接口重构了，接口名、请求参数、请求方式、返回数据都有变化，这可就有的忙了，光重构就重构了好久。 要说光改改接口，返回结果格式，也问题不大，稍微麻烦一点吧，多弄两天也就ok了。偏偏遇到自己这时候强迫症犯了，把之前项目写的不好的地方又重新整了一遍。原先的项目路由一直设置的不好（前人历史遗留问题），参数全部用的search格式，导致每次数据变化了都要用componentWillReceiveProps来进行判断，不仅判断起来复杂，还会导致render执行多次，造成浪费，而且debug起来也很麻烦。索性改了，引发关键数据变化的参数统统改成router pathname，这样子数据变化的时候只需要判断componentDidMount或者componentDidUpdate就可以了。 这样子就相当于将整个项目都重写了一遍，又花了大几天的时间。如果到这了，也就ok。偏偏让我看到了antd的版本还停留在2.x时代，这antd都已经更新到3.11.6（重构项目的时候，刚才我又看了一眼antd的更新日志，已经到3.12了。）怎么办，升级呗，升完了感觉确实好看一点点了。 到这里感觉应该差不多了吧，嗯。。。，这个ui界面长得还是丑了点。纯粹是产品画了张草图，开发自己随便方便着来的布局，没有一点点的美感。虽说这是个内部系统，可以也太不好看了吧。用antd-pro重写一遍？杀了我吧，实在是改不动了。 虽然不能用antd-pro来重写，但antd-pro的页面布局可以考虑一下啊，找demo里合适的布局样式来改了改。嗯，改完了还挺好看的，终于有点高大上的感觉了。完结撒花！！！ 有人要问了，你这么搞不是多花了好多的工作时间，导致项目周期延长吗？错了，这也是为啥说重构一时爽的原因了。在不影响项目周期的前提下，进行自我认同的重构工作，都是在下班时间搞的。就像现在这个，元旦假期搞了好几天呢，甚至还通了个宵，隐隐的感觉到了身体被掏空。。。]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[hexo next主题配置]]></title>
     <url>%2F%2Fblog%2F2018%2F12%2Fhexo-next%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE.html</url>
     <content type="text"><![CDATA[站在巨人的肩膀上，提供一下链接： next官方文档 搭建hexo 百度统计配置 阅读人数配置 字数统计、阅读时长配置]]></content>
@@ -24,6 +35,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[科里化]]></title>
+    <url>%2F%2Fblog%2F2018%2F11%2F%E7%A7%91%E9%87%8C%E5%8C%96.html</url>
+    <content type="text"><![CDATA[bind的概念 12var result = fun.bind(thisArg[, arg1[, arg2[, ...]]]) result(newArg1, newArg2...) bind返回一个新的函数，这个函数要绑定的this对象指向第一个参数，后面的参数是传入新函数的参数。这个函数的功能和fun函数的功能一样。所以，上面的bind函数可以等价于：1result(newArg1, newArg2...) = thisArg.fun(newArg1, newArg2...) 科里化的概念 1）科里化的目的123把func(arg1, arg2, arg3...)类型的函数转换成func(arg1)(arg2)(arg3)(...)类型 2）科里化的返回值 所以科里化的返回值仍然是一个函数，这样才能继续执行后面的参数(arg2)(arg3)(…) 3）科里化的定义 将函数与其参数的一个子集绑定起来后返回个新函数。 所以要绑定，就需要bind方法 4）科里化的实现1234567var currying = function(fn) &#123; var args = [].slice.call(arguments, 1); return function() &#123; var newArgs = args.concat([].slice.call(arguments)); return fn.apply(null, newArgs); &#125;;&#125;;]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>curry</tag>
+        <tag>js基础</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[redux-thunk的原理解析]]></title>
     <url>%2F%2Fblog%2F2018%2F11%2Fredux-thunk%E7%9A%84%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90.html</url>
     <content type="text"><![CDATA[参考文档：redux-thunk的原理解析 个人理解：1、首先了解redux的中间件原理const store = createStore(reducer, applyMiddleware(thunk))在createStore的时候，如果应用了中间件，那么store的属性dispatch、getState可能会被重写而在redux-thunk中，dispatch就被重写了2、redux-thunk 1234567891011121314function createThunkMiddleware(extraArgument) &#123; return (&#123; dispatch, getState &#125;) =&gt; next =&gt; action =&gt; &#123; if (typeof action === 'function') &#123; return action(dispatch, getState, extraArgument); &#125; return next(action); &#125;;&#125;const thunk = createThunkMiddleware();thunk.withExtraArgument = createThunkMiddleware;export default thunk; 应用了redux-thunk后，dispatch变成了一个可以传function参数的dispatch，当遇到action为function时，执行该function的action，如果是正常的action，则执行dispatch 12345678dispatch=function(store.dispatch)&#123; action =&gt; &#123; if (typeof action === 'function') &#123; return action(store.dispatch, getState, extraArgument); &#125; return store.dispatch(action); &#125;; &#125;]]></content>
@@ -34,18 +57,6 @@
         <tag>React</tag>
         <tag>Redux-thunk</tag>
         <tag>Redux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[科里化]]></title>
-    <url>%2F%2Fblog%2F2018%2F11%2F%E7%A7%91%E9%87%8C%E5%8C%96.html</url>
-    <content type="text"><![CDATA[bind的概念 12var result = fun.bind(thisArg[, arg1[, arg2[, ...]]]) result(newArg1, newArg2...) bind返回一个新的函数，这个函数要绑定的this对象指向第一个参数，后面的参数是传入新函数的参数。这个函数的功能和fun函数的功能一样。所以，上面的bind函数可以等价于：1result(newArg1, newArg2...) = thisArg.fun(newArg1, newArg2...) 科里化的概念 1）科里化的目的123把func(arg1, arg2, arg3...)类型的函数转换成func(arg1)(arg2)(arg3)(...)类型 2）科里化的返回值 所以科里化的返回值仍然是一个函数，这样才能继续执行后面的参数(arg2)(arg3)(…) 3）科里化的定义 将函数与其参数的一个子集绑定起来后返回个新函数。 所以要绑定，就需要bind方法 4）科里化的实现1234567var currying = function(fn) &#123; var args = [].slice.call(arguments, 1); return function() &#123; var newArgs = args.concat([].slice.call(arguments)); return fn.apply(null, newArgs); &#125;;&#125;;]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>curry</tag>
-        <tag>js基础</tag>
       </tags>
   </entry>
   <entry>
