@@ -114,7 +114,7 @@
 <meta property="og:site_name" content="han&#39;s bolg - 年糕記">
 <meta property="og:description" content="俗话说的好，“重构一时爽，全家火葬场”。这两天就遇到了这么个事。 本来一个老项目要加一点新需求，挺简单的事，前端一两天就干完了。偏偏遇到了后端大佬把接口重构了，接口名、请求参数、请求方式、返回数据都有变化，这可就有的忙了，光重构就重构了好久。 要说光改改接口，返回结果格式，也问题不大，稍微麻烦一点吧，多弄两天也就ok了。偏偏遇到自己这时候强迫症犯了，把之前项目写的不好的地方又重新整了一遍。原先的项">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-06T17:13:04.151Z">
+<meta property="og:updated_time" content="2019-01-07T07:48:39.351Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="重构一时爽...">
 <meta name="twitter:description" content="俗话说的好，“重构一时爽，全家火葬场”。这两天就遇到了这么个事。 本来一个老项目要加一点新需求，挺简单的事，前端一两天就干完了。偏偏遇到了后端大佬把接口重构了，接口名、请求参数、请求方式、返回数据都有变化，这可就有的忙了，光重构就重构了好久。 要说光改改接口，返回结果格式，也问题不大，稍微麻烦一点吧，多弄两天也就ok了。偏偏遇到自己这时候强迫症犯了，把之前项目写的不好的地方又重新整了一遍。原先的项">
@@ -562,7 +562,7 @@ $(function() {
       
 
       
-        <p>俗话说的好，“重构一时爽，全家火葬场”。这两天就遇到了这么个事。</p>
+        <h3 id="俗话说的好，“重构一时爽，全家火葬场”。"><a href="#俗话说的好，“重构一时爽，全家火葬场”。" class="headerlink" title="俗话说的好，“重构一时爽，全家火葬场”。"></a>俗话说的好，“重构一时爽，全家火葬场”。</h3><p>这两天就遇到了这么个事。</p>
 <p>本来一个老项目要加一点新需求，挺简单的事，前端一两天就干完了。偏偏遇到了后端大佬把接口重构了，接口名、请求参数、请求方式、返回数据都有变化，这可就有的忙了，光重构就重构了好久。</p>
 <p>要说光改改接口，返回结果格式，也问题不大，稍微麻烦一点吧，多弄两天也就ok了。偏偏遇到自己这时候强迫症犯了，把之前项目写的不好的地方又重新整了一遍。原先的项目路由一直设置的不好（前人历史遗留问题），参数全部用的search格式，导致每次数据变化了都要用componentWillReceiveProps来进行判断，不仅判断起来复杂，还会导致render执行多次，造成浪费，而且debug起来也很麻烦。索性改了，引发关键数据变化的参数统统改成router pathname，这样子数据变化的时候只需要判断componentDidMount或者componentDidUpdate就可以了。</p>
 <p>这样子就相当于将整个项目都重写了一遍，又花了大几天的时间。如果到这了，也就ok。偏偏让我看到了antd的版本还停留在2.x时代，这antd都已经更新到3.11.6（重构项目的时候，刚才我又看了一眼antd的更新日志，已经到3.12了。）怎么办，升级呗，升完了感觉确实好看一点点了。</p>
@@ -665,6 +665,8 @@ $(function() {
           
   <div class="comments" id="comments">
     
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MjAyNi8xODU3Mw"></div>
+    
   </div>
 
 
@@ -686,8 +688,17 @@ $(function() {
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="handv">
           <p class="site-author-name" itemprop="name">handv</p>
@@ -752,6 +763,22 @@ $(function() {
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#俗话说的好，“重构一时爽，全家火葬场”。"><span class="nav-number">1.</span> <span class="nav-text">俗话说的好，“重构一时爽，全家火葬场”。</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
@@ -913,6 +940,17 @@ $(function() {
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 

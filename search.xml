@@ -35,18 +35,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[科里化]]></title>
-    <url>%2F%2Fblog%2F2018%2F11%2F%E7%A7%91%E9%87%8C%E5%8C%96.html</url>
-    <content type="text"><![CDATA[bind的概念 12var result = fun.bind(thisArg[, arg1[, arg2[, ...]]]) result(newArg1, newArg2...) bind返回一个新的函数，这个函数要绑定的this对象指向第一个参数，后面的参数是传入新函数的参数。这个函数的功能和fun函数的功能一样。所以，上面的bind函数可以等价于：1result(newArg1, newArg2...) = thisArg.fun(newArg1, newArg2...) 科里化的概念 1）科里化的目的123把func(arg1, arg2, arg3...)类型的函数转换成func(arg1)(arg2)(arg3)(...)类型 2）科里化的返回值 所以科里化的返回值仍然是一个函数，这样才能继续执行后面的参数(arg2)(arg3)(…) 3）科里化的定义 将函数与其参数的一个子集绑定起来后返回个新函数。 所以要绑定，就需要bind方法 4）科里化的实现1234567var currying = function(fn) &#123; var args = [].slice.call(arguments, 1); return function() &#123; var newArgs = args.concat([].slice.call(arguments)); return fn.apply(null, newArgs); &#125;;&#125;;]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>curry</tag>
-        <tag>js基础</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[redux-thunk的原理解析]]></title>
     <url>%2F%2Fblog%2F2018%2F11%2Fredux-thunk%E7%9A%84%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90.html</url>
     <content type="text"><![CDATA[参考文档：redux-thunk的原理解析 个人理解：1、首先了解redux的中间件原理const store = createStore(reducer, applyMiddleware(thunk))在createStore的时候，如果应用了中间件，那么store的属性dispatch、getState可能会被重写而在redux-thunk中，dispatch就被重写了2、redux-thunk 1234567891011121314function createThunkMiddleware(extraArgument) &#123; return (&#123; dispatch, getState &#125;) =&gt; next =&gt; action =&gt; &#123; if (typeof action === 'function') &#123; return action(dispatch, getState, extraArgument); &#125; return next(action); &#125;;&#125;const thunk = createThunkMiddleware();thunk.withExtraArgument = createThunkMiddleware;export default thunk; 应用了redux-thunk后，dispatch变成了一个可以传function参数的dispatch，当遇到action为function时，执行该function的action，如果是正常的action，则执行dispatch 12345678dispatch=function(store.dispatch)&#123; action =&gt; &#123; if (typeof action === 'function') &#123; return action(store.dispatch, getState, extraArgument); &#125; return store.dispatch(action); &#125;; &#125;]]></content>
@@ -57,6 +45,18 @@
         <tag>React</tag>
         <tag>Redux-thunk</tag>
         <tag>Redux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[科里化]]></title>
+    <url>%2F%2Fblog%2F2018%2F11%2F%E7%A7%91%E9%87%8C%E5%8C%96.html</url>
+    <content type="text"><![CDATA[bind的概念 12var result = fun.bind(thisArg[, arg1[, arg2[, ...]]]) result(newArg1, newArg2...) bind返回一个新的函数，这个函数要绑定的this对象指向第一个参数，后面的参数是传入新函数的参数。这个函数的功能和fun函数的功能一样。所以，上面的bind函数可以等价于：1result(newArg1, newArg2...) = thisArg.fun(newArg1, newArg2...) 科里化的概念 1）科里化的目的123把func(arg1, arg2, arg3...)类型的函数转换成func(arg1)(arg2)(arg3)(...)类型 2）科里化的返回值 所以科里化的返回值仍然是一个函数，这样才能继续执行后面的参数(arg2)(arg3)(…) 3）科里化的定义 将函数与其参数的一个子集绑定起来后返回个新函数。 所以要绑定，就需要bind方法 4）科里化的实现1234567var currying = function(fn) &#123; var args = [].slice.call(arguments, 1); return function() &#123; var newArgs = args.concat([].slice.call(arguments)); return fn.apply(null, newArgs); &#125;;&#125;;]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>curry</tag>
+        <tag>js基础</tag>
       </tags>
   </entry>
   <entry>
