@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[2018前端年终盘点]]></title>
+    <url>%2F%2Fblog%2F2019%2F01%2F2018%E5%89%8D%E7%AB%AF%E5%B9%B4%E7%BB%88%E7%9B%98%E7%82%B9.html</url>
+    <content type="text"><![CDATA[年度盘点系列 前端 2018 解读 2018年GitHub年度盘点（中文链接） 2018年JavaScript生态圈调查报告出炉！（中文链接） New ES2018 Features Every JavaScript Developer Should Know (中文链接) 剩余参数和扩展运算符 异步迭代 Promise.finally 正则表达式 标记模板文字 The Most Liked CodePen Examples in 2018 知识点 Node.js和JavaScript测试最佳实践 redux作者Dan Abramov不知道的事 1234567不管你的程度多好，你仍会感到不安或毫无自信。虽然经验丰富的开发者也有很多不会的东西，但他们仍拥有十分宝贵的专业与技术。我知道我的知识缺口是哪些（至少是某些）。我可以在未来我感到好奇或需要它们的时候补强这些不足。而这个认知并不会抹煞我的知识与经验。有很多事情是我可以做得很好的。例如：在我需要某个技术的时候，把它学起来。 如何用svg画一个进度环]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[重构一时爽...]]></title>
     <url>%2F%2Fblog%2F2019%2F01%2F%E9%87%8D%E6%9E%84%E4%B8%80%E6%97%B6%E7%88%BD.html</url>
     <content type="text"><![CDATA[俗话说的好，“重构一时爽，全家火葬场”。这两天就遇到了这么个事。 本来一个老项目要加一点新需求，挺简单的事，前端一两天就干完了。偏偏遇到了后端大佬把接口重构了，接口名、请求参数、请求方式、返回数据都有变化，这可就有的忙了，光重构就重构了好久。 要说光改改接口，返回结果格式，也问题不大，稍微麻烦一点吧，多弄两天也就ok了。偏偏遇到自己这时候强迫症犯了，把之前项目写的不好的地方又重新整了一遍。原先的项目路由一直设置的不好（前人历史遗留问题），参数全部用的search格式，导致每次数据变化了都要用componentWillReceiveProps来进行判断，不仅判断起来复杂，还会导致render执行多次，造成浪费，而且debug起来也很麻烦。索性改了，引发关键数据变化的参数统统改成router pathname，这样子数据变化的时候只需要判断componentDidMount或者componentDidUpdate就可以了。 这样子就相当于将整个项目都重写了一遍，又花了大几天的时间。如果到这了，也就ok。偏偏让我看到了antd的版本还停留在2.x时代，这antd都已经更新到3.11.6（重构项目的时候，刚才我又看了一眼antd的更新日志，已经到3.12了。）怎么办，升级呗，升完了感觉确实好看一点点了。 到这里感觉应该差不多了吧，嗯。。。，这个ui界面长得还是丑了点。纯粹是产品画了张草图，开发自己随便方便着来的布局，没有一点点的美感。虽说这是个内部系统，可以也太不好看了吧。用antd-pro重写一遍？杀了我吧，实在是改不动了。 虽然不能用antd-pro来重写，但antd-pro的页面布局可以考虑一下啊，找demo里合适的布局样式来改了改。嗯，改完了还挺好看的，终于有点高大上的感觉了。完结撒花！！！ 有人要问了，你这么搞不是多花了好多的工作时间，导致项目周期延长吗？错了，这也是为啥说重构一时爽的原因了。在不影响项目周期的前提下，进行自我认同的重构工作，都是在下班时间搞的。就像现在这个，元旦假期搞了好几天呢，甚至还通了个宵，隐隐的感觉到了身体被掏空。。。]]></content>
@@ -14,7 +25,7 @@
   <entry>
     <title><![CDATA[hexo next主题配置]]></title>
     <url>%2F%2Fblog%2F2018%2F12%2Fhexo-next%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE.html</url>
-    <content type="text"><![CDATA[站在巨人的肩膀上，提供一下链接： next官方文档 搭建hexo 百度统计配置 阅读人数配置 字数统计、阅读时长配置]]></content>
+    <content type="text"><![CDATA[站在巨人的肩膀上，提供一下链接： next官方文档 搭建hexo 百度统计配置 阅读人数配置 字数统计、阅读时长配置 工具 来必力评论系统 百度统计 leancloud阅读人数统计]]></content>
       <categories>
         <category>技术</category>
       </categories>
