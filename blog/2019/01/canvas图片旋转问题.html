@@ -90,7 +90,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="Literallycanvas,Canvas,">
+  <meta name="keywords" content="Canvas,Literallycanvas,">
 
 
 
@@ -107,19 +107,19 @@
 
 
 <meta name="description" content="canvas如何实现将一张图片旋转90度的效果呢？ 方法1：修改canvas的css，将canvas旋转90度index.html123456789101112131415161718192021222324252627282930313233343536373839404142434445&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html&amp;gt;  &amp;lt;head&amp;gt;    &amp;lt">
-<meta name="keywords" content="Literallycanvas,Canvas">
+<meta name="keywords" content="Canvas,Literallycanvas">
 <meta property="og:type" content="article">
 <meta property="og:title" content="canvas图片如何旋转90度">
 <meta property="og:url" content="https://handv.github.io/blog/2019/01/canvas图片旋转问题.html">
 <meta property="og:site_name" content="han&#39;s bolg - 年糕記">
 <meta property="og:description" content="canvas如何实现将一张图片旋转90度的效果呢？ 方法1：修改canvas的css，将canvas旋转90度index.html123456789101112131415161718192021222324252627282930313233343536373839404142434445&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html&amp;gt;  &amp;lt;head&amp;gt;    &amp;lt">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://handv.github.io/blog/2019/01/img/rotate1.jpeg">
-<meta property="og:updated_time" content="2019-01-27T16:35:12.296Z">
+<meta property="og:image" content="https://handv.github.io/blog/2019/01/images/rotate1.jpeg">
+<meta property="og:updated_time" content="2019-01-27T16:45:47.174Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="canvas图片如何旋转90度">
 <meta name="twitter:description" content="canvas如何实现将一张图片旋转90度的效果呢？ 方法1：修改canvas的css，将canvas旋转90度index.html123456789101112131415161718192021222324252627282930313233343536373839404142434445&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html&amp;gt;  &amp;lt;head&amp;gt;    &amp;lt">
-<meta name="twitter:image" content="https://handv.github.io/blog/2019/01/img/rotate1.jpeg">
+<meta name="twitter:image" content="https://handv.github.io/blog/2019/01/images/rotate1.jpeg">
 
 
 
@@ -580,9 +580,9 @@ $(function() {
 <li>将图片在坐标系的负1/2处渲染出来</li>
 <li>将ctx坐标恢复默认</li>
 </ol>
-<p><img src="./img/rotate1.jpeg" alt="示意图"></p>
+<p><img src="./images/rotate1.jpeg" alt="示意图"></p>
 <h4 id="注意"><a href="#注意" class="headerlink" title="注意:"></a>注意:</h4><p><strong>图片在canvas中的渲染，一定要放到imageObj.onload中，否则可能会出现渲染出来的图片为空，因为imageObj尚未加载完成。</strong></p>
-<h2 id="掌握了这个旋转方法，在literallycanvas中的图片旋转就变得很简单了"><a href="#掌握了这个旋转方法，在literallycanvas中的图片旋转就变得很简单了" class="headerlink" title="掌握了这个旋转方法，在literallycanvas中的图片旋转就变得很简单了"></a>掌握了这个旋转方法，在literallycanvas中的图片旋转就变得很简单了</h2><ul>
+<h3 id="掌握了这个旋转方法，在literallycanvas中的图片旋转就变得很简单了"><a href="#掌握了这个旋转方法，在literallycanvas中的图片旋转就变得很简单了" class="headerlink" title="掌握了这个旋转方法，在literallycanvas中的图片旋转就变得很简单了"></a>掌握了这个旋转方法，在literallycanvas中的图片旋转就变得很简单了</h3><ul>
 <li>参考<a href="https://github.com/handv/literallycanvas/tree/rotate2" target="_blank" rel="noopener">我的代码</a></li>
 </ul>
 
@@ -598,9 +598,9 @@ $(function() {
   
         <div class="post-tags">
           
-            <a href="/tags/Literallycanvas/" rel="tag"># Literallycanvas</a>
-          
             <a href="/tags/Canvas/" rel="tag"># Canvas</a>
+          
+            <a href="/tags/Literallycanvas/" rel="tag"># Literallycanvas</a>
           
         </div>
       
@@ -791,7 +791,7 @@ $(function() {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法1：修改canvas的css，将canvas旋转90度"><span class="nav-number">1.</span> <span class="nav-text">方法1：修改canvas的css，将canvas旋转90度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法2：canvas不变，将图片旋转90度"><span class="nav-number">2.</span> <span class="nav-text">方法2：canvas不变，将图片旋转90度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#canvas-api"><span class="nav-number">2.1.</span> <span class="nav-text">canvas api</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原理"><span class="nav-number">2.2.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注意"><span class="nav-number">2.3.</span> <span class="nav-text">注意:</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#掌握了这个旋转方法，在literallycanvas中的图片旋转就变得很简单了"><span class="nav-number"></span> <span class="nav-text">掌握了这个旋转方法，在literallycanvas中的图片旋转就变得很简单了</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法1：修改canvas的css，将canvas旋转90度"><span class="nav-number">1.</span> <span class="nav-text">方法1：修改canvas的css，将canvas旋转90度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法2：canvas不变，将图片旋转90度"><span class="nav-number">2.</span> <span class="nav-text">方法2：canvas不变，将图片旋转90度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#canvas-api"><span class="nav-number">2.1.</span> <span class="nav-text">canvas api</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原理"><span class="nav-number">2.2.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注意"><span class="nav-number">2.3.</span> <span class="nav-text">注意:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#掌握了这个旋转方法，在literallycanvas中的图片旋转就变得很简单了"><span class="nav-number">3.</span> <span class="nav-text">掌握了这个旋转方法，在literallycanvas中的图片旋转就变得很简单了</span></a></li></ol></div>
             
 
           </div>
