@@ -114,7 +114,7 @@
 <meta property="og:site_name" content="han&#39;s bolg - 年糕記">
 <meta property="og:description" content="开发和测试是互联网公司最常见的两个工种，他们相互依赖，或者说单方面依赖，但至少不像开发和产品那样关系恶劣，动不动就武力解决。网上关于开发、产品关系的段子很多，但关于开发和测试的却不多。因为工作关系，对开发、测试都比较熟悉，所以今天我们来聊一聊开发和测试之间的那些事儿。 代码测试开发：就像是建筑师一样，按照图纸的要求，打地基盖房子，尽可能100%还原设计师的要求。开发自测的思路也一般以完成功能为主，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-05T14:18:45.125Z">
+<meta property="og:updated_time" content="2019-03-05T14:20:44.706Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="开发、测试趣谈">
 <meta name="twitter:description" content="开发和测试是互联网公司最常见的两个工种，他们相互依赖，或者说单方面依赖，但至少不像开发和产品那样关系恶劣，动不动就武力解决。网上关于开发、产品关系的段子很多，但关于开发和测试的却不多。因为工作关系，对开发、测试都比较熟悉，所以今天我们来聊一聊开发和测试之间的那些事儿。 代码测试开发：就像是建筑师一样，按照图纸的要求，打地基盖房子，尽可能100%还原设计师的要求。开发自测的思路也一般以完成功能为主，">
@@ -586,7 +586,7 @@ $(function() {
 <p>开发自己看代码都头大，甚至都不愿意自测。</p>
 <h3 id="提测"><a href="#提测" class="headerlink" title="提测"></a>提测</h3><p>开发：排期定好了，到提测时间了，可我代码还没写完呢，怎么办？先把主流程写通吧，小细节，测试同学测的时候我继续开发，提bug就提bug吧。</p>
 <p>测试：提测了，那应该是都写好了，流程是可以跑通的。</p>
-<h2 id="提测申请"><a href="#提测申请" class="headerlink" title="提测申请"></a>提测申请</h2><p>开发：哎呀，为什么这个模板里有这么多内容，我要写那么多干嘛，就写个标题吧，嘿嘿</p>
+<h3 id="提测申请"><a href="#提测申请" class="headerlink" title="提测申请"></a>提测申请</h3><p>开发：哎呀，为什么这个模板里有这么多内容，我要写那么多干嘛，就写个标题吧，嘿嘿</p>
 <p>测试：你不写全了，我哪知道需要测试啥？你的代码你最清楚啊</p>
 <ul>
 <li>相关prd、接口、log文档呢</li>
@@ -598,7 +598,7 @@ $(function() {
 </ul>
 <h3 id="bug"><a href="#bug" class="headerlink" title="bug"></a>bug</h3><p>测试：发现了一个bug，跟开发说：这里运行不了，是不是有bug？<br>开发：呵呵，你的环境没搭好吧？</p>
 <p>资深测试：发现一个bug，跟开发说：亲，我这里运行不了，能不能帮忙看看是不是我环境没搭好？<br>开发：卧槽，是不是出bug了？</p>
-<h2 id="测试写的bug说明"><a href="#测试写的bug说明" class="headerlink" title="测试写的bug说明"></a>测试写的bug说明</h2><p>测试：我费了劲在jira写了半天<br>开发：我就看个标题</p>
+<h3 id="测试写的bug说明"><a href="#测试写的bug说明" class="headerlink" title="测试写的bug说明"></a>测试写的bug说明</h3><p>测试：我费了劲在jira写了半天<br>开发：我就看个标题</p>
 <p>开发：复现步骤呢，bug环境呢，链接呢，机型呢？有截图吗？<br>测试：…</p>
 <p>有经验的测试，不会一发现问题，就给开发提bug。而是进行反复的确认，在测试报告里会写出详细的复现步骤，贴出效果图，确认bug的产品环境(比如，是任何机器都会触发，还是某台特定机器特定浏览器的问题)。</p>
 <p>再资深一点的测试，会主动追查bug产生的原因，会去代码的相关片段进行debug，给出开发同学合适的建议。</p>
@@ -617,9 +617,9 @@ $(function() {
 <h3 id="需求变动"><a href="#需求变动" class="headerlink" title="需求变动"></a>需求变动</h3><p>测试：这个地方怎么跟prd不符？<br>开发：产品需求改了啊，怎么没改prd<br>两人一起怒视pm</p>
 <h3 id="改完bug"><a href="#改完bug" class="headerlink" title="改完bug"></a>改完bug</h3><p>开发：默默改完了<br>测试：改完了吗？在吗？人肉访问中。。。<br>测试：改完了吗？你改一下jira状态啊？<br>测试：改完了？自测了吗？还是有问题啊？<br>测试：改完了，能告知一下错误原因吗？</p>
 <h3 id="要封包了，还要改需求的pm"><a href="#要封包了，还要改需求的pm" class="headerlink" title="要封包了，还要改需求的pm"></a>要封包了，还要改需求的pm</h3><p>开发、测试双双拿起来桌子上的板砖</p>
-<h2 id="上线"><a href="#上线" class="headerlink" title="上线"></a>上线</h2><p>开发：我就改了一点点，不影响其他功能，不用测了，直接上吧<br>测试：上线了？什么时候上的？上的什么功能，我不知道怎么能上线，出问题不要甩锅给我啊！！！</p>
+<h3 id="上线"><a href="#上线" class="headerlink" title="上线"></a>上线</h3><p>开发：我就改了一点点，不影响其他功能，不用测了，直接上吧<br>测试：上线了？什么时候上的？上的什么功能，我不知道怎么能上线，出问题不要甩锅给我啊！！！</p>
 <p>不要偷偷上线，有时间尽量安排测试。实在不行，也要跟测试同学同步一下信息。</p>
-<h2 id="线上故障"><a href="#线上故障" class="headerlink" title="线上故障"></a>线上故障</h2><p>开发：你们测试怎么回事，怎么没测出来？<br>测试：你没跟我说这个需求啊，我哪知道？<br>测试：对不起，我尽力了。。。</p>
+<h3 id="线上故障"><a href="#线上故障" class="headerlink" title="线上故障"></a>线上故障</h3><p>开发：你们测试怎么回事，怎么没测出来？<br>测试：你没跟我说这个需求啊，我哪知道？<br>测试：对不起，我尽力了。。。</p>
 <p>世上没有无bug的代码，开发尽量不写带明显bug的代码；测试要写测试用例，要维护核心case。</p>
 <p>开发测试是一个团队，大家都是为了一个目标，所以要相亲相爱，要peace!</p>
 
@@ -826,7 +826,7 @@ $(function() {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码测试"><span class="nav-number">1.</span> <span class="nav-text">代码测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#但是，bug数太多"><span class="nav-number">2.</span> <span class="nav-text">但是，bug数太多</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提测"><span class="nav-number">3.</span> <span class="nav-text">提测</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#提测申请"><span class="nav-number"></span> <span class="nav-text">提测申请</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bug"><span class="nav-number">1.</span> <span class="nav-text">bug</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试写的bug说明"><span class="nav-number"></span> <span class="nav-text">测试写的bug说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#debug"><span class="nav-number">1.</span> <span class="nav-text">debug</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不是自己写的bug"><span class="nav-number">2.</span> <span class="nav-text">不是自己写的bug</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重复提的bug"><span class="nav-number">3.</span> <span class="nav-text">重复提的bug</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#需求变动"><span class="nav-number">4.</span> <span class="nav-text">需求变动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改完bug"><span class="nav-number">5.</span> <span class="nav-text">改完bug</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#要封包了，还要改需求的pm"><span class="nav-number">6.</span> <span class="nav-text">要封包了，还要改需求的pm</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上线"><span class="nav-number"></span> <span class="nav-text">上线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线上故障"><span class="nav-number"></span> <span class="nav-text">线上故障</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码测试"><span class="nav-number">1.</span> <span class="nav-text">代码测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#但是，bug数太多"><span class="nav-number">2.</span> <span class="nav-text">但是，bug数太多</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提测"><span class="nav-number">3.</span> <span class="nav-text">提测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提测申请"><span class="nav-number">4.</span> <span class="nav-text">提测申请</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bug"><span class="nav-number">5.</span> <span class="nav-text">bug</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试写的bug说明"><span class="nav-number">6.</span> <span class="nav-text">测试写的bug说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#debug"><span class="nav-number">7.</span> <span class="nav-text">debug</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不是自己写的bug"><span class="nav-number">8.</span> <span class="nav-text">不是自己写的bug</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重复提的bug"><span class="nav-number">9.</span> <span class="nav-text">重复提的bug</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#需求变动"><span class="nav-number">10.</span> <span class="nav-text">需求变动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改完bug"><span class="nav-number">11.</span> <span class="nav-text">改完bug</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#要封包了，还要改需求的pm"><span class="nav-number">12.</span> <span class="nav-text">要封包了，还要改需求的pm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上线"><span class="nav-number">13.</span> <span class="nav-text">上线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线上故障"><span class="nav-number">14.</span> <span class="nav-text">线上故障</span></a></li></ol></div>
             
 
           </div>
