@@ -114,7 +114,7 @@
 <meta property="og:site_name" content="han&#39;s bolg - 年糕記">
 <meta property="og:description" content="开发和测试是互联网公司最常见的两个工种，他们相互依赖，或者说单方面依赖，但至少不像开发和产品那样关系恶劣，动不动就武力解决。网上关于开发、产品关系的段子很多，但关于开发和测试的却不多。因为工作关系，对开发、测试都比较熟悉，所以今天我们来聊一聊开发和测试之间的那些事儿。 角色定位开发：就像是建筑师一样，按照图纸的要求，打地基盖房子，尽可能100%还原设计师的要求。开发自测的思路也一般以完成功能为主，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-07T10:55:54.451Z">
+<meta property="og:updated_time" content="2019-03-12T07:05:02.437Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="开发、测试趣谈">
 <meta name="twitter:description" content="开发和测试是互联网公司最常见的两个工种，他们相互依赖，或者说单方面依赖，但至少不像开发和产品那样关系恶劣，动不动就武力解决。网上关于开发、产品关系的段子很多，但关于开发和测试的却不多。因为工作关系，对开发、测试都比较熟悉，所以今天我们来聊一聊开发和测试之间的那些事儿。 角色定位开发：就像是建筑师一样，按照图纸的要求，打地基盖房子，尽可能100%还原设计师的要求。开发自测的思路也一般以完成功能为主，">
@@ -524,7 +524,7 @@ $(function() {
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1.6k
+                  1.7k
                 </span>
               
 
@@ -578,12 +578,11 @@ $(function() {
 <li>这房子剩一半能住人吗？</li>
 <li>这房子只剩个天花板能住人吗？</li>
 <li>把这房子挪到别的地方能住人吗？</li>
-<li>这房子有一万个人一起涌进来，然后又走了，之后还能住人吗？</li>
+<li>这房子有一万个人一起涌进来，然后又走了，之后还能住人吗？<br>开发：😅，用户不会像你这么操作的</li>
 </ul>
 <p>他们以发现bug的数量和质量为荣，他们给开发报bug的时候，多半是很开心的。</p>
 <h3 id="但是，bug数太多"><a href="#但是，bug数太多" class="headerlink" title="但是，bug数太多"></a>但是，bug数太多</h3><p>测试：这个开发，这次又有100多bug，也不害臊<br>开发：呵呵…</p>
-<p>但是当bug数超出想象之后，测试会比开发更加难受，发现的bug越多，表示代码质量越差，这么烂的东西谁愿意碰。</p>
-<p>开发自己看代码都头大，甚至都不愿意自测。</p>
+<p>当找bug变成一种似乎永无止境的任务时，找bug的快感就完全消失了。</p>
 <h3 id="提测"><a href="#提测" class="headerlink" title="提测"></a>提测</h3><p>开发：排期定好了，到提测时间了，可我代码还没写完呢，怎么办？先把主流程写通吧，小细节，测试同学测的时候我继续开发，提bug就提bug吧。</p>
 <p>测试：提测了，那应该是都写好了，流程是可以跑通的。</p>
 <h3 id="提测申请"><a href="#提测申请" class="headerlink" title="提测申请"></a>提测申请</h3><p>开发：哎呀，为什么这个模板里有这么多内容，我要写那么多干嘛，就写个标题吧，嘿嘿</p>
@@ -606,6 +605,10 @@ $(function() {
 <ul>
 <li>不可能，我代码写的那么好，怎么会有bug</li>
 <li>哎，我电脑上是好好的啊</li>
+<li>真是奇怪，刚刚还好好的</li>
+<li>肯定是数据问题</li>
+<li>清下缓存试试</li>
+<li>重启电脑试试</li>
 <li>我去，居然忘加判断了，真傻x</li>
 <li>不对，不是我的问题，这是之前那个傻x写的</li>
 <li>哦，这个地方就得是之前的写法，是我傻x了</li>
@@ -614,8 +617,15 @@ $(function() {
 <h3 id="不是自己写的bug"><a href="#不是自己写的bug" class="headerlink" title="不是自己写的bug"></a>不是自己写的bug</h3><p>开发同学：不是我的锅，是第三方包/后端/客户端/之前那个傻x的问题</p>
 <p>测试同学：我不管，是你的项目的问题，就是你的bug</p>
 <h3 id="重复提的bug"><a href="#重复提的bug" class="headerlink" title="重复提的bug"></a>重复提的bug</h3><p>开发：两位测试大大，你俩能不能同步一下再报bug，我的bug数破100了<br>测试：…</p>
+<p>开发：这几个bug都是一个问题引起的，唉，怪我自己。。。</p>
 <h3 id="debug过程中出现的bug"><a href="#debug过程中出现的bug" class="headerlink" title="debug过程中出现的bug"></a>debug过程中出现的bug</h3><p>开发：哎呀，这个地方的逻辑写的不对，趁测试没发现，偷偷改了。<br>改完之后，一看jira，呵呵，那个bug刚刚提交出来。<br>测试：没有我发现不了的bug</p>
-<h3 id="需求变动"><a href="#需求变动" class="headerlink" title="需求变动"></a>需求变动</h3><p>测试：这个地方怎么跟prd不符？<br>开发：产品需求改了啊，怎么没改prd<br>两人一起怒视pm</p>
+<h3 id="需求变动"><a href="#需求变动" class="headerlink" title="需求变动"></a>需求变动</h3><p>测试：这个地方怎么跟prd不符？</p>
+<ul>
+<li><p>开发：产品需求改了啊，怎么没改prd<br>两人一起怒视pm</p>
+</li>
+<li><p>开发：emmmm，我觉着这么做更符合用户使用习惯（其实是实现起来麻烦，换了一种方式）</p>
+</li>
+</ul>
 <h3 id="改完bug"><a href="#改完bug" class="headerlink" title="改完bug"></a>改完bug</h3><p>开发：默默改完了<br>测试：改完了吗？在吗？人肉访问中。。。</p>
 <p>测试：改完了吗？你改一下jira状态啊？</p>
 <p>测试：改完了？自测了吗？还是有问题啊？<br>开发：WTF…</p>
@@ -703,6 +713,10 @@ $(function() {
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/blog/2019/03/谈一谈单元测试.html" rel="prev" title="谈一谈单元测试">
+                谈一谈单元测试 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -771,7 +785,7 @@ $(function() {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

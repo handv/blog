@@ -1,0 +1,1651 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="随笔,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
+
+
+
+
+
+
+<meta name="description" content="引子这是我们平时的开发流程：  即：需求分析 -&amp;gt; ui 设计 -&amp;gt; 项目代码开发 -&amp;gt; 编写测试用例 –&amp;gt; 运行测试用例 -&amp;gt; 修复代码 BUG -&amp;gt; 上线 -&amp;gt; 上线回测 当然，测试部分的工作有时候会提前开发，比如在需求分析、应用开发阶段就介入进来做一些工作。但是测试工作主要还是放在开发完成之后再进行。 这样子有什么问题呢：  测试时间依赖于开发时间">
+<meta name="keywords" content="随笔">
+<meta property="og:type" content="article">
+<meta property="og:title" content="谈一谈单元测试">
+<meta property="og:url" content="https://handv.github.io/blog/2019/03/谈一谈单元测试.html">
+<meta property="og:site_name" content="han&#39;s bolg - 年糕記">
+<meta property="og:description" content="引子这是我们平时的开发流程：  即：需求分析 -&amp;gt; ui 设计 -&amp;gt; 项目代码开发 -&amp;gt; 编写测试用例 –&amp;gt; 运行测试用例 -&amp;gt; 修复代码 BUG -&amp;gt; 上线 -&amp;gt; 上线回测 当然，测试部分的工作有时候会提前开发，比如在需求分析、应用开发阶段就介入进来做一些工作。但是测试工作主要还是放在开发完成之后再进行。 这样子有什么问题呢：  测试时间依赖于开发时间">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.pconline.com.cn/images/upload/upc/tx/itbbs/1610/02/c13/27821546_1475394898223_1024x1024.jpg">
+<meta property="og:image" content="http://snger.github.io/lab/intro-tdd/without-tdd.png">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/1/21/16870a2afbca8e51?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="http://ydschool-online.nos.netease.com/1539337871760unitest.jpg">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/279826-49f2f708aefb567f?imageMogr2/auto-orient/strip%7CimageView2/2/w/489/format/webp">
+<meta property="og:image" content="http://snger.github.io/lab/intro-tdd/tdd.png">
+<meta property="og:updated_time" content="2019-03-22T07:22:09.921Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="谈一谈单元测试">
+<meta name="twitter:description" content="引子这是我们平时的开发流程：  即：需求分析 -&amp;gt; ui 设计 -&amp;gt; 项目代码开发 -&amp;gt; 编写测试用例 –&amp;gt; 运行测试用例 -&amp;gt; 修复代码 BUG -&amp;gt; 上线 -&amp;gt; 上线回测 当然，测试部分的工作有时候会提前开发，比如在需求分析、应用开发阶段就介入进来做一些工作。但是测试工作主要还是放在开发完成之后再进行。 这样子有什么问题呢：  测试时间依赖于开发时间">
+<meta name="twitter:image" content="http://img.pconline.com.cn/images/upload/upc/tx/itbbs/1610/02/c13/27821546_1475394898223_1024x1024.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://handv.github.io/blog/2019/03/谈一谈单元测试.html">
+
+
+
+
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+
+  <title> 谈一谈单元测试 | han's bolg - 年糕記 </title>
+</head>
+
+  	 <!-- custom analytics part create by xiamo -->
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("d4OUfN7p7swl3vIOPSNDldTi-gzGzoHsz", "hxU0ojVq8uxtXfRQIkPYzk4y");</script>
+<script>
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+	$(".leancloud_visitors").each(function() {
+		var url = $(this).attr("id").trim();
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {
+					var content = $(document.getElementById(url)).text() + ': 0';
+					$(document.getElementById(url)).text(content);
+					return;
+				}
+				for (var i = 0; i < results.length; i++) {
+					var object = results[i];
+					var content = $(document.getElementById(url)).text() + ': ' + object.get('time');
+					$(document.getElementById(url)).text(content);
+				}
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+
+	});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = $(document.getElementById(url)).text() + ': ' + counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = $(document.getElementById(url)).text() + ': ' + newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else if ($('.post-title-link').length > 1) {
+		showTime(Counter);
+	}
+});
+</script>
+  
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8fc923fef3ff9cdaea6776861e480fbe";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">han's bolg - 年糕記</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <h1 class="site-subtitle" itemprop="description"></h1>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://handv.github.io/blog/2019/03/谈一谈单元测试.html">
+
+  <span style="display:none" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="handv">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="han's bolg - 年糕記">
+    <span style="display:none" itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="han's bolg - 年糕記" src="/images/avatar.jpg">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                谈一谈单元测试
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-08T20:44:14+08:00">
+                2019-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+		  
+			 
+          
+          
+             <span id="/blog/2019/03/谈一谈单元测试.html" class="leancloud_visitors" data-flag-title="谈一谈单元测试">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+				 <span>℃</span>
+             </span>
+          
+		   
+          
+
+		  
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  7.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  25
+                </span>
+              
+            </div>
+          
+		  
+          
+ 
+        
+
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h1><p>这是我们平时的开发流程：</p>
+<p><img src="http://img.pconline.com.cn/images/upload/upc/tx/itbbs/1610/02/c13/27821546_1475394898223_1024x1024.jpg" alt="image"></p>
+<p>即：需求分析 -&gt; ui 设计 -&gt; 项目代码开发 -&gt; 编写测试用例 –&gt; 运行测试用例 -&gt; 修复代码 BUG -&gt; 上线 -&gt; 上线回测</p>
+<p>当然，测试部分的工作有时候会提前开发，比如在需求分析、应用开发阶段就介入进来做一些工作。但是测试工作主要还是放在开发完成之后再进行。</p>
+<p>这样子有什么问题呢：</p>
+<ul>
+<li>测试时间依赖于开发时间</li>
+</ul>
+<p>真正用于测试的时间，在整个项目的后期，并且严重依赖于开发时间。</p>
+<p>当项目整体排期不变的情况下，如果开发时间 delay 了，必然导致压缩测试时间，即使测试和开发同学加班 debug，也会影响项目质量。</p>
+<ul>
+<li>开发质量依赖于测试质量</li>
+</ul>
+<p>开发对于代码质量也没有把握，依赖于测试的水平。</p>
+<p><img src="http://snger.github.io/lab/intro-tdd/without-tdd.png" alt="image"></p>
+<ul>
+<li>不确定新代码是否正常工作</li>
+<li>不确定新代码是否影响别的功能</li>
+<li>不确定重构后的代码是否正常工作</li>
+<li>不确定重构后的代码是否影响别的功能</li>
+<li>不确定上线后的代码是否正常工作</li>
+<li>不确定上线后的代码是否一直正常工作</li>
+</ul>
+<p>如果你的项目或你本人存在以上问题，那么你可能需要采用一些措施了。</p>
+<ul>
+<li>线上监控</li>
+</ul>
+<p>通过 log 日志，自动化测试，对线上环境比如数据库、服务器的性能指标进行监控，及时报警，这些策略保证了环境的问题。</p>
+<ul>
+<li>代码质量</li>
+</ul>
+<p>提高代码质量的方式有：</p>
+<ol>
+<li>静态代码分析<br>规范写好的代码风格，减少出错风险，不能发现 bug</li>
+<li>代码 review<br>人力时间成本高</li>
+<li>单元测试</li>
+</ol>
+<h1 id="什么是单元测试"><a href="#什么是单元测试" class="headerlink" title="什么是单元测试"></a>什么是单元测试</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a><a href="https://zh.wikipedia.org/wiki/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95" target="_blank" rel="noopener">定义</a></h2><blockquote>
+<p>在计算机编程中，单元测试（英语：Unit Testing）又称为模块测试, 是针对程序模块（软件设计的最小单位）来进行正确性检验的测试工作。程序单元是应用的最小可测试部件。在过程化编程中，一个单元就是单个程序、函数、过程等；<strong><em>对于面向对象编程，最小单元就是方法，包括基类（超类）、抽象类、或者派生类（子类）中的方法</em></strong>。</p>
+</blockquote>
+<p><small>备注：单元测试对软件中的最小可测试单元进行检查和验证，并非检查程序单元之间是否能够合作良好</small></p>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ol>
+<li>独立性</li>
+</ol>
+<p>单元测试用例之间不存在互相调用，也不依赖执行的先后次序，可以在多线程中并行执行。</p>
+<p>反例：method2 需要依赖 method1 的执行，将执行结果作为 method2 的输入。<br>集成测试里可以这么干，为了进行场景测试（先登录，后买课）</p>
+<ol start="2">
+<li>确定性</li>
+</ol>
+<p>确定的输入得到肯定的输出</p>
+<ol start="3">
+<li>可重复性</li>
+</ol>
+<p>单元测试可以重复执行，不依赖于特定的时间、特定的环境、特定的测试数据。在不同的机器上都能得到相同的运行结果。</p>
+<p>这里的环境包括操作系统的类型，网络，本地文件等。<br>说明：单元测试通常会被放到持续集成中，每次有代码 check in 时单元测试都会被执行。如<br>果单测对外部环境（网络、服务、中间件等）有依赖，容易导致持续集成机制的不可用。<br>正例：为了不受外界环境影响，要求设计代码时就把 SUT 的依赖改成注入，在测试时用 spring<br>这样的 DI 框架注入一个本地（内存）实现或者 Mock 实现。</p>
+<ol start="4">
+<li>细粒度</li>
+</ol>
+<p>单元规模较小，复杂性较低，粒度一般是方法级别，至多是类级别，不负责检查跨类或者跨系统的。因而发现错误后容易隔离和定位，有利于调试工作。</p>
+<ol start="5">
+<li>自动化</li>
+</ol>
+<p>单元测试可以全自动执行的，并且是非交互式的，自动化的单元测试有助于进行回归测试。<br>输出结果需要人工检查的测试不是一个好的单元测试。单元测试中不准使用 System.out 来进行人肉验证，必须使用 assert 来验证。</p>
+<ol start="6">
+<li>易用性</li>
+</ol>
+<p>单元测试中用到的，无非是白盒测试中覆盖分析在内的许多测试技术。</p>
+<ol start="7">
+<li>文档性</li>
+</ol>
+<p>测试用例用于测试接口、模块的重要性，那么在测试用例中就会涉及如何使用这些 API。其他开发人员如果要使用这些 API，那阅读测试用例是一种很好地途径，有时比文档说明更清晰。</p>
+<h2 id="本质"><a href="#本质" class="headerlink" title="本质"></a>本质</h2><p><strong>单元测试不是目的，不是为了覆盖率达到 100%。它是一种手段，一种方法，一种规范代码编写、辅助提高代码质量的方法</strong>。</p>
+<h1 id="为什么要做单元测试"><a href="#为什么要做单元测试" class="headerlink" title="为什么要做单元测试"></a>为什么要做单元测试</h1><h2 id="对于单元测试的误解"><a href="#对于单元测试的误解" class="headerlink" title="对于单元测试的误解"></a>对于单元测试的误解</h2><ol>
+<li>单元测试应该让测试人员写</li>
+</ol>
+<p>单元测试常常和编码同步进行，软件的开发者总是应当负责程序的单个单元的测试，保证每个单元能够完成设计的功能。</p>
+<p>如果测试人员来做，</p>
+<ul>
+<li>不清楚项目代码逻辑</li>
+</ul>
+<p>读别人的代码尚且费劲，还要写单元测试。<br><small>备注：我曾经想写精品课后台的单元测试，但是却连项目怎么运行都不清楚</small></p>
+<ul>
+<li>代码同步不及时</li>
+</ul>
+<p>让测试人员来编写单元测试，必然存在后置性。<br>开发因为添加新功能、bugfix、重构而更新代码了，你只有在开发推送到 git 上，才知晓代码更新了。</p>
+<ul>
+<li>质量无法保证</li>
+</ul>
+<p>单元测试是用来保证代码质量的，一方面是保证写好的代码不出错，另一方面是保证写“好的代码”。</p>
+<p>测试人员写单元测试，只能他去适应开发人员的代码写测试用例。他能打断开发人员的思路，让他按照自己的方式去写代码吗？</p>
+<ul>
+<li>不方便交接</li>
+</ul>
+<p>本来接手别人的项目就够困难的，还要接手另一个编写的单元测试，难上加难。</p>
+<ol start="2">
+<li>单元测试没有用</li>
+</ol>
+<p>编写单元测试，使我们静下心来审视、观察、思考项目，把程序设计成易于调用和可测试的，并努力降低代码的耦合度；可以提前发现代码设计中不合理的地方，减少由于错误而引起的连锁反应。</p>
+<ol start="3">
+<li>没有时间写单元测试</li>
+</ol>
+<p>为什么没有时间写？</p>
+<ul>
+<li>想快点开发完代码完成项目</li>
+</ul>
+<p>但是我们忘记的一点是，项目时间不仅仅依赖于开发时间，还依赖于测试时间。如果代码质量不过关的话，bugfix 阶段会让你花费时间去查原因，修复 bug，也会延长项目的整体时间。<br>而且，当 bugfix 变成一种永无止境的任务时，从写代码中获取的兴奋感也会离你而去。</p>
+<ul>
+<li>深层次原因，其实是不会写</li>
+</ul>
+<p>但就像你新学一门语言一样，刚开始的时候写的慢，写长了不就快了。最好的学习方法就是动手去敲啊。<br>而且从长期来看，写了单元测试降低了维护成本，在新需求和重构的时候不会陷入拆东墙补西墙的恐慌中，可以更自信的交出产品。</p>
+<ol start="4">
+<li>我写代码水平很高，不需要进行单元测试</li>
+</ol>
+<p>人都会犯错，大神也不例外。</p>
+<pre><code>凡是可能出错的事就一定会出错 -- 墨菲定律
+</code></pre><p>计算机按照你写出来的方式运行，而不是你想象出来的。编码不是可以一次性通过的，必须经过各种各样的测试，单元测试只是其中一种。</p>
+<p>缺乏测试的程序代码可能包含许多 Bug，程序员在没有测试保护的情况下修改 Bug，会引发更多的 Bug，忙于除虫，于是更没有时间测试。如此循环往往会导致项目的崩溃。</p>
+<p>为避免产生恶性循环，代码必须有一张安全网来保护，随时进行的单元测试就是这张安全网。</p>
+<ol start="5">
+<li>不管怎样，集成测试将会抓住所有的 Bug</li>
+</ol>
+<p><img src="https://user-gold-cdn.xitu.io/2019/1/21/16870a2afbca8e51?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="image"></p>
+<p>“测试金字塔”模型按照运行速度和投入成本两个维度对不同阶段的测试工作进行非常直观的可视化，可以看到单元测试是位于“测试金字塔”的最底部，很明显“单元测试”相对于其它不同阶段的测试工作，拥有速度快（运行效率），成本低（维护成本）的优势，同时也是作为上层测试工作的支撑，体现了“单元测试”的重要程度。</p>
+<p>效率问题。举例：学习报告项目，有一个数据不显示的问题，先提给前端，前端查了是接口的问题，提给后端，后端检查代码发现是直播服务端的问题，再提给直播服务端。</p>
+<p>集成测试的目标是把通过单元测试的模块整合在一起，构造一个具体的使用场景，通过测试发现问题。它要求项目的所有流程是走的通的。</p>
+<p>如果测试过程中的 Bug，非常严重，阻塞测试流程，以至于不能再测试其他功能，进行错误修改，回归测试时又发现其他新的问题，使得测试工作很难开展下去。这样子会拖延项目进展。</p>
+<p>举例：学习报告项目，集合了精品课主站、题库、客户端、前端、后台管理系统多个服务，因为某个服务的问题，导致所有流程都被 block 了。</p>
+<p>而且，有些 bug 是集成阶段很难去 debug 的。你要去排除各种各样的原因，前端的问题还是服务端的问题，还是客户端的问题。</p>
+<p>举例：(想个别的例子)</p>
+<p>题库模考添加新题目，添加第三个分卷时，添加题目异常。</p>
+<ol start="6">
+<li>单元测试不需要维护</li>
+</ol>
+<p>一年半载后，那么单元测试几乎处于废弃状态。</p>
+<ol start="7">
+<li>单元测试与线上故障没有辩证关系</li>
+</ol>
+<p>好的单元测试能够最大限度地规避线上故障。</p>
+<ol start="8">
+<li>单元测试保障一切</li>
+</ol>
+<p>单元测试不是万能的，单元测试只是测试代码功能，不包含复杂的业务逻辑。</p>
+<p><img src="http://ydschool-online.nos.netease.com/1539337871760unitest.jpg" alt="image"></p>
+<p>举例：登录逻辑没有问题，但用错接口服务了（测试服）。这个单元测试就发现不了了。</p>
+<h2 id="单元测试的意义："><a href="#单元测试的意义：" class="headerlink" title="单元测试的意义："></a>单元测试的意义：</h2><h3 id="对于整个项目"><a href="#对于整个项目" class="headerlink" title="对于整个项目"></a>对于整个项目</h3><p>单元是整个软件的构成基础，单元测试是整个软件质量的基础。</p>
+<p>就像硬件系统中的零部件一样，只有保证零部件的质量，这个设备的质量才有基础。因此，单元测试的效果会直接影响软件的后期测试，做好单元测试，后期的系统集成联调或集成测试和系统测试会很顺利，节约很多时间，最终在很大程度上影响到产品的质量。</p>
+<h3 id="对于开发人员"><a href="#对于开发人员" class="headerlink" title="对于开发人员"></a>对于开发人员</h3><ol>
+<li>提高架构能力</li>
+</ol>
+<p>编写单元测试将使我们从调用者的角度观察、思考，特别是要先考虑测试，这样就可把程序设计成易于调用和可测试的，并努力降低软件中的耦合，使得代码清晰、易于阅读，提高可维护性。<br>在开发过程中进行测试，可以提前发现代码设计中不合理的地方，提高代码的配置性，可扩展性。<br>比开发完再被叫去修 bug 要快许多，便于项目维护。</p>
+<ol start="2">
+<li>减少失误</li>
+</ol>
+<p>增加新功能的时候，往往一改一大片。加入单元测试，这种修改幅度让你很难写测试。<br>单元测试强迫你降低修改幅度，每次一点一点的修改。</p>
+<ol start="3">
+<li>保证重构</li>
+</ol>
+<p>互联网行业产品迭代速度很快，没有一成不变的代码，迭代后必然存在代码重构的过程，后续任何代码更新也必须跑通单元测试用例，保障预期功能的实现，也不会对其他功能产生干扰。</p>
+<ol start="4">
+<li>上线不慌</li>
+</ol>
+<p>之前每次上线都小心翼翼，生怕修改之后，不符合原来的要求。单元测试用例能给你一颗定心丸。</p>
+<h2 id="为什么要做单元测试？"><a href="#为什么要做单元测试？" class="headerlink" title="为什么要做单元测试？"></a>为什么要做单元测试？</h2><ul>
+<li>我们想要代码运行起来</li>
+<li>我们想要代码持续运行起来</li>
+<li>我们想要有更多的自信，更少的重写</li>
+<li>因为我们都会犯错</li>
+<li><p>因为开源大项目都有单元测试</p>
+<ul>
+<li><p>javascript:<br><a href="https://github.com/vuejs/vue" target="_blank" rel="noopener">https://github.com/vuejs/vue</a><br><a href="https://github.com/facebook/react" target="_blank" rel="noopener">https://github.com/facebook/react</a></p>
+</li>
+<li><p>java：<br><a href="https://github.com/spring-projects/spring-boot" target="_blank" rel="noopener">https://github.com/spring-projects/spring-boot</a><br><a href="https://github.com/spring-projects/spring-framework" target="_blank" rel="noopener">https://github.com/spring-projects/spring-framework</a><br><a href="https://github.com/apache/cassandra" target="_blank" rel="noopener">https://github.com/apache/cassandra</a><br><a href="https://github.com/apache/incubator-dubbo" target="_blank" rel="noopener">https://github.com/apache/incubator-dubbo</a><br><a href="https://github.com/spring-cloud-incubator/spring-cloud-alibaba" target="_blank" rel="noopener">https://github.com/spring-cloud-incubator/spring-cloud-alibaba</a></p>
+</li>
+<li><p>c:<br><a href="https://github.com/antirez/redis" target="_blank" rel="noopener">https://github.com/antirez/redis</a></p>
+</li>
+<li><p>python:<br><a href="https://github.com/google/ggrc-core" target="_blank" rel="noopener">https://github.com/google/ggrc-core</a></p>
+</li>
+<li><p>dart:<br><a href="https://github.com/flutter/flutter" target="_blank" rel="noopener">https://github.com/flutter/flutter</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="什么时候做单元测试"><a href="#什么时候做单元测试" class="headerlink" title="什么时候做单元测试"></a>什么时候做单元测试</h1><p>并不是所有的项目都值得引入测试框架，也不是任何时刻都可以写单元测试，毕竟维护测试用例也是需要成本的。</p>
+<h2 id="不适合"><a href="#不适合" class="headerlink" title="不适合"></a>不适合</h2><ul>
+<li>需求频繁变更、复用性较低的内容</li>
+</ul>
+<p>比如活动页面，让开发专门抽出人力来写测试用例确实得不偿失。</p>
+<ul>
+<li>刚刚接手的老项目</li>
+</ul>
+<p>老项目能够运行起来就很不错了，更不用说修改代码，这个要慢慢来重构。</p>
+<ul>
+<li><p>不再更新，运行稳定的老服务</p>
+</li>
+<li><p>不再维护，准备重构、放弃的项目</p>
+</li>
+</ul>
+<h2 id="适合"><a href="#适合" class="headerlink" title="适合"></a>适合</h2><ul>
+<li><p>新框架、新服务、新项目</p>
+</li>
+<li><p>基础服务、通用组件</p>
+</li>
+</ul>
+<p>被多次复用的部分，比如一些通用组件和库函数，更要测试来保障代码可维护性、功能的稳定性。<br>给它们写单元测试用例，维护成本低。</p>
+<ul>
+<li>核心业务、核心应用、核心模块</li>
+</ul>
+<p>支付、登录、退款。。。</p>
+<h1 id="怎么做单元测试"><a href="#怎么做单元测试" class="headerlink" title="怎么做单元测试"></a>怎么做单元测试</h1><h2 id="TDD（Test-driven-development）："><a href="#TDD（Test-driven-development）：" class="headerlink" title="TDD（Test-driven development）："></a>TDD（Test-driven development）：</h2><p>介绍一下 TDD，测试驱动开发是敏捷开发中的一项核心实践和技术，也是一种设计方法论。<br>测试驱动开发的基本思想就是通过测试来推动整个开发的进行，在开发功能代码之前，先编写测试代码。也就是说在明确要开发某个功能后，首先思考如何对这个功能进行测试，并完成测试代码的编写，然后编写相关的代码满足这些测试用例。然后循环进行添加其他功能，直到完全部功能的开发。</p>
+<p>单元测试的首要目的不是为了能够编写出大覆盖率的全部通过的测试代码，而是需要从使用者(调用者)的角度出发，尝试函数逻辑的各种可能性，进而辅助性增强代码质量</p>
+<p><strong>测试是手段而不是目的。测试的主要目的不是证明代码正确，而是帮助发现错误，包括低级的错误。</strong></p>
+<h3 id="开发流程"><a href="#开发流程" class="headerlink" title="开发流程"></a>开发流程</h3><ol>
+<li>明确当前要完成的功能。可以记录成一个 TODO 列表</li>
+</ol>
+<p>需求分析，思考实现。考虑如何“使用”产品代码，是一个实例方法还是一个类方法，是从构造函数传参还是从方法调用传参，方法的命名，返回值等。这时其实就是在做设计，而且设计以代码来体现。</p>
+<ol start="2">
+<li>快速完成针对此功能的测试用例编写</li>
+</ol>
+<p>只关注需求，程序的输入输出，不关心中间过程</p>
+<ol start="3">
+<li><p>测试代码编译不通过</p>
+</li>
+<li><p>编写对应的功能代码</p>
+</li>
+</ol>
+<p>不考虑别的需求，用最简单的方式满足当前这个小需求即可</p>
+<ol start="5">
+<li>测试通过</li>
+</ol>
+<p>对代码进行重构，并保证测试通过。</p>
+<ol start="6">
+<li>循环完成所有功能的开发。</li>
+</ol>
+<p>写完，手动测试一下，基本没什么问题，有问题补个用例，修复。</p>
+<p>最终符合所有要求即：</p>
+<ul>
+<li>每个概念都被清晰的表达</li>
+<li>代码中无自我重复</li>
+<li>没有多余的东西</li>
+</ul>
+<ol start="7">
+<li>信心满满地提交，通过测试</li>
+</ol>
+<p>更概括的来说，可以分为三部曲:</p>
+<p>红灯（代码还不完善，测试挂）-&gt; 绿灯（编写代码，测试通过）-&gt; 重构（优化代码并保证测试通过）<br><img src="https://upload-images.jianshu.io/upload_images/279826-49f2f708aefb567f?imageMogr2/auto-orient/strip%7CimageView2/2/w/489/format/webp" alt="image"></p>
+<p><img src="http://snger.github.io/lab/intro-tdd/tdd.png" alt="image"></p>
+<h3 id="TDD-的本质"><a href="#TDD-的本质" class="headerlink" title="TDD 的本质"></a>TDD 的本质</h3><ul>
+<li>分离关注点，一次只戴一顶帽子</li>
+</ul>
+<p>在我们编程的过程中，有几个关注点：需求，实现，设计。<br>TDD 给了我们明确的三个步骤，每个步骤关注一个方面。<br>红：写一个失败的测试，它是对一个小需求的描述，只需要关心输入输出，这个时候根本不用关心如何实现。<br>绿：专注在用最快的方式实现当前这个小需求，不用关心其他需求，也不要管代码的质量多么惨不忍睹。<br>重构：既不用思考需求，也没有实现的压力，只需要找出代码中的坏味道，并用一个手法消除它，让代码变成整洁的代码。</p>
+<ul>
+<li>注意力控制</li>
+</ul>
+<p>人的注意力既可以主动控制，也会被被动吸引。注意力来回切换的话，就会消耗更多精力，思考也会不那么完整。</p>
+<p>使用 TDD 开发，我们要主动去控制注意力，写测试的时候，发现一个类没有定义，IDE 提示编译错误，这时候你如果去创建这个类，你的注意力就不在需求上了，已经切换到了实现上，我们应该专注地写完这个测试，思考它是否表达了需求，确定无误后再开始去消除编译错误。</p>
+<h3 id="单元测试的本质"><a href="#单元测试的本质" class="headerlink" title="单元测试的本质"></a>单元测试的本质</h3><p>我不是强制向大家推行 TDD，说实话 TDD 很复杂，不是一句两句就学会的，何况我也没什么经验。<br>我们要借鉴 TDD 的思想，那就是写代码之前，先别急着动手，先想。考虑周全了再写。<br>这个时候，即使先写功能，再写测试也是没问题的。一定不要把功能都写完了，再补测试，你会发现很痛苦。<br>可能为了某个测试用例的写法，需要重构你的代码，这样子就相当于花费了更多的精力。</p>
+<h2 id="拆分项目"><a href="#拆分项目" class="headerlink" title="拆分项目"></a>拆分项目</h2><p>TDD 之前要拆分任务，把一个大需求拆成多个小需求。</p>
+<h3 id="原则"><a href="#原则" class="headerlink" title="原则"></a>原则</h3><ul>
+<li>结合设计文档，关注于完成当前功能点，防止过度设计</li>
+</ul>
+<p>仅凭这个就可以节省大量精力了。那些仅仅是“可能”会发生的事情，我们不会去做。过多的考虑后期的扩展，其他功能的添加，无疑增加了过多的复杂性，容易产生问题。</p>
+<p>单元测试不仅是证明这些代码做了什么，是如何做的，而且证明是否做了它该做的事情而没有做不该做的事情。</p>
+<pre><code>（小字）拆分不是让我们把任务想的非常全，在后续兼容上方便。后续添加的时候，一看，哎，我之前想到了，这里留着参数等着用。万一用不着呢？那不就浪费时间了嘛。
+</code></pre><p>那么需求真的变了怎么办？改呗。有整套测试用例做基础，会让应对变化变得容易，但它会让你有底气去做出修改。</p>
+<p>还是那句话，天下武功，唯快不破，改得越快，成本越低。</p>
+<ul>
+<li>任务维持在单元级别</li>
+</ul>
+<p>当前功能太过复杂，继续分解成小的任务来完成。</p>
+<p>举例：既要获取用户个人信息，又要获取用户购课信息。</p>
+<h2 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h2><h3 id="工欲善其事必先利其器"><a href="#工欲善其事必先利其器" class="headerlink" title="工欲善其事必先利其器"></a>工欲善其事必先利其器</h3><h4 id="测试框架"><a href="#测试框架" class="headerlink" title="测试框架"></a>测试框架</h4><ul>
+<li>Java: Junit, TestNG</li>
+<li>Javascript: Jest, Mocha</li>
+<li>Android/Kotlin: Junit</li>
+<li>Swift: XCTest</li>
+<li>Python: Unittest</li>
+<li>C++: gtest</li>
+<li>Go: go test</li>
+</ul>
+<h4 id="覆盖率分析"><a href="#覆盖率分析" class="headerlink" title="覆盖率分析"></a>覆盖率分析</h4><ul>
+<li>Java: Emma, Jacoco</li>
+<li>Javascript: istanbul(Jest 内置)</li>
+<li>Python: Coverage.py</li>
+<li>C++: LCOV</li>
+</ul>
+<h5 id="常用的覆盖率"><a href="#常用的覆盖率" class="headerlink" title="常用的覆盖率"></a>常用的覆盖率</h5><ul>
+<li>语句覆盖率/行覆盖率</li>
+</ul>
+<p>语句覆盖指被测单元中每条可执行语句都被测试用例所覆盖。语句覆盖是强度最低的覆盖要求</p>
+<ul>
+<li>分支覆盖率</li>
+</ul>
+<p>用来度量程序中每一个判定的分支是否都被测试到，即代码中每个分支语句取真值和取假值至少各覆盖一次</p>
+<ul>
+<li>函数覆盖率</li>
+</ul>
+<p>覆盖率只是单元测试的一种衡量标准，一种基于定量的衡量标准，不足以说明测试的稳健性。不要过度追求覆盖率，100%的覆盖率不代表你的代码就没有问题了。统计代码覆盖率的目的是找出哪些类型的代码未经过测试，并针对性的补充测试用例。</p>
+<p>就像那些正在出差并出示护照印章的人一样 - 这并不能证明他做过任何工作，只是他访问过几个机场和酒店。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">function</span> <span class="selector-tag">addNewOrder</span>(newOrder) &#123;</span><br><span class="line">    <span class="selector-tag">logger</span><span class="selector-class">.log</span>(<span class="built_in">`Adding new order $&#123;newOrder&#125;`</span>);</span><br><span class="line">    <span class="selector-tag">DB</span><span class="selector-class">.save</span>(newOrder);</span><br><span class="line">    <span class="selector-tag">Mailer</span><span class="selector-class">.sendMail</span>(newOrder.assignee, <span class="built_in">`A new order was places $&#123;newOrder&#125;`</span>);</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">return</span> &#123;<span class="attribute">approved</span>: true&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">it</span>(<span class="string">"Test addNewOrder, don't use such test names"</span>, () =&gt; &#123;</span><br><span class="line">    <span class="selector-tag">addNewOrder</span>(&#123;<span class="attribute">asignee</span>: <span class="string">"John@mailer.com"</span>,<span class="attribute">price</span>: <span class="number">120</span>&#125;);</span><br><span class="line">&#125;);<span class="comment">//Triggers 100% code coverage, but it doesn't check anything</span></span><br></pre></td></tr></table></figure>
+<h4 id="断言库-Assert"><a href="#断言库-Assert" class="headerlink" title="断言库 Assert"></a>断言库 Assert</h4><p>有的语言还有单独的断言库，有的自带了。</p>
+<h4 id="Mock-框架"><a href="#Mock-框架" class="headerlink" title="Mock 框架"></a>Mock 框架</h4><p>mock 就是在测试过程中，对于某些不容易构造或者不容易获取的对象，用一个虚拟的对象来创建以便测试。</p>
+<h4 id="Lint"><a href="#Lint" class="headerlink" title="Lint"></a>Lint</h4><p>Lint 是检查代码风格/错误的小工具，作用是提高代码质量。</p>
+<p>Javascript 编写有 eslint, 而单元测试编写有 eslint-plugin-jest, eslint-plugin-mocha</p>
+<h4 id="持续集成"><a href="#持续集成" class="headerlink" title="持续集成"></a>持续集成</h4><ul>
+<li>Travis-ci</li>
+<li>Jenkins</li>
+</ul>
+<h3 id="单元测试原则"><a href="#单元测试原则" class="headerlink" title="单元测试原则"></a>单元测试原则</h3><h4 id="测试隔离"><a href="#测试隔离" class="headerlink" title="测试隔离"></a>测试隔离</h4><ul>
+<li>不同代码的测试应该相互隔离</li>
+<li>单元测试之间没有依赖关系</li>
+<li>对一个代码单元只考虑此代码的测试</li>
+</ul>
+<p>不考虑第三方调用<br>不考虑内部方法<br>不考虑子类</p>
+<p>// todo:代码片段<br>例：react 中父子组件之间/一个函数调用了其他函数/controller 和 service</p>
+<h4 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h4><ul>
+<li><p>数据尽量使用真实数据、边界数据</p>
+</li>
+<li><p>不要用随机数，使用确定的数值</p>
+</li>
+<li><p>不要使用开发代码里的命名常量</p>
+</li>
+</ul>
+<p>他们可能是错误的，可能会更改</p>
+<ul>
+<li><p>不要共享全局数据，否则一个出错会导致多个测试用例出错（?）</p>
+</li>
+<li><p>定义好时间（跨时区问题）、光速、重力等物理常量</p>
+</li>
+<li><p>不要在单元测试里做逻辑问题（条件、选择逻辑）</p>
+</li>
+</ul>
+<p>把他们写到多条单元测试里</p>
+<ul>
+<li><p>在合适的位置使用合适的注解</p>
+</li>
+<li><p>一个单元测试里只有一个 assert</p>
+</li>
+<li><p>通过的测试不产生任何输出</p>
+</li>
+<li><p>未通过的测试只产生必要的输出</p>
+</li>
+<li><p>不要为了通过一项测试用例, 而写一个无意义的测试, 比如仅有一句 assert(true)</p>
+</li>
+<li><p>在测试中使用适当的 Mock 技术</p>
+</li>
+</ul>
+<p>可以降低测试的相互依赖性, 更快速的编写测试用例. 一般的 Mock 对象包括: 数据库, 其他产品和服务等.<br>避免在测试代码中使用基类, 即尽量不要有过多的继承层次. 目的是保持测试代码的简洁易读, 无依赖性</p>
+<h4 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h4><ul>
+<li><p>不要访问网络</p>
+</li>
+<li><p>不要访问文件系统</p>
+</li>
+<li><p>不要访问预设的外部资源</p>
+</li>
+</ul>
+<p>单元测试代码不应该假定外部的执行环境, 以便在任何时候/任何地方都能执行. 为了向测试提供必需的资源, 这些资源应该由测试本身提供.</p>
+<p>比如一个解析某类型文件的类, 可以把文件内容嵌入到测试代码里, 在测试的时候写入到临时文件, 测试结束再删除, 而不是从预定的地址直接读取.</p>
+<h4 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h4><ul>
+<li>一个单元测试应该在 1s 内完成</li>
+<li>一组测试集应该在 1 分钟内完成</li>
+<li>把一个大的测试集分成多个小的测试集</li>
+<li>把执行最慢的用例放在最后执行</li>
+</ul>
+<h4 id="更新代码时"><a href="#更新代码时" class="headerlink" title="更新代码时"></a>更新代码时</h4><p>测试列表。需要测试的功能点很多。应该在任何阶段想添加功能需求问题时，把相关功能点加到测试列表中，然后继续手头工作。然后不断的完成对应的测试用例、功能代码、重构。一是避免疏漏，也避免干扰当前进行的工作。</p>
+<h4 id="生产环境或发布版本中不能带有测试代码"><a href="#生产环境或发布版本中不能带有测试代码" class="headerlink" title="生产环境或发布版本中不能带有测试代码"></a>生产环境或发布版本中不能带有测试代码</h4><h3 id="单元测试方法"><a href="#单元测试方法" class="headerlink" title="单元测试方法"></a>单元测试方法</h3><h4 id="命名习惯"><a href="#命名习惯" class="headerlink" title="命名习惯"></a>命名习惯</h4><p>测试代码 Package 的命名和结构应该保持和实现代码的保持一致. 这样可以提高测试代码的可维护性</p>
+<ul>
+<li>测试代码与开发代码隔离</li>
+</ul>
+<p>许多构建和测试工具都需要将测试代码放在一个特定的源码目录中. Maven 和 Gradle 默认 src/main/java 中是实现代码, 而 src/test/java 中是测试代码.</p>
+<ul>
+<li><p>实现代码和测试代码的包名结构保持一致</p>
+</li>
+<li><p>测试类的命名和实现类命名有规律</p>
+</li>
+</ul>
+<p>通常是用 Test 或其他类似词汇作为前缀或后缀<br>// todo:截图<br>比如 src/controller/Login.java</p>
+<p>test/controller/Login.test.java</p>
+<ul>
+<li>使用有意义的测试用例名称, 要能够大致描述测试的对象或行为。</li>
+</ul>
+<p>每个测试名称包含 3 个部分</p>
+<p>（1）正在测试什么？例如，ProductsService.addNewProduct 方法</p>
+<p>（2）在什么情况和情况下？例如，没有价格传递给方法</p>
+<p>（3）预期结果是什么？例如，新产品未获批准</p>
+<p>好的测试报告类似于需求文档</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">describe(<span class="string">'ProductsService'</span>, <span class="function"><span class="keyword">function</span></span>() &#123; <span class="comment">// testsuite测试用例集</span></span><br><span class="line">  it(<span class="string">'addNewProduct, when no price is specified, then the product status is pending approval'</span>, ()=&gt; &#123; <span class="comment">// testcase测试用例</span></span><br><span class="line">    const <span class="keyword">new</span><span class="type">Product</span> = <span class="keyword">new</span> <span class="type">ProductService</span>().add(...);</span><br><span class="line">    expect(<span class="keyword">new</span><span class="type">Product</span>.status).to.equal(<span class="string">'pendingApproval'</span>);<span class="comment">// assert</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="测试技术"><a href="#测试技术" class="headerlink" title="测试技术"></a>测试技术</h4><p>在单元测试时要根据“白盒”测试和“黑盒”测试用例设计方法设计测试用例</p>
+<h5 id="黑盒测试"><a href="#黑盒测试" class="headerlink" title="黑盒测试"></a>黑盒测试</h5><p>等价类划分法<br>  边界值分析法<br>  错误推测法<br>  因果图法<br>  功能图法</p>
+<h5 id="白盒测试"><a href="#白盒测试" class="headerlink" title="白盒测试"></a>白盒测试</h5><p>主要是逻辑驱动法和基本路径法</p>
+<p>语句覆盖。<br>判定覆盖。<br>条件覆盖。<br>判定/条件覆盖。<br>条件组合覆盖。<br>路径覆盖。</p>
+<h5 id="等级"><a href="#等级" class="headerlink" title="等级"></a>等级</h5><ol>
+<li>Level1：正常流程可用，即一个函数在输入正确的参数时，会有正确的输出<br>正确的输入，并得到预期的结果</li>
+<li>Level2：异常流程可抛出逻辑异常，即输入参数有误时，不能抛出系统异常，而是用自己定义的逻辑异常通知上层调用代码其错误之处<br>强制错误信息输入（如：非法数据、异常流程、非业务允许输入等），并得到预期的结果。</li>
+<li>Level3：极端情况和边界数据可用，对输入参数的边界情况也要单独测试，确保输出是正确有效的<br>边界值测试，包括循环边界、特殊取值、特殊时间点、数据顺序</li>
+<li>Level4：所有分支、循环的逻辑走通，不能有任何流程是测试不到的</li>
+<li>Level5：输出数据的所有字段验证，对有复杂数据结构的输出，确保每个字段都是正确的</li>
+</ol>
+<h1 id="单元测试的实施规则"><a href="#单元测试的实施规则" class="headerlink" title="单元测试的实施规则"></a>单元测试的实施规则</h1><ol>
+<li><p>安排测试优先次序，核心业务、核心应用、核心模块的增量代码确保单元测试通过。</p>
+<p>说明：新增代码及时补充单元测试，如果新增代码影响了原有单元测试，请及时修正。</p>
+</li>
+<li><p>单元测试的基本目标：语句覆盖率达到 70%；核心模块的语句覆盖率和分支覆盖率都<br>要达到 100%</p>
+</li>
+</ol>
+<p>高的代码覆盖率不一定能保证代码的质量，但是低的代码覆盖率一定不能保证代码的质量。</p>
+<ol start="3">
+<li><p>对于不可测的代码建议做必要的重构，使代码变得可测，避免为了达到测试要求而<br>书写不规范测试代码。</p>
+</li>
+<li><p>在设计评审阶段，开发人员需要和测试人员一起确定单元测试范围，单元测试最好<br>覆盖所有测试用例。</p>
+</li>
+<li><p>单元测试作为一种质量保障手段，不建议项目发布后补充单元测试用例，建议在项<br>目提测前完成单元测试。</p>
+</li>
+<li><p>所有的测试都必须通过：这一点很重要，不能因为懒惰而产生 Failed 掉的 Case。</p>
+</li>
+<li><p>最简单的测试也远远胜过完全没有测试。</p>
+</li>
+</ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>单元测试写起来不容易，且写且珍惜。</p>
+<h1 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h1><ul>
+<li><a href="https://www.youtube.com/watch?v=fr1E9aVnBxw" target="_blank" rel="noopener">https://www.youtube.com/watch?v=fr1E9aVnBxw</a></li>
+<li><a href="https://github.com/yangyubo/zh-unit-testing-guidelines" target="_blank" rel="noopener">https://github.com/yangyubo/zh-unit-testing-guidelines</a></li>
+<li><a href="https://medium.com/@me_37286/yoni-goldberg-javascript-nodejs-testing-best-practices-2b98924c9347" target="_blank" rel="noopener">https://medium.com/@me_37286/yoni-goldberg-javascript-nodejs-testing-best-practices-2b98924c9347</a></li>
+<li><a href="https://www.jianshu.com/p/62f16cd4fef3" target="_blank" rel="noopener">https://www.jianshu.com/p/62f16cd4fef3</a></li>
+<li><a href="https://www.ibm.com/developerworks/cn/linux/l-tdd/index.html" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/linux/l-tdd/index.html</a></li>
+<li><a href="https://juejin.im/entry/5b485e186fb9a04f8a2177a5" target="_blank" rel="noopener">https://juejin.im/entry/5b485e186fb9a04f8a2177a5</a></li>
+<li><a href="https://www.jianshu.com/p/f18cf0ea72ec" target="_blank" rel="noopener">https://www.jianshu.com/p/f18cf0ea72ec</a></li>
+<li><a href="https://github.com/linesh-simplicity/linesh-simplicity.github.io/issues/84" target="_blank" rel="noopener">https://github.com/linesh-simplicity/linesh-simplicity.github.io/issues/84</a></li>
+<li><a href="https://github.com/Chunlin-Li/Chunlin-Li.github.io/blob/master/blogs/java/java-test.md" target="_blank" rel="noopener">https://github.com/Chunlin-Li/Chunlin-Li.github.io/blob/master/blogs/java/java-test.md</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+  
+        <div class="post-tags">
+          
+            <a href="/tags/随笔/" rel="tag"># 随笔</a>
+          
+        </div>
+      
+
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+        
+     <div>    
+      
+      <ul class="post-copyright">
+         <li class="post-copyright-link">
+          <strong>本文作者：</strong>
+          <a href="/" title="欢迎访问 handv 的个人博客">handv</a>
+        </li>
+
+        <li class="post-copyright-link">
+          <strong>本文标题：</strong>
+          <a href="https://handv.github.io/blog/2019/03/谈一谈单元测试.html" title="谈一谈单元测试">谈一谈单元测试</a>
+        </li>
+
+        <li class="post-copyright-link">
+          <strong>本文链接：</strong>
+          <a href="https://handv.github.io/blog/2019/03/谈一谈单元测试.html" title="谈一谈单元测试">https://handv.github.io/blog/2019/03/谈一谈单元测试.html</a>
+        </li>
+
+        <li class="post-copyright-date">
+            <strong>发布时间：</strong>2019年3月8日 - 20时03分
+        </li>  
+
+        <li class="post-copyright-license">
+          <strong>版权声明： </strong>
+          本文由 handv 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="license" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a> <br>转载请保留以上声明信息！
+        </li>
+      </ul>
+    
+  </div>  
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2019/03/开发测试趣谈.html" rel="next" title="开发、测试趣谈">
+                <i class="fa fa-chevron-left"></i> 开发、测试趣谈
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2019/03/2019-03前端月报.html" rel="prev" title="2019.03前端月报">
+                2019.03前端月报 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MjAyNi8xODU3Mw"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="handv">
+          <p class="site-author-name" itemprop="name">handv</p>
+          <p class="site-description motion-element" itemprop="description">前端小知识</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/handv" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引子"><span class="nav-number">1.</span> <span class="nav-text">引子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是单元测试"><span class="nav-number">2.</span> <span class="nav-text">什么是单元测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">2.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特点"><span class="nav-number">2.2.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本质"><span class="nav-number">2.3.</span> <span class="nav-text">本质</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么要做单元测试"><span class="nav-number">3.</span> <span class="nav-text">为什么要做单元测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对于单元测试的误解"><span class="nav-number">3.1.</span> <span class="nav-text">对于单元测试的误解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单元测试的意义："><span class="nav-number">3.2.</span> <span class="nav-text">单元测试的意义：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对于整个项目"><span class="nav-number">3.2.1.</span> <span class="nav-text">对于整个项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对于开发人员"><span class="nav-number">3.2.2.</span> <span class="nav-text">对于开发人员</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要做单元测试？"><span class="nav-number">3.3.</span> <span class="nav-text">为什么要做单元测试？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么时候做单元测试"><span class="nav-number">4.</span> <span class="nav-text">什么时候做单元测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#不适合"><span class="nav-number">4.1.</span> <span class="nav-text">不适合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#适合"><span class="nav-number">4.2.</span> <span class="nav-text">适合</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#怎么做单元测试"><span class="nav-number">5.</span> <span class="nav-text">怎么做单元测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TDD（Test-driven-development）："><span class="nav-number">5.1.</span> <span class="nav-text">TDD（Test-driven development）：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开发流程"><span class="nav-number">5.1.1.</span> <span class="nav-text">开发流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TDD-的本质"><span class="nav-number">5.1.2.</span> <span class="nav-text">TDD 的本质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单元测试的本质"><span class="nav-number">5.1.3.</span> <span class="nav-text">单元测试的本质</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拆分项目"><span class="nav-number">5.2.</span> <span class="nav-text">拆分项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原则"><span class="nav-number">5.2.1.</span> <span class="nav-text">原则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单元测试"><span class="nav-number">5.3.</span> <span class="nav-text">单元测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#工欲善其事必先利其器"><span class="nav-number">5.3.1.</span> <span class="nav-text">工欲善其事必先利其器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#测试框架"><span class="nav-number">5.3.1.1.</span> <span class="nav-text">测试框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#覆盖率分析"><span class="nav-number">5.3.1.2.</span> <span class="nav-text">覆盖率分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#常用的覆盖率"><span class="nav-number">5.3.1.2.1.</span> <span class="nav-text">常用的覆盖率</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#断言库-Assert"><span class="nav-number">5.3.1.3.</span> <span class="nav-text">断言库 Assert</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mock-框架"><span class="nav-number">5.3.1.4.</span> <span class="nav-text">Mock 框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lint"><span class="nav-number">5.3.1.5.</span> <span class="nav-text">Lint</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#持续集成"><span class="nav-number">5.3.1.6.</span> <span class="nav-text">持续集成</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单元测试原则"><span class="nav-number">5.3.2.</span> <span class="nav-text">单元测试原则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#测试隔离"><span class="nav-number">5.3.2.1.</span> <span class="nav-text">测试隔离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输入输出"><span class="nav-number">5.3.2.2.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#环境"><span class="nav-number">5.3.2.3.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行"><span class="nav-number">5.3.2.4.</span> <span class="nav-text">执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更新代码时"><span class="nav-number">5.3.2.5.</span> <span class="nav-text">更新代码时</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生产环境或发布版本中不能带有测试代码"><span class="nav-number">5.3.2.6.</span> <span class="nav-text">生产环境或发布版本中不能带有测试代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单元测试方法"><span class="nav-number">5.3.3.</span> <span class="nav-text">单元测试方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#命名习惯"><span class="nav-number">5.3.3.1.</span> <span class="nav-text">命名习惯</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试技术"><span class="nav-number">5.3.3.2.</span> <span class="nav-text">测试技术</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#黑盒测试"><span class="nav-number">5.3.3.2.1.</span> <span class="nav-text">黑盒测试</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#白盒测试"><span class="nav-number">5.3.3.2.2.</span> <span class="nav-text">白盒测试</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#等级"><span class="nav-number">5.3.3.2.3.</span> <span class="nav-text">等级</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单元测试的实施规则"><span class="nav-number">6.</span> <span class="nav-text">单元测试的实施规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文献："><span class="nav-number">8.</span> <span class="nav-text">参考文献：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2018 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">handv</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>| Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a>
+</div>
+
+
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("d4OUfN7p7swl3vIOPSNDldTi-gzGzoHsz", "hxU0ojVq8uxtXfRQIkPYzk4y");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+	<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+</body>
+</html>
