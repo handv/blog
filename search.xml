@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[2019-05前端月报.md]]></title>
+    <title><![CDATA[2019-06-ARTS-01]]></title>
+    <url>%2F%2Fblog%2F2019%2F06%2F2019-06-ARTS-01.html</url>
+    <content type="text"><![CDATA[1. algorithm371. Sum of Two Integers 123456789101112/** * @param &#123;number&#125; a * @param &#123;number&#125; b * @return &#123;number&#125; */var getSum = function(a, b) &#123; if (a === 0) return b; if (b === 0) return a; return getSum(a ^ b, (a &amp; b) &lt;&lt; 1);&#125;; 解题思路： 同位相加 同位进位 相加结果 + 进位结果 2. review危险的 target=”_blank” 与 “opener” window.opener - 如果当前窗口是由另一个窗口打开的, window.opener保留了那个窗口的引用 影响： 如果，你的网站上有一个链接，使用了 target=”_blank”，那么一旦用户点击这个链接并进入一个新的标签，新标签中的页面如果存在恶意代码，就可以将你的网站直接导航到一个虚假网站。此时，如果用户回到你的标签页，看到的就是被替换过的页面了。 在新打开的页面，执行window.opener.location.replace(‘https://baidu.com/&#39;)，会将之前的网站的地址变成百度。 网站使用了 &lt;a target=&quot;_blank&quot;&gt;，那么新打开的标签页的性能将会影响到当前页面。 解决方案： rel=”noreferrer” 保证来源隐私安全 rel=”noopener” 保证无法使用opener对象 兼容性 123456"use strict";function openUrl(url) &#123; var newTab = window.open(); newTab.opener = null; newTab.location = url;&#125; 3. tipfilter: invert: 改版元素颜色filter: hue-rotate: 改版元素色调 二者结合，可以简单将网页样式改成dark主题123.body &#123; filter: invert(100) hue-rotate(180deg);&#125; 4. share深入理解现代浏览器 开始划重点： 架构篇 chrome最新架构: 浏览器进程：控制浏览器这个应用的chrome（主框架）部分，包括地址栏、书签、前进/后退按钮等，同时也会处理浏览器不可见的高权限任务，如发送网络请求、访问文件。 渲染器进程：负责在标签页中显示网站及处理事件。 插件进程：控制网站用到的所有插件。 GPU进程：在独立的进程中处理GPU任务。之所以放到独立的进程，是因为GPU要处理来自多个应用的请求，但要在同一个界面上绘制图形。 进程处理 正常情况，一个标签页就是一个渲染器进程。 为节省内存，Chrome会限制自己可以打开的进程数量。限制的条件取决于设备内存和CPU配置。达到限制条件后，Chrome会用一个进程处理同一个站点的多个标签页。 站点隔离（http://t.cn/RgNAwLC）。站点隔离是新近引入Chrome的一个里程碑式特性，即每个跨站点iframe都运行一个独立的`渲染器进程`。 导航篇 标签页外面的一切都由浏览器进程处理 浏览器进程中有UI线程负责绘制浏览器的按钮和地址栏 网络线程负责处理网络请求并从互联网接收数据 存储线程负责访问文件和存储数据 输入url后 第一步：处理输入。UI线程会判断用户输入的是查询字符串还是URL 第二步：开始导航。如果输入的是URL，UI线程会通知网络线程发起网络调用，获取网站内容 第三步：读取响应。服务器返回的响应体到来之后，网络线程会检查接收到的前几个字节。 1如果响应是HTML文件，那下一步就是把数据交给`渲染器进程`。但如果是一个zip文件或其他文件，那就意味着是一个下载请求，需要把数据传给`下载管理器`。 第四步：联系渲染器进程。网络线程确认浏览器可以导航到用户请求的网站，通知UI线程数据已经准备好了。UI线程会联系渲染器进程渲染网页。 第五步：提交导航。数据和渲染器进程都有了，就可以通过IPC(进程间通信)从浏览器进程向渲染器进程提交导航。渲染器进程也会同时接收到不间断的HTML数据流。当浏览器进程收到渲染器进程的确认消息后，导航完成，文档加载阶段开始。 最后一步：初始加载完成。提交导航之后，渲染器进程将负责加载资源和渲染页面（具体细节后面介绍）。而在“完成”渲染后（在所有iframe中的onload事件触发且执行完成后），渲染器进程会通过IPC给浏览器进程发送一个消息。此时，UI线程停止标签页上的旋转图标。 如果此时用户在地址又输入了其他URL呢？ 1)浏览器进程还会重复上述步骤，导航到新站点。2)在此之前，需要确认已渲染的网站是否关注beforeunload事件。3)如果有beforeunload事件，必须渲染器进程执行完毕，浏览器进程才能导航到新站点。4)导航到不同的网站时，会有一个新的独立渲染器进程负责处理新导航，而老的渲染器进程要负责处理unload之类的事件。 渲染篇 标签页中的一切都由渲染器进程负责处理 主线程负责运行大多数客户端JavaScript代码 少量代码可能会由工作线程处理（如果用到了Web Worker或Service Worker） 合成器（compositor）线程和栅格化（raster）线程负责高效、平滑地渲染页面 加载子资源 Chrome会在解析同时并发运行“预加载扫描器”，当发现HTML文档中有&lt;img&gt;或&lt;link&gt;时，预加载扫描器会将请求提交给浏览器进程中的网络线程。 交互篇 用户交互比如触摸事件发生时的过程： 浏览器进程首先接收到该手势。但是，浏览器进程仅仅知道手势发生在哪里， 浏览器进程会把事件类型（如touchstart）及其坐标发送给渲染器进程处理这个事件，即根据事件目标来运行注册的监听程序。因为标签页中的内容是渲染器进程处理。 事件处理 输入事件是由渲染器进程中的合成器线程处理的。 如果页面上没有注册事件监听程序，那合成器线程可以完全独立于主线程生成新的合成器帧。 如果页面上注册了事件监听程序呢？此时合成器线程怎么知道是否有事件要处理？ 为什么事件监听要加上passive:true? 123document.body.addEventListener('touchstart', evt =&gt; &#123; ...&#125;, &#123; passive: true &#125;) 自己看文章吧 大概原理是，如果把事件监听都挂载到document.body, 那么在处理每一次事件的时候，都需要渲染器进程的合成器线程先进行js事件的判断，再合成新帧。而加了这个之后，就可以同步进行了。]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>arts</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[2019-05前端月报]]></title>
     <url>%2F%2Fblog%2F2019%2F05%2F2019-05%E5%89%8D%E7%AB%AF%E6%9C%88%E6%8A%A5.html</url>
     <content type="text"><![CDATA[新闻 Google开发者大会(全部视频) 加载速度优化 浏览器性能和速度提升 浏览器实现了图像和 iframe 的懒加载，只需要给html元素增加属性 loading=”lazy” Paint Holding 的实验功能，避免闪现纯白的“加载页面“, 【弹幕：看起来就像是点击了没反应】 [Web Packaging]（https://github.com/WICG/webpackage） 增加了页面可以加载源，类似“P2P” 更强大的新特性 文件系统访问 https://github.com/WICG/native-file-system 无限配额 https://bugs.chromium.org/p/chromium/issues/detail?id=897276 基于短信的身份验证 https://github.com/sso-google/sms-otp-retrieval/blob/master/README.md Web Share Target API 形状检测 API，可以实现与本次大会上发布的 Web Perception 工具包（https://perceptiontoolkit.dev/） TWA 视频演示：https://youtu.be/XMaDMYjHP0Y， 什么是TWA 桌面版 PWA 小程序支持ChromeOS 平台 Windows、Mac 和 Linux 平台 comlink来使用 worker 的扫雷游戏 Proxx 隐私安全 新策略可以让用户决定是否允许网站追踪自己，并且可以增强 Web 整体的安全和隐私保护能力，提升透明度 Chrome 处理 Cookie 策略的重要变化： https://blog.chromium.org/2019/05/improving-privacy-and-security-on-web.html 改善开发者体验 web.dev学习教程eg. react 和工具使用文档 eg. lighthouse QCon大会(PPT可下载) 前端场里，百度amis还不错 2019 new Javasscript JS 解析快了 2 倍 async 执行快了 11 倍 平均减少了 20% 的内存使用 class fileds 可以直接在 class 中初始化变量不用写在 constructor 里 私有变量前缀 string.matchAll 用来做正则多次匹配 numeric seperator 允许我们在写数字的时候使用 _ 作为分隔符提高可读性 bigint 新的大数字类型支持 Intl.NumberFormat 本地化格式化数字显示 Array.prototype.flat(), Array.prototype.flatMap() 多层数组打平方法 Object.entries() 和 Object.fromEntries() 快速对对象进行数组操作 globalThis 无环境依赖的全局 this 支持 Array.prototype.sort() 的排序结果稳定输出 Intl.RelativeTimeFormat(), Intl.DateTimeFormat() 本地化显示时间 Intl.ListFormat() 本地化显示多个名词列表 Intl.locale() 提供某一本地化语言的各种常量查询 顶级 await 无需写 async 的支持 Promise.allSettled() 和 Promise.any() 的增加丰富 Promise 场景 WeakRef 类型用来做部分变量弱引用减少内存泄露 React Native还没完！ Facebook App 的改版使用了 React Native,进一步扩大了 React Native 的应用范围:视频 在 Facebook 里面 RN 的使用很广泛，产品包括：Ads Manager, Oculus Companion, Marketplace, Dating, Jobs, Profile, Settings, Blood Donations, Crisis Response 等等 去年 RN 的大规模重构，使用 C++ 重写了 RN 的核心部分:https://www.youtube.com/watch?v=UcqRXTriUVI RN 得到了微软的大力支持，你可以用 RN 直接编写 Windows 平台的 UWP 应用 Flutter1.5来了！全平台制霸！ Flutter 1.5：新的 App Store iOS SDK 更新、iOS 与 Material 小工具更新、引擎对于新型设备的支持，Dart 2.3 带来的全新 UI-as-code 语言功能等等 投资建立技术支持生态系统，目前 Flutter 项目拥有超过 2000 个可用的开源软件包 从移动到多平台：Flutter for Web 正尝试在各类嵌入式设备之上运行 Flutter 应用程序 svelte:又一个前端框架，类似 vue 乍看结构很像vue,一个.svelte文件里包括了 script、style、html 提供了一套全新的语法 Svelte不依赖于虚拟DOM，在构建时运行 Vuex3.1.1 更新：支持 jsDelivr，修复内存泄漏 支持在 NativeScript 应用中调试 Vuex 从uglify换成Terser&amp;支持了type=module的直接加载方式 支持jsdelivr 修复内存泄漏 技术 HTTPS的页面发送不了HTTP请求 MPEG-DASH在bilibili的应用与实践 自适应比特率串流技术， 2011 年 11 月成为国际标准 自适应码率、无缝切换、降低卡顿率 B站在2018年9月将其全量，卡顿率对比 HTTP-FLV 有大幅降低 微信，支付宝小程序实现原理概述 对比了小程序和普通网页的区别 运行环境不同，普通网页开发可以使用各种浏览器提供的 DOM API，进行 DOM 操作 小程序渲染层和逻辑层运行在不同线程中，且渲染层存在多个WebView线程 执行环境不同 分析了小程序为何选择hybrid技术 避免单线程阻塞，用户体验好 方便发布新版本 详细介绍了小程序的双线程模型 线程之间相互独立，通过微信客户端进行通信 渲染层模拟渲染层DOM树，当调用setData后通过Native层传递数据，渲染层对比新旧DOM树后更新。 介绍了小程序的运行&amp;更新&amp;事件处理机制 说明为什么我们要避免频繁的setData setData会占用渲染层的js线程，从而阻塞事件传递到逻辑层。 setData会传递大量新数据 工具 即拿即用的 CSS 小功能，直接 copy 代码就能用起来 利用favicon展示页面加载进度 shepherd 做新手指引的工具库，目前对于Vue，React，Angular，Ember框架都有支持 Tickeys 没有机械键盘，那你就来着了 每月金句你要避免两个陷阱。一个是尝试自动化一个不完全理解的服务，另一个是盲目地相信别人的自动化，而不理解它在幕后做的事情。]]></content>
       <categories>
@@ -99,8 +110,8 @@
         <category>javascript</category>
       </categories>
       <tags>
-        <tag>Canvas</tag>
         <tag>Literallycanvas</tag>
+        <tag>Canvas</tag>
       </tags>
   </entry>
   <entry>
@@ -206,8 +217,8 @@
         <category>javascript</category>
       </categories>
       <tags>
-        <tag>Literallycanvas</tag>
         <tag>React</tag>
+        <tag>Literallycanvas</tag>
       </tags>
   </entry>
 </search>
