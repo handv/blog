@@ -90,7 +90,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="handv">
+  <meta name="keywords" content="浏览器,">
 
 
 
@@ -106,17 +106,18 @@
 
 
 
-<meta name="description" content="前端小知识">
-<meta name="keywords" content="handv JavaScript">
-<meta property="og:type" content="website">
-<meta property="og:title" content="han&#39;s bolg - 年糕記">
-<meta property="og:url" content="https://handv.github.io/tags/arts/index.html">
+<meta name="description" content="看了深入理解现代浏览器这篇文章，写的非常好，记录一下。 开始划重点： 架构篇   chrome最新架构:  浏览器进程：控制浏览器这个应用的chrome（主框架）部分，包括地址栏、书签、前进/后退按钮等，同时也会处理浏览器不可见的高权限任务，如发送网络请求、访问文件。  渲染器进程：负责在标签页中显示网站及处理事件。  插件进程：控制网站用到的所有插件。  GPU进程：在独立的进程中处理GPU任务">
+<meta name="keywords" content="浏览器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解现代浏览器">
+<meta property="og:url" content="https://handv.github.io/blog/2019/06/深入理解现代浏览器.html">
 <meta property="og:site_name" content="han&#39;s bolg - 年糕記">
-<meta property="og:description" content="前端小知识">
+<meta property="og:description" content="看了深入理解现代浏览器这篇文章，写的非常好，记录一下。 开始划重点： 架构篇   chrome最新架构:  浏览器进程：控制浏览器这个应用的chrome（主框架）部分，包括地址栏、书签、前进/后退按钮等，同时也会处理浏览器不可见的高权限任务，如发送网络请求、访问文件。  渲染器进程：负责在标签页中显示网站及处理事件。  插件进程：控制网站用到的所有插件。  GPU进程：在独立的进程中处理GPU任务">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-06T11:54:24.549Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="han&#39;s bolg - 年糕記">
-<meta name="twitter:description" content="前端小知识">
+<meta name="twitter:title" content="深入理解现代浏览器">
+<meta name="twitter:description" content="看了深入理解现代浏览器这篇文章，写的非常好，记录一下。 开始划重点： 架构篇   chrome最新架构:  浏览器进程：控制浏览器这个应用的chrome（主框架）部分，包括地址栏、书签、前进/后退按钮等，同时也会处理浏览器不可见的高权限任务，如发送网络请求、访问文件。  渲染器进程：负责在标签页中显示网站及处理事件。  插件进程：控制网站用到的所有插件。  GPU进程：在独立的进程中处理GPU任务">
 
 
 
@@ -144,7 +145,7 @@
 
 
 
-  <link rel="canonical" href="https://handv.github.io/tags/arts/">
+  <link rel="canonical" href="https://handv.github.io/blog/2019/06/深入理解现代浏览器.html">
 
 
 
@@ -167,7 +168,7 @@
 </style>
 
 
-  <title> 标签: arts | han's bolg - 年糕記 </title>
+  <title> 深入理解现代浏览器 | han's bolg - 年糕記 </title>
 </head>
 
   	 <!-- custom analytics part create by xiamo -->
@@ -281,7 +282,7 @@ $(function() {
     
   
 
-  <div class="container one-collumn sidebar-position-right  ">
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -406,44 +407,346 @@ $(function() {
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2>
-        arts
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://handv.github.io/blog/2019/06/深入理解现代浏览器.html">
+
+  <span style="display:none" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="handv">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="han's bolg - 年糕記">
+    <span style="display:none" itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="han's bolg - 年糕記" src="/images/avatar.jpg">
+    </span>
+  </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                深入理解现代浏览器
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-13T22:03:42+08:00">
+                2019-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">javascript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+		  
+			 
+          
+          
+             <span id="/blog/2019/06/深入理解现代浏览器.html" class="leancloud_visitors" data-flag-title="深入理解现代浏览器">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+				 <span>℃</span>
+             </span>
+          
+		   
+          
+
+		  
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+		  
+          
+ 
+        
+
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <p>看了<a href="https://mp.weixin.qq.com/s/LkKNjrkx1V32lCjv92Cuuw" target="_blank" rel="noopener">深入理解现代浏览器</a>这篇文章，写的非常好，记录一下。</p>
+<h5 id="开始划重点："><a href="#开始划重点：" class="headerlink" title="开始划重点："></a>开始划重点：</h5><ol>
+<li>架构篇</li>
+</ol>
+<ul>
+<li><p>chrome最新架构:</p>
+<ul>
+<li><p><code>浏览器进程</code>：控制浏览器这个应用的chrome（主框架）部分，包括地址栏、书签、前进/后退按钮等，同时也会处理浏览器不可见的高权限任务，如发送网络请求、访问文件。</p>
+</li>
+<li><p><code>渲染器进程</code>：负责在标签页中显示网站及处理事件。</p>
+</li>
+<li><p><code>插件进程</code>：控制网站用到的所有插件。</p>
+</li>
+<li><p><code>GPU进程</code>：在独立的进程中处理GPU任务。之所以放到独立的进程，是因为GPU要处理来自多个应用的请求，但要在同一个界面上绘制图形。</p>
+</li>
+</ul>
+</li>
+<li><p>进程处理</p>
+<ul>
+<li>正常情况，一个标签页就是一个<code>渲染器进程</code>。</li>
+<li>为节省内存，Chrome会限制自己可以打开的进程数量。限制的条件取决于设备内存和CPU配置。达到限制条件后，Chrome会用一个进程处理同一个站点的多个标签页。</li>
+<li>站点隔离（<a href="http://t.cn/RgNAwLC）。站点隔离是新近引入Chrome的一个里程碑式特性，即每个跨站点iframe都运行一个独立的`渲染器进程`。" target="_blank" rel="noopener">http://t.cn/RgNAwLC）。站点隔离是新近引入Chrome的一个里程碑式特性，即每个跨站点iframe都运行一个独立的`渲染器进程`。</a></li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>导航篇</li>
+</ol>
+<ul>
+<li><p>标签页外面的一切都由<code>浏览器进程</code>处理，包括以下线程：</p>
+<ul>
+<li><code>UI线程</code>负责绘制浏览器的按钮和地址栏</li>
+<li><code>网络线程</code>负责处理网络请求并从互联网接收数据</li>
+<li><code>存储线程</code>负责访问文件和存储数据</li>
+</ul>
+</li>
+<li><p>输入url后</p>
+<ul>
+<li>第一步：处理输入。<code>UI线程</code>会判断用户输入的是查询字符串还是URL</li>
+<li>第二步：开始导航。如果输入的是URL，<code>UI线程</code>会通知<code>网络线程</code>发起网络调用，获取网站内容</li>
+<li>第三步：读取响应。服务器返回的响应体到来之后，<code>网络线程</code>会检查接收到的前几个字节。</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果响应是HTML文件，那下一步就是把数据交给<span class="code">`渲染器进程`</span>。但如果是一个zip文件或其他文件，那就意味着是一个下载请求，需要把数据传给<span class="code">`下载管理器`</span>。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第四步：联系渲染器进程。<code>网络线程</code>确认浏览器可以导航到用户请求的网站，通知<code>UI线程</code>数据已经准备好了。<code>UI线程</code>会联系<code>渲染器进程</code>渲染网页。</li>
+<li>第五步：提交导航。数据和渲染器进程都有了，就可以通过IPC(进程间通信)从<code>浏览器进程</code>向<code>渲染器进程</code>提交导航。<code>渲染器进程</code>也会同时接收到不间断的HTML数据流。当<code>浏览器进程</code>收到<code>渲染器进程</code>的确认消息后，导航完成，文档加载阶段开始。</li>
+<li>最后一步：初始加载完成。提交导航之后，<code>渲染器进程</code>将负责加载资源和渲染页面（具体细节后面介绍）。而在“完成”渲染后（在所有iframe中的onload事件触发且执行完成后），<code>渲染器进程</code>会通过IPC给<code>浏览器进程</code>发送一个消息。此时，<code>UI线程</code>停止标签页上的旋转图标。</li>
+</ul>
+</li>
+</ul>
+<p>如果此时用户在地址又输入了其他URL呢？</p>
+<p>1)浏览器进程还会重复上述步骤，导航到新站点。<br>2)在此之前，需要确认已渲染的网站是否关注beforeunload事件。<br>3)如果有beforeunload事件，必须<code>渲染器进程</code>执行完毕，<code>浏览器进程</code>才能导航到新站点。<br>4)导航到不同的网站时，会有一个<code>新的独立渲染器进程</code>负责处理新导航，而<code>老的渲染器进程</code>要负责处理unload之类的事件。</p>
+<ol start="3">
+<li>渲染篇</li>
+</ol>
+<ul>
+<li><p>标签页中的一切都由<code>渲染器进程</code>负责处理</p>
+<ul>
+<li><code>主线程</code>负责运行大多数客户端JavaScript代码</li>
+<li>少量代码可能会由<code>工作线程</code>处理（如果用到了Web Worker或Service Worker）</li>
+<li><code>合成器（compositor）线程</code>和<code>栅格化（raster）线程</code>负责高效、平滑地渲染页面</li>
+</ul>
+</li>
+<li><p>加载子资源</p>
+<ul>
+<li>Chrome会在解析同时并发运行“预加载扫描器”，当发现HTML文档中有<code>&lt;img&gt;</code>或<code>&lt;link&gt;</code>时，预加载<code>扫描器</code>会将请求提交给<code>浏览器进程</code>中的<code>网络线程</code>。</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li>交互篇</li>
+</ol>
+<ul>
+<li><p>用户交互比如触摸事件发生时的过程：</p>
+<ul>
+<li><code>浏览器进程</code>首先接收到该手势。但是，浏览器进程仅仅知道手势发生在哪里，</li>
+<li><code>浏览器进程</code>会把事件类型（如touchstart）及其坐标发送给<code>渲染器进程</code>处理这个事件，即根据事件目标来运行注册的监听程序。因为标签页中的内容是<code>渲染器进程</code>处理。</li>
+</ul>
+</li>
+<li><p>事件处理</p>
+<ul>
+<li>输入事件是由<code>渲染器进程</code>中的<code>合成器线程</code>处理的。</li>
+<li>如果页面上没有注册事件监听程序，那合成器线程可以完全独立于主线程生成新的合成器帧。</li>
+<li>如果页面上注册了事件监听程序呢？此时合成器线程怎么知道是否有事件要处理？</li>
+</ul>
+</li>
+<li><p>为什么事件监听要加上<code>passive:true</code>?</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.body.addEventListener(<span class="string">'touchstart'</span>, evt =&gt; &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;, &#123; <span class="attr">passive</span>: <span class="literal">true</span> &#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>自己看文章吧</li>
+<li>大概原理是，如果把事件监听都挂载到document.body, 那么在处理每一次事件的时候，都需要<code>渲染器进程</code>的<code>合成器线程</code>先进行js事件的判断，再合成新帧。而加了这个之后，就可以同步进行了。</li>
+</ul>
 
-      <h2 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/blog/2019/06/2019-06-ARTS-01.html" itemprop="url">
-              
-                <span itemprop="name">2019-06-ARTS-01</span>
-              
-            </a>
+
+      
+    </div>
+  
+        <div class="post-tags">
+          
+            <a href="/tags/浏览器/" rel="tag"># 浏览器</a>
+          
+        </div>
+      
+
+
+    <div>
+      
         
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-05T22:03:42+08:00" content="2019-06-05">
-          06-05
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+
+    <footer class="post-footer">
+        
+     <div>    
+      
+      <ul class="post-copyright">
+         <li class="post-copyright-link">
+          <strong>本文作者：</strong>
+          <a href="/" title="欢迎访问 handv 的个人博客">handv</a>
+        </li>
+
+        <li class="post-copyright-link">
+          <strong>本文标题：</strong>
+          <a href="https://handv.github.io/blog/2019/06/深入理解现代浏览器.html" title="深入理解现代浏览器">深入理解现代浏览器</a>
+        </li>
+
+        <li class="post-copyright-link">
+          <strong>本文链接：</strong>
+          <a href="https://handv.github.io/blog/2019/06/深入理解现代浏览器.html" title="深入理解现代浏览器">https://handv.github.io/blog/2019/06/深入理解现代浏览器.html</a>
+        </li>
+
+        <li class="post-copyright-date">
+            <strong>发布时间：</strong>2019年6月13日 - 22时06分
+        </li>  
+
+        <li class="post-copyright-license">
+          <strong>版权声明： </strong>
+          本文由 handv 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="license" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a> <br>转载请保留以上声明信息！
+        </li>
+      </ul>
+    
+  </div>  
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2019/05/2019-05前端月报.html" rel="next" title="2019-05前端月报">
+                <i class="fa fa-chevron-left"></i> 2019-05前端月报
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2019/06/2019-06前端月报.html" rel="prev" title="2019-06前端月报">
+                2019-06前端月报 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
           
           </div>
@@ -451,6 +754,12 @@ $(function() {
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MjAyNi8xODU3Mw"></div>
+    
+  </div>
+
 
         </div>
         
@@ -470,8 +779,17 @@ $(function() {
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="handv">
           <p class="site-author-name" itemprop="name">handv</p>
@@ -500,7 +818,7 @@ $(function() {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -536,6 +854,22 @@ $(function() {
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#开始划重点："><span class="nav-number">1.</span> <span class="nav-text">开始划重点：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
@@ -654,6 +988,10 @@ $(function() {
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 
@@ -685,6 +1023,10 @@ $(function() {
 
   
 
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
   
 
 

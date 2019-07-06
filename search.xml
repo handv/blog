@@ -12,14 +12,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[2019-06-ARTS-01]]></title>
-    <url>%2F%2Fblog%2F2019%2F06%2F2019-06-ARTS-01.html</url>
-    <content type="text"><![CDATA[algorithm371. Sum of Two Integers 123456789101112/** * @param &#123;number&#125; a * @param &#123;number&#125; b * @return &#123;number&#125; */var getSum = function(a, b) &#123; if (a === 0) return b; if (b === 0) return a; return getSum(a ^ b, (a &amp; b) &lt;&lt; 1);&#125;; 解题思路： 同位相加 同位进位 相加结果 + 进位结果 review危险的 target=”_blank” 与 “opener” window.opener - 如果当前窗口是由另一个窗口打开的, window.opener保留了那个窗口的引用 影响： 如果，你的网站上有一个链接，使用了 target=”_blank”，那么一旦用户点击这个链接并进入一个新的标签，新标签中的页面如果存在恶意代码，就可以将你的网站直接导航到一个虚假网站。此时，如果用户回到你的标签页，看到的就是被替换过的页面了。 在新打开的页面，执行window.opener.location.replace(‘https://baidu.com/&#39;)，会将之前的网站的地址变成百度。 网站使用了 &lt;a target=&quot;_blank&quot;&gt;，那么新打开的标签页的性能将会影响到当前页面。 解决方案： rel=”noreferrer” 保证来源隐私安全 rel=”noopener” 保证无法使用opener对象 兼容性 123456"use strict";function openUrl(url) &#123; var newTab = window.open(); newTab.opener = null; newTab.location = url;&#125; tipfilter: invert: 改版元素颜色filter: hue-rotate: 改版元素色调 二者结合，可以简单将网页样式改成dark主题123.body &#123; filter: invert(100) hue-rotate(180deg);&#125; share深入理解现代浏览器 开始划重点： 架构篇 chrome最新架构: 浏览器进程：控制浏览器这个应用的chrome（主框架）部分，包括地址栏、书签、前进/后退按钮等，同时也会处理浏览器不可见的高权限任务，如发送网络请求、访问文件。 渲染器进程：负责在标签页中显示网站及处理事件。 插件进程：控制网站用到的所有插件。 GPU进程：在独立的进程中处理GPU任务。之所以放到独立的进程，是因为GPU要处理来自多个应用的请求，但要在同一个界面上绘制图形。 进程处理 正常情况，一个标签页就是一个渲染器进程。 为节省内存，Chrome会限制自己可以打开的进程数量。限制的条件取决于设备内存和CPU配置。达到限制条件后，Chrome会用一个进程处理同一个站点的多个标签页。 站点隔离（http://t.cn/RgNAwLC）。站点隔离是新近引入Chrome的一个里程碑式特性，即每个跨站点iframe都运行一个独立的`渲染器进程`。 导航篇 标签页外面的一切都由浏览器进程处理 浏览器进程中有UI线程负责绘制浏览器的按钮和地址栏 网络线程负责处理网络请求并从互联网接收数据 存储线程负责访问文件和存储数据 输入url后 第一步：处理输入。UI线程会判断用户输入的是查询字符串还是URL 第二步：开始导航。如果输入的是URL，UI线程会通知网络线程发起网络调用，获取网站内容 第三步：读取响应。服务器返回的响应体到来之后，网络线程会检查接收到的前几个字节。 1如果响应是HTML文件，那下一步就是把数据交给`渲染器进程`。但如果是一个zip文件或其他文件，那就意味着是一个下载请求，需要把数据传给`下载管理器`。 第四步：联系渲染器进程。网络线程确认浏览器可以导航到用户请求的网站，通知UI线程数据已经准备好了。UI线程会联系渲染器进程渲染网页。 第五步：提交导航。数据和渲染器进程都有了，就可以通过IPC(进程间通信)从浏览器进程向渲染器进程提交导航。渲染器进程也会同时接收到不间断的HTML数据流。当浏览器进程收到渲染器进程的确认消息后，导航完成，文档加载阶段开始。 最后一步：初始加载完成。提交导航之后，渲染器进程将负责加载资源和渲染页面（具体细节后面介绍）。而在“完成”渲染后（在所有iframe中的onload事件触发且执行完成后），渲染器进程会通过IPC给浏览器进程发送一个消息。此时，UI线程停止标签页上的旋转图标。 如果此时用户在地址又输入了其他URL呢？ 1)浏览器进程还会重复上述步骤，导航到新站点。2)在此之前，需要确认已渲染的网站是否关注beforeunload事件。3)如果有beforeunload事件，必须渲染器进程执行完毕，浏览器进程才能导航到新站点。4)导航到不同的网站时，会有一个新的独立渲染器进程负责处理新导航，而老的渲染器进程要负责处理unload之类的事件。 渲染篇 标签页中的一切都由渲染器进程负责处理 主线程负责运行大多数客户端JavaScript代码 少量代码可能会由工作线程处理（如果用到了Web Worker或Service Worker） 合成器（compositor）线程和栅格化（raster）线程负责高效、平滑地渲染页面 加载子资源 Chrome会在解析同时并发运行“预加载扫描器”，当发现HTML文档中有&lt;img&gt;或&lt;link&gt;时，预加载扫描器会将请求提交给浏览器进程中的网络线程。 交互篇 用户交互比如触摸事件发生时的过程： 浏览器进程首先接收到该手势。但是，浏览器进程仅仅知道手势发生在哪里， 浏览器进程会把事件类型（如touchstart）及其坐标发送给渲染器进程处理这个事件，即根据事件目标来运行注册的监听程序。因为标签页中的内容是渲染器进程处理。 事件处理 输入事件是由渲染器进程中的合成器线程处理的。 如果页面上没有注册事件监听程序，那合成器线程可以完全独立于主线程生成新的合成器帧。 如果页面上注册了事件监听程序呢？此时合成器线程怎么知道是否有事件要处理？ 为什么事件监听要加上passive:true? 123document.body.addEventListener('touchstart', evt =&gt; &#123; ...&#125;, &#123; passive: true &#125;) 自己看文章吧 大概原理是，如果把事件监听都挂载到document.body, 那么在处理每一次事件的时候，都需要渲染器进程的合成器线程先进行js事件的判断，再合成新帧。而加了这个之后，就可以同步进行了。]]></content>
+    <title><![CDATA[深入理解现代浏览器]]></title>
+    <url>%2F%2Fblog%2F2019%2F06%2F%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E7%8E%B0%E4%BB%A3%E6%B5%8F%E8%A7%88%E5%99%A8.html</url>
+    <content type="text"><![CDATA[看了深入理解现代浏览器这篇文章，写的非常好，记录一下。 开始划重点： 架构篇 chrome最新架构: 浏览器进程：控制浏览器这个应用的chrome（主框架）部分，包括地址栏、书签、前进/后退按钮等，同时也会处理浏览器不可见的高权限任务，如发送网络请求、访问文件。 渲染器进程：负责在标签页中显示网站及处理事件。 插件进程：控制网站用到的所有插件。 GPU进程：在独立的进程中处理GPU任务。之所以放到独立的进程，是因为GPU要处理来自多个应用的请求，但要在同一个界面上绘制图形。 进程处理 正常情况，一个标签页就是一个渲染器进程。 为节省内存，Chrome会限制自己可以打开的进程数量。限制的条件取决于设备内存和CPU配置。达到限制条件后，Chrome会用一个进程处理同一个站点的多个标签页。 站点隔离（http://t.cn/RgNAwLC）。站点隔离是新近引入Chrome的一个里程碑式特性，即每个跨站点iframe都运行一个独立的`渲染器进程`。 导航篇 标签页外面的一切都由浏览器进程处理，包括以下线程： UI线程负责绘制浏览器的按钮和地址栏 网络线程负责处理网络请求并从互联网接收数据 存储线程负责访问文件和存储数据 输入url后 第一步：处理输入。UI线程会判断用户输入的是查询字符串还是URL 第二步：开始导航。如果输入的是URL，UI线程会通知网络线程发起网络调用，获取网站内容 第三步：读取响应。服务器返回的响应体到来之后，网络线程会检查接收到的前几个字节。 1如果响应是HTML文件，那下一步就是把数据交给`渲染器进程`。但如果是一个zip文件或其他文件，那就意味着是一个下载请求，需要把数据传给`下载管理器`。 第四步：联系渲染器进程。网络线程确认浏览器可以导航到用户请求的网站，通知UI线程数据已经准备好了。UI线程会联系渲染器进程渲染网页。 第五步：提交导航。数据和渲染器进程都有了，就可以通过IPC(进程间通信)从浏览器进程向渲染器进程提交导航。渲染器进程也会同时接收到不间断的HTML数据流。当浏览器进程收到渲染器进程的确认消息后，导航完成，文档加载阶段开始。 最后一步：初始加载完成。提交导航之后，渲染器进程将负责加载资源和渲染页面（具体细节后面介绍）。而在“完成”渲染后（在所有iframe中的onload事件触发且执行完成后），渲染器进程会通过IPC给浏览器进程发送一个消息。此时，UI线程停止标签页上的旋转图标。 如果此时用户在地址又输入了其他URL呢？ 1)浏览器进程还会重复上述步骤，导航到新站点。2)在此之前，需要确认已渲染的网站是否关注beforeunload事件。3)如果有beforeunload事件，必须渲染器进程执行完毕，浏览器进程才能导航到新站点。4)导航到不同的网站时，会有一个新的独立渲染器进程负责处理新导航，而老的渲染器进程要负责处理unload之类的事件。 渲染篇 标签页中的一切都由渲染器进程负责处理 主线程负责运行大多数客户端JavaScript代码 少量代码可能会由工作线程处理（如果用到了Web Worker或Service Worker） 合成器（compositor）线程和栅格化（raster）线程负责高效、平滑地渲染页面 加载子资源 Chrome会在解析同时并发运行“预加载扫描器”，当发现HTML文档中有&lt;img&gt;或&lt;link&gt;时，预加载扫描器会将请求提交给浏览器进程中的网络线程。 交互篇 用户交互比如触摸事件发生时的过程： 浏览器进程首先接收到该手势。但是，浏览器进程仅仅知道手势发生在哪里， 浏览器进程会把事件类型（如touchstart）及其坐标发送给渲染器进程处理这个事件，即根据事件目标来运行注册的监听程序。因为标签页中的内容是渲染器进程处理。 事件处理 输入事件是由渲染器进程中的合成器线程处理的。 如果页面上没有注册事件监听程序，那合成器线程可以完全独立于主线程生成新的合成器帧。 如果页面上注册了事件监听程序呢？此时合成器线程怎么知道是否有事件要处理？ 为什么事件监听要加上passive:true? 123document.body.addEventListener('touchstart', evt =&gt; &#123; ...&#125;, &#123; passive: true &#125;) 自己看文章吧 大概原理是，如果把事件监听都挂载到document.body, 那么在处理每一次事件的时候，都需要渲染器进程的合成器线程先进行js事件的判断，再合成新帧。而加了这个之后，就可以同步进行了。]]></content>
       <categories>
         <category>javascript</category>
       </categories>
       <tags>
-        <tag>arts</tag>
+        <tag>浏览器</tag>
       </tags>
   </entry>
   <entry>
@@ -121,8 +121,8 @@
         <category>javascript</category>
       </categories>
       <tags>
-        <tag>Literallycanvas</tag>
         <tag>Canvas</tag>
+        <tag>Literallycanvas</tag>
       </tags>
   </entry>
   <entry>
@@ -171,6 +171,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[科里化]]></title>
+    <url>%2F%2Fblog%2F2018%2F11%2F%E7%A7%91%E9%87%8C%E5%8C%96.html</url>
+    <content type="text"><![CDATA[bind的概念 12var result = fun.bind(thisArg[, arg1[, arg2[, ...]]]) result(newArg1, newArg2...) bind返回一个新的函数，这个函数要绑定的this对象指向第一个参数，后面的参数是传入新函数的参数。这个函数的功能和fun函数的功能一样。所以，上面的bind函数可以等价于：1result(newArg1, newArg2...) = thisArg.fun(newArg1, newArg2...) 科里化的概念 1）科里化的目的123把func(arg1, arg2, arg3...)类型的函数转换成func(arg1)(arg2)(arg3)(...)类型 2）科里化的返回值 所以科里化的返回值仍然是一个函数，这样才能继续执行后面的参数(arg2)(arg3)(…) 3）科里化的定义 将函数与其参数的一个子集绑定起来后返回个新函数。 所以要绑定，就需要bind方法 4）科里化的实现1234567var currying = function(fn) &#123; var args = [].slice.call(arguments, 1); return function() &#123; var newArgs = args.concat([].slice.call(arguments)); return fn.apply(null, newArgs); &#125;;&#125;;]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>js基础</tag>
+        <tag>curry</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[redux-thunk的原理解析]]></title>
     <url>%2F%2Fblog%2F2018%2F11%2Fredux-thunk%E7%9A%84%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90.html</url>
     <content type="text"><![CDATA[参考文档：redux-thunk的原理解析 个人理解：1、首先了解redux的中间件原理const store = createStore(reducer, applyMiddleware(thunk))在createStore的时候，如果应用了中间件，那么store的属性dispatch、getState可能会被重写而在redux-thunk中，dispatch就被重写了2、redux-thunk 1234567891011121314function createThunkMiddleware(extraArgument) &#123; return (&#123; dispatch, getState &#125;) =&gt; next =&gt; action =&gt; &#123; if (typeof action === 'function') &#123; return action(dispatch, getState, extraArgument); &#125; return next(action); &#125;;&#125;const thunk = createThunkMiddleware();thunk.withExtraArgument = createThunkMiddleware;export default thunk; 应用了redux-thunk后，dispatch变成了一个可以传function参数的dispatch，当遇到action为function时，执行该function的action，如果是正常的action，则执行dispatch 12345678dispatch=function(store.dispatch)&#123; action =&gt; &#123; if (typeof action === 'function') &#123; return action(store.dispatch, getState, extraArgument); &#125; return store.dispatch(action); &#125;; &#125;]]></content>
@@ -181,18 +193,6 @@
         <tag>React</tag>
         <tag>Redux-thunk</tag>
         <tag>Redux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[科里化]]></title>
-    <url>%2F%2Fblog%2F2018%2F11%2F%E7%A7%91%E9%87%8C%E5%8C%96.html</url>
-    <content type="text"><![CDATA[bind的概念 12var result = fun.bind(thisArg[, arg1[, arg2[, ...]]]) result(newArg1, newArg2...) bind返回一个新的函数，这个函数要绑定的this对象指向第一个参数，后面的参数是传入新函数的参数。这个函数的功能和fun函数的功能一样。所以，上面的bind函数可以等价于：1result(newArg1, newArg2...) = thisArg.fun(newArg1, newArg2...) 科里化的概念 1）科里化的目的123把func(arg1, arg2, arg3...)类型的函数转换成func(arg1)(arg2)(arg3)(...)类型 2）科里化的返回值 所以科里化的返回值仍然是一个函数，这样才能继续执行后面的参数(arg2)(arg3)(…) 3）科里化的定义 将函数与其参数的一个子集绑定起来后返回个新函数。 所以要绑定，就需要bind方法 4）科里化的实现1234567var currying = function(fn) &#123; var args = [].slice.call(arguments, 1); return function() &#123; var newArgs = args.concat([].slice.call(arguments)); return fn.apply(null, newArgs); &#125;;&#125;;]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>js基础</tag>
-        <tag>curry</tag>
       </tags>
   </entry>
   <entry>
@@ -228,8 +228,8 @@
         <category>javascript</category>
       </categories>
       <tags>
-        <tag>React</tag>
         <tag>Literallycanvas</tag>
+        <tag>React</tag>
       </tags>
   </entry>
 </search>
