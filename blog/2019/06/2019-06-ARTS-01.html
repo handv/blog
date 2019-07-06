@@ -106,18 +106,18 @@
 
 
 
-<meta name="description" content="1. algorithm371. Sum of Two Integers 123456789101112/** * @param &amp;#123;number&amp;#125; a * @param &amp;#123;number&amp;#125; b * @return &amp;#123;number&amp;#125; */var getSum = function(a, b) &amp;#123;    if (a === 0) re">
+<meta name="description" content="algorithm371. Sum of Two Integers 123456789101112/** * @param &amp;#123;number&amp;#125; a * @param &amp;#123;number&amp;#125; b * @return &amp;#123;number&amp;#125; */var getSum = function(a, b) &amp;#123;    if (a === 0) retur">
 <meta name="keywords" content="arts">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2019-06-ARTS-01">
 <meta property="og:url" content="https://handv.github.io/blog/2019/06/2019-06-ARTS-01.html">
 <meta property="og:site_name" content="han&#39;s bolg - 年糕記">
-<meta property="og:description" content="1. algorithm371. Sum of Two Integers 123456789101112/** * @param &amp;#123;number&amp;#125; a * @param &amp;#123;number&amp;#125; b * @return &amp;#123;number&amp;#125; */var getSum = function(a, b) &amp;#123;    if (a === 0) re">
+<meta property="og:description" content="algorithm371. Sum of Two Integers 123456789101112/** * @param &amp;#123;number&amp;#125; a * @param &amp;#123;number&amp;#125; b * @return &amp;#123;number&amp;#125; */var getSum = function(a, b) &amp;#123;    if (a === 0) retur">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-06T07:33:20.248Z">
+<meta property="og:updated_time" content="2019-06-06T07:35:51.574Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019-06-ARTS-01">
-<meta name="twitter:description" content="1. algorithm371. Sum of Two Integers 123456789101112/** * @param &amp;#123;number&amp;#125; a * @param &amp;#123;number&amp;#125; b * @return &amp;#123;number&amp;#125; */var getSum = function(a, b) &amp;#123;    if (a === 0) re">
+<meta name="twitter:description" content="algorithm371. Sum of Two Integers 123456789101112/** * @param &amp;#123;number&amp;#125; a * @param &amp;#123;number&amp;#125; b * @return &amp;#123;number&amp;#125; */var getSum = function(a, b) &amp;#123;    if (a === 0) retur">
 
 
 
@@ -562,7 +562,7 @@ $(function() {
       
 
       
-        <h2 id="1-algorithm"><a href="#1-algorithm" class="headerlink" title="1. algorithm"></a>1. algorithm</h2><p><a href="https://leetcode.com/problems/sum-of-two-integers/description/" target="_blank" rel="noopener">371. Sum of Two Integers</a></p>
+        <h2 id="algorithm"><a href="#algorithm" class="headerlink" title="algorithm"></a>algorithm</h2><p><a href="https://leetcode.com/problems/sum-of-two-integers/description/" target="_blank" rel="noopener">371. Sum of Two Integers</a></p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;number&#125; a</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;number&#125; b</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> getSum = <span class="function"><span class="keyword">function</span><span class="params">(a, b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (a === <span class="number">0</span>) <span class="keyword">return</span> b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (b === <span class="number">0</span>) <span class="keyword">return</span> a;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> getSum(a ^ b, (a &amp; b) &lt;&lt; <span class="number">1</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>解题思路：</li>
@@ -572,7 +572,7 @@ $(function() {
 <li>同位进位</li>
 <li>相加结果 + 进位结果</li>
 </ol>
-<h2 id="2-review"><a href="#2-review" class="headerlink" title="2. review"></a>2. review</h2><p><a href="https://www.tutorialdocs.com/article/html-opener-blank.html" target="_blank" rel="noopener">危险的 target=”_blank” 与 “opener”</a></p>
+<h2 id="review"><a href="#review" class="headerlink" title="review"></a>review</h2><p><a href="https://www.tutorialdocs.com/article/html-opener-blank.html" target="_blank" rel="noopener">危险的 target=”_blank” 与 “opener”</a></p>
 <ul>
 <li><p>window.opener - 如果当前窗口是由另一个窗口打开的, window.opener保留了那个窗口的引用</p>
 </li>
@@ -595,12 +595,12 @@ $(function() {
 <li>兼容性</li>
 </ol>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">"use strict"</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">openUrl</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> newTab = <span class="built_in">window</span>.open();</span><br><span class="line">  newTab.opener = <span class="literal">null</span>;</span><br><span class="line">  newTab.location = url;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="3-tip"><a href="#3-tip" class="headerlink" title="3. tip"></a>3. tip</h2><p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/invert" target="_blank" rel="noopener">filter: invert</a>: 改版元素颜色<br><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/hue-rotate" target="_blank" rel="noopener">filter: hue-rotate</a>: 改版元素色调</p>
+<h2 id="tip"><a href="#tip" class="headerlink" title="tip"></a>tip</h2><p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/invert" target="_blank" rel="noopener">filter: invert</a>: 改版元素颜色<br><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/hue-rotate" target="_blank" rel="noopener">filter: hue-rotate</a>: 改版元素色调</p>
 <ul>
 <li>二者结合，可以简单将网页样式改成dark主题<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.body</span> &#123;</span><br><span class="line">    <span class="attribute">filter</span>: <span class="built_in">invert</span>(100) <span class="built_in">hue-rotate</span>(180deg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="4-share"><a href="#4-share" class="headerlink" title="4. share"></a>4. share</h2><p><a href="https://mp.weixin.qq.com/s/LkKNjrkx1V32lCjv92Cuuw" target="_blank" rel="noopener">深入理解现代浏览器</a></p>
+<h2 id="share"><a href="#share" class="headerlink" title="share"></a>share</h2><p><a href="https://mp.weixin.qq.com/s/LkKNjrkx1V32lCjv92Cuuw" target="_blank" rel="noopener">深入理解现代浏览器</a></p>
 <h5 id="开始划重点："><a href="#开始划重点：" class="headerlink" title="开始划重点："></a>开始划重点：</h5><ol>
 <li>架构篇</li>
 </ol>
@@ -766,6 +766,10 @@ $(function() {
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/blog/2019/06/2019-06前端月报.html" rel="prev" title="2019-06前端月报">
+                2019-06前端月报 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -834,7 +838,7 @@ $(function() {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -898,7 +902,7 @@ $(function() {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-algorithm"><span class="nav-number">1.</span> <span class="nav-text">1. algorithm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-review"><span class="nav-number">2.</span> <span class="nav-text">2. review</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-tip"><span class="nav-number">3.</span> <span class="nav-text">3. tip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-share"><span class="nav-number">4.</span> <span class="nav-text">4. share</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#开始划重点："><span class="nav-number">4.0.0.1.</span> <span class="nav-text">开始划重点：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#algorithm"><span class="nav-number">1.</span> <span class="nav-text">algorithm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#review"><span class="nav-number">2.</span> <span class="nav-text">review</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tip"><span class="nav-number">3.</span> <span class="nav-text">tip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#share"><span class="nav-number">4.</span> <span class="nav-text">share</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#开始划重点："><span class="nav-number">4.0.0.1.</span> <span class="nav-text">开始划重点：</span></a></li></ol></li></ol></div>
             
 
           </div>
