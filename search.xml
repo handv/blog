@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[时间格式化]]></title>
+    <url>%2F%2Fblog%2F2019%2F07%2F%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96.html</url>
+    <content type="text"><![CDATA[类似moment的时间戳转换格式12345678910111213141516171819202122232425262728293031323334353637383940/** * 将「时间戳」转换为「日期时间」 * @param timeStamp 时间戳 * @param fmt 时间格式，如：「YYYY:MM:DD hh:mm」 */const getDate = (timeStamp = 0, fmt) =&gt; &#123; let date = new Date(timeStamp), year = date.getFullYear(), month = leftPad(date.getMonth() + 1), day = leftPad(date.getDate()), hour = leftPad(date.getHours()), minus = leftPad(date.getMinutes()), secondes = leftPad(date.getSeconds()); if(fmt)&#123; if (/(Y+)/.test(fmt)) &#123; fmt = fmt.replace(RegExp.$1,(year + '').substr(4 - RegExp.$1.length)) &#125; let o = &#123; 'M+': month, 'D+': day, 'h+': hour, 'm+': minus, 's+': secondes &#125; for (let k in o) &#123; if (new RegExp(`($&#123;k&#125;)`).test(fmt)) &#123; let str = o[k] + '' fmt = fmt.replace(RegExp.$1, str) &#125; &#125; return fmt &#125;&#125;// 左填充const leftPad = (string) =&gt; &#123; if (String(string).length &lt; 2) return `0$&#123;string&#125;` return string&#125;]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>moment</tag>
+        <tag>time format</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[2019-06前端月报]]></title>
     <url>%2F%2Fblog%2F2019%2F06%2F2019-06%E5%89%8D%E7%AB%AF%E6%9C%88%E6%8A%A5.html</url>
     <content type="text"><![CDATA[新闻 Chrome 浏览器计划加强 cookie 限制 使用SameSite属性，使用户能够清除所有此类cookie，同时保持单域cookie不受影响，从而保留用户登录和设置 将跨站点cookie限制为HTTPS连接 对指纹识别的保护 建议在各家浏览器稳定支持还是不要用了 TypeScript 3.5发布，构建时间减少 68%、新增 Omit 类型、UMD 全局访问等等 中文翻译 V8 release v7.6 性能方面： JSON.parse方法：1. 自己管理一个堆栈，不依赖原始堆栈 2. 先解析，然后分配空间（之前是预分配足够大的空间） Frozen/sealed array Unicode string handling JS语言特性 Promise.allSettled Improved BigInt support Native stack 技术 危险的 target=”_blank” 与 “opener” 中文翻译 window.opener - 如果当前窗口是由另一个窗口打开的, window.opener保留了那个窗口的引用 影响： 如果，你的网站上有一个链接，使用了 target=”_blank”，那么一旦用户点击这个链接并进入一个新的标签，新标签中的页面如果存在恶意代码，就可以将你的网站直接导航到一个虚假网站。此时，如果用户回到你的标签页，看到的就是被替换过的页面了。 在新打开的页面，执行window.opener.location.replace(‘https://baidu.com/&#39;)，会将之前的网站的地址变成百度。 网站使用了 &lt;a target=&quot;_blank&quot;&gt;，那么新打开的标签页的性能将会影响到当前页面。 防御： rel=”noreferrer” 保证来源隐私安全 rel=”noopener” 保证无法使用opener对象 兼容性 123456"use strict";function openUrl(url) &#123; var newTab = window.open(); newTab.opener = null; newTab.location = url;&#125; Chrome官方——资源优先级 预加载, 如字体文件，关键路径 CSS 和 JavaScript 预连接 预提取(主站课程详情页到下单页可以考虑使用) Preload, Prefetch And Priorities in Chrome 如何编写深色主题的CSS 一种聪明而优雅的方法 filter: invert: 改版元素颜色 filter: hue-rotate: 改版元素色调123.message--dark &#123; filter: invert(100) hue-rotate(180deg);&#125; 只使用 CSS 的实时聊天 作者灵感来源： https://twitter.com/davywtf/status/1124130932573839360 原理：大概是每一个按钮都是一个css样式，点击按钮发送图片请求，服务端接收到请求，发送到客户端图片 123.some-button:active &#123; background-image: url('some_image.jpg')&#125; 看README： 12345Practical DetailsIf you want to install and use this locally you should:1. Re-evaluate your life choices2. If you simply must continue, check out INSTALL.md 文章 阿里前端委员会主席圆心：前端路上的思考 破坏程序员生产力的 12 件事 中文翻译 像程序员一样思考: 如何解决问题 中文翻译 最好的方法: 掌握一套框架 不断实践框架 react for 面试 工具 gridea 一款跨平台桌面软件，可以在本地将 Markdown 文档编译成静态博客，然后发布到 GitHub Pages 或 Coding Pages [Giflens] vscode插件，可以预览gif图片 小红书用的弹幕播放器dplayer Bit Bit 是一个支持组件即服务的在线平台，可以在线托管存在组件，支持组件查找，组件版本号，独立运行，并且支持不同项目的组件集成。Bit 解决了管理组件系统这个通用问题，并且将开发人员从持续造轮子解脱，提高开发效率。]]></content>
