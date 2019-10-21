@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[css实现一个圆角三角形]]></title>
+    <url>%2F%2Fblog%2F2019%2F10%2Fcss%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%9C%86%E8%A7%92%E4%B8%89%E8%A7%92%E5%BD%A2.html</url>
+    <content type="text"><![CDATA[项目中有个实现三角图标的需求，因为ui同学没空，所以自己就用css实现了一下，同时推荐一下这个网站，实现样式如下： 1234567#triangle-right &#123; width: 0; height: 0; border-top: 50px solid transparent; border-left: 100px solid red; border-bottom: 50px solid transparent;&#125; 但debug的时候，ui同学说我稿里的三角形是圆角的，怎么办呢？要么找ui要图，要么自己实现，自己实现的放大后不会虚化对吧。那就自己来吧，这个实现起来难度大了点： 123&lt;body&gt; &lt;div class="triangle"&gt;&lt;/div&gt;&lt;/body&gt; 1234567891011121314151617181920212223242526.triangle, .triangle:before, .triangle:after &#123; width: 4em; height: 4em; &#125;.triangle &#123; overflow: hidden; position: relative; margin: 7em auto 0; border-radius: 20%; transform: translateY(50%) rotate(120deg) skewY(30deg) scaleX(.866); cursor: pointer; pointer-events: none;&#125; .triangle:before, .triangle:after &#123; position: absolute; background: orange; pointer-events: auto; content: '';&#125;.triangle:before &#123; border-radius: 20% 20% 20% 53%; transform: scaleX(1.155) skewY(-30deg) rotate(-30deg) translateY(-42.3%) skewX(30deg) scaleY(.866) translateX(-24%);&#125;.triangle:after &#123; border-radius: 20% 20% 53% 20%; transform: scaleX(1.155) skewY(-30deg) rotate(-30deg) translateY(-42.3%) skewX(-30deg) scaleY(.866) translateX(24%);&#125; mark一下]]></content>
+      <categories>
+        <category>css</category>
+      </categories>
+      <tags>
+        <tag>css</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[时间格式化]]></title>
     <url>%2F%2Fblog%2F2019%2F07%2F%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96.html</url>
     <content type="text"><![CDATA[类似moment的时间戳转换格式12345678910111213141516171819202122232425262728293031323334353637383940/** * 将「时间戳」转换为「日期时间」 * @param timeStamp 时间戳 * @param fmt 时间格式，如：「YYYY:MM:DD hh:mm」 */const getDate = (timeStamp = 0, fmt) =&gt; &#123; let date = new Date(timeStamp), year = date.getFullYear(), month = leftPad(date.getMonth() + 1), day = leftPad(date.getDate()), hour = leftPad(date.getHours()), minus = leftPad(date.getMinutes()), secondes = leftPad(date.getSeconds()); if(fmt)&#123; if (/(Y+)/.test(fmt)) &#123; fmt = fmt.replace(RegExp.$1,(year + '').substr(4 - RegExp.$1.length)) &#125; let o = &#123; 'M+': month, 'D+': day, 'h+': hour, 'm+': minus, 's+': secondes &#125; for (let k in o) &#123; if (new RegExp(`($&#123;k&#125;)`).test(fmt)) &#123; let str = o[k] + '' fmt = fmt.replace(RegExp.$1, str) &#125; &#125; return fmt &#125;&#125;// 左填充const leftPad = (string) =&gt; &#123; if (String(string).length &lt; 2) return `0$&#123;string&#125;` return string&#125;]]></content>
@@ -53,8 +64,8 @@
         <category>javascript</category>
       </categories>
       <tags>
-        <tag>js基础</tag>
         <tag>css</tag>
+        <tag>js基础</tag>
       </tags>
   </entry>
   <entry>
@@ -183,18 +194,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[科里化]]></title>
-    <url>%2F%2Fblog%2F2018%2F11%2F%E7%A7%91%E9%87%8C%E5%8C%96.html</url>
-    <content type="text"><![CDATA[bind的概念 12var result = fun.bind(thisArg[, arg1[, arg2[, ...]]]) result(newArg1, newArg2...) bind返回一个新的函数，这个函数要绑定的this对象指向第一个参数，后面的参数是传入新函数的参数。这个函数的功能和fun函数的功能一样。所以，上面的bind函数可以等价于：1result(newArg1, newArg2...) = thisArg.fun(newArg1, newArg2...) 科里化的概念 1）科里化的目的123把func(arg1, arg2, arg3...)类型的函数转换成func(arg1)(arg2)(arg3)(...)类型 2）科里化的返回值 所以科里化的返回值仍然是一个函数，这样才能继续执行后面的参数(arg2)(arg3)(…) 3）科里化的定义 将函数与其参数的一个子集绑定起来后返回个新函数。 所以要绑定，就需要bind方法 4）科里化的实现1234567var currying = function(fn) &#123; var args = [].slice.call(arguments, 1); return function() &#123; var newArgs = args.concat([].slice.call(arguments)); return fn.apply(null, newArgs); &#125;;&#125;;]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>js基础</tag>
-        <tag>curry</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[redux-thunk的原理解析]]></title>
     <url>%2F%2Fblog%2F2018%2F11%2Fredux-thunk%E7%9A%84%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90.html</url>
     <content type="text"><![CDATA[参考文档：redux-thunk的原理解析 个人理解：1、首先了解redux的中间件原理const store = createStore(reducer, applyMiddleware(thunk))在createStore的时候，如果应用了中间件，那么store的属性dispatch、getState可能会被重写而在redux-thunk中，dispatch就被重写了2、redux-thunk 1234567891011121314function createThunkMiddleware(extraArgument) &#123; return (&#123; dispatch, getState &#125;) =&gt; next =&gt; action =&gt; &#123; if (typeof action === 'function') &#123; return action(dispatch, getState, extraArgument); &#125; return next(action); &#125;;&#125;const thunk = createThunkMiddleware();thunk.withExtraArgument = createThunkMiddleware;export default thunk; 应用了redux-thunk后，dispatch变成了一个可以传function参数的dispatch，当遇到action为function时，执行该function的action，如果是正常的action，则执行dispatch 12345678dispatch=function(store.dispatch)&#123; action =&gt; &#123; if (typeof action === 'function') &#123; return action(store.dispatch, getState, extraArgument); &#125; return store.dispatch(action); &#125;; &#125;]]></content>
@@ -205,6 +204,18 @@
         <tag>React</tag>
         <tag>Redux-thunk</tag>
         <tag>Redux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[科里化]]></title>
+    <url>%2F%2Fblog%2F2018%2F11%2F%E7%A7%91%E9%87%8C%E5%8C%96.html</url>
+    <content type="text"><![CDATA[bind的概念 12var result = fun.bind(thisArg[, arg1[, arg2[, ...]]]) result(newArg1, newArg2...) bind返回一个新的函数，这个函数要绑定的this对象指向第一个参数，后面的参数是传入新函数的参数。这个函数的功能和fun函数的功能一样。所以，上面的bind函数可以等价于：1result(newArg1, newArg2...) = thisArg.fun(newArg1, newArg2...) 科里化的概念 1）科里化的目的123把func(arg1, arg2, arg3...)类型的函数转换成func(arg1)(arg2)(arg3)(...)类型 2）科里化的返回值 所以科里化的返回值仍然是一个函数，这样才能继续执行后面的参数(arg2)(arg3)(…) 3）科里化的定义 将函数与其参数的一个子集绑定起来后返回个新函数。 所以要绑定，就需要bind方法 4）科里化的实现1234567var currying = function(fn) &#123; var args = [].slice.call(arguments, 1); return function() &#123; var newArgs = args.concat([].slice.call(arguments)); return fn.apply(null, newArgs); &#125;;&#125;;]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>js基础</tag>
+        <tag>curry</tag>
       </tags>
   </entry>
   <entry>
