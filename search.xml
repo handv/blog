@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[关于ueditor公式编辑器的小bug]]></title>
+    <url>%2F%2Fblog%2F2019%2F12%2F%E5%85%B3%E4%BA%8Eueditor%E5%85%AC%E5%BC%8F%E7%BC%96%E8%BE%91%E5%99%A8%E7%9A%84%E5%B0%8Fbug.html</url>
+    <content type="text"><![CDATA[小于号&lt;的问题http://ueditor.baidu.com/website/kityformula.html 在公式编辑器里输入&lt;，控制台里输入1ue.getContent() 获取内容：1"&lt;p&gt;&lt;img class="kfformula" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAAArCAYAAADFRP4AAAABtklEQVRoQ+3Wv0tWURzH8ZfiIC0OhS1Bizrk0JJTNDk1SYEQTS0VDkamkf9C/oAyNEEI1D+gliZdndwagkBajMYGbYyQC/eCgk88x+d6702+Zz7n3PN53/f3e06XGKcS6AoupxMIMC3MCDABJq1phDFhTBiTRiCMSeMVPSaMCWPSCIQxabyix4QxF9OYbgziW1q8s89ueildwgO8whAu49fZ47a/sqlgruIpZvIoK1jGfvvROpvZNDDDeIYn+IE5rOOgs5jpq5sAJjvDKF7gLnZzIJ/wJz1SOSvqBNOLccziBj5iETvlROtslzrAXMFjPEc/lvAOe51FKXd11WDGkJVINjJT1qq6ZVKxVQ0ma67vcScvmXl8rrOXtAJWNZjiHLcwhYf4jgVs4nfqnz2v+XWBKfJcx0T+gDvEG6zi53kFbnffusEU5+zDo/xBdw0f8BZf2g1S9rymgCly9eAeXmIEW3mZbeNv2eH/tV/TwBw/621M56C+4jU2qoLTZDAFgwFM4j5uVnW9/w9gqpLkxHcCTAvsASbApFVkGBPGhDFpBMKYNF7RY8KYMCaNQBiTxit6TAteR75YLyyndV0xAAAAAElFTkSuQmCC" data-latex="&amp;lt;"/&gt;&lt;/p&gt;" 而输入 1ue.getPlainTxt() 获取内容出错12"&lt;img class="kfformula" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAAArCAYAAADFRP4AAAABtklEQVRoQ+3Wv0tWURzH8ZfiIC0OhS1Bizrk0JJTNDk1SYEQTS0VDkamkf9C/oAyNEEI1D+gliZdndwagkBajMYGbYyQC/eCgk88x+d6702+Zz7n3PN53/f3e06XGKcS6AoupxMIMC3MCDABJq1phDFhTBiTRiCMSeMVPSaMCWPSCIQxabyix4QxF9OYbgziW1q8s89ueildwgO8whAu49fZ47a/sqlgruIpZvIoK1jGfvvROpvZNDDDeIYn+IE5rOOgs5jpq5sAJjvDKF7gLnZzIJ/wJz1SOSvqBNOLccziBj5iETvlROtslzrAXMFjPEc/lvAOe51FKXd11WDGkJVINjJT1qq6ZVKxVQ0ma67vcScvmXl8rrOXtAJWNZjiHLcwhYf4jgVs4nfqnz2v+XWBKfJcx0T+gDvEG6zi53kFbnffusEU5+zDo/xBdw0f8BZf2g1S9rymgCly9eAeXmIEW3mZbeNv2eH/tV/TwBw/621M56C+4jU2qoLTZDAFgwFM4j5uVnW9/w9gqpLkxHcCTAvsASbApFVkGBPGhDFpBMKYNF7RY8KYMCaNQBiTxit6TAteR75YLyyndV0xAAAAAElFTkSuQmCC" data-latex="&lt;" _src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAAArCAYAAADFRP4AAAABtklEQVRoQ+3Wv0tWURzH8ZfiIC0OhS1Bizrk0JJTNDk1SYEQTS0VDkamkf9C/oAyNEEI1D+gliZdndwagkBajMYGbYyQC/eCgk88x+d6702+Zz7n3PN53/f3e06XGKcS6AoupxMIMC3MCDABJq1phDFhTBiTRiCMSeMVPSaMCWPSCIQxabyix4QxF9OYbgziW1q8s89ueildwgO8whAu49fZ47a/sqlgruIpZvIoK1jGfvvROpvZNDDDeIYn+IE5rOOgs5jpq5sAJjvDKF7gLnZzIJ/wJz1SOSvqBNOLccziBj5iETvlROtslzrAXMFjPEc/lvAOe51FKXd11WDGkJVINjJT1qq6ZVKxVQ0ma67vcScvmXl8rrOXtAJWNZjiHLcwhYf4jgVs4nfqnz2v+XWBKfJcx0T+gDvEG6zi53kFbnffusEU5+zDo/xBdw0f8BZf2g1S9rymgCly9eAeXmIEW3mZbeNv2eH/tV/TwBw/621M56C+4jU2qoLTZDAFgwFM4j5uVnW9/w9gqpLkxHcCTAvsASbApFVkGBPGhDFpBMKYNF7RY8KYMCaNQBiTxit6TAteR75YLyyndV0xAAAAAElFTkSuQmCC"&gt;" 分析结果后来又实验，在上面ueditor的官方页面里是正常的。但是在我们自己系统里是不正常的。 为什么呢？ 首先说一下kfformula在ueditor中的dom节点是这样的： 1&lt;img class="kfformula" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAAArCAYAAADFRP4AAAABtklEQVRoQ+3Wv0tWURzH8ZfiIC0OhS1Bizrk0JJTNDk1SYEQTS0VDkamkf9C/oAyNEEI1D+gliZdndwagkBajMYGbYyQC/eCgk88x+d6702+Zz7n3PN53/f3e06XGKcS6AoupxMIMC3MCDABJq1phDFhTBiTRiCMSeMVPSaMCWPSCIQxabyix4QxF9OYbgziW1q8s89ueildwgO8whAu49fZ47a/sqlgruIpZvIoK1jGfvvROpvZNDDDeIYn+IE5rOOgs5jpq5sAJjvDKF7gLnZzIJ/wJz1SOSvqBNOLccziBj5iETvlROtslzrAXMFjPEc/lvAOe51FKXd11WDGkJVINjJT1qq6ZVKxVQ0ma67vcScvmXl8rrOXtAJWNZjiHLcwhYf4jgVs4nfqnz2v+XWBKfJcx0T+gDvEG6zi53kFbnffusEU5+zDo/xBdw0f8BZf2g1S9rymgCly9eAeXmIEW3mZbeNv2eH/tV/TwBw/621M56C+4jU2qoLTZDAFgwFM4j5uVnW9/w9gqpLkxHcCTAvsASbApFVkGBPGhDFpBMKYNF7RY8KYMCaNQBiTxit6TAteR75YLyyndV0xAAAAAElFTkSuQmCC" data-latex="&lt;" _src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAAArCAYAAADFRP4AAAABtklEQVRoQ+3Wv0tWURzH8ZfiIC0OhS1Bizrk0JJTNDk1SYEQTS0VDkamkf9C/oAyNEEI1D+gliZdndwagkBajMYGbYyQC/eCgk88x+d6702+Zz7n3PN53/f3e06XGKcS6AoupxMIMC3MCDABJq1phDFhTBiTRiCMSeMVPSaMCWPSCIQxabyix4QxF9OYbgziW1q8s89ueildwgO8whAu49fZ47a/sqlgruIpZvIoK1jGfvvROpvZNDDDeIYn+IE5rOOgs5jpq5sAJjvDKF7gLnZzIJ/wJz1SOSvqBNOLccziBj5iETvlROtslzrAXMFjPEc/lvAOe51FKXd11WDGkJVINjJT1qq6ZVKxVQ0ma67vcScvmXl8rrOXtAJWNZjiHLcwhYf4jgVs4nfqnz2v+XWBKfJcx0T+gDvEG6zi53kFbnffusEU5+zDo/xBdw0f8BZf2g1S9rymgCly9eAeXmIEW3mZbeNv2eH/tV/TwBw/621M56C+4jU2qoLTZDAFgwFM4j5uVnW9/w9gqpLkxHcCTAvsASbApFVkGBPGhDFpBMKYNF7RY8KYMCaNQBiTxit6TAteR75YLyyndV0xAAAAAElFTkSuQmCC"&gt; 而在题库系统里是这样的 1&lt;img class="kfformula" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAAArCAYAAADFRP4AAAABtklEQVRoQ+3Wv0tWURzH8ZfiIC0OhS1Bizrk0JJTNDk1SYEQTS0VDkamkf9C/oAyNEEI1D+gliZdndwagkBajMYGbYyQC/eCgk88x+d6702+Zz7n3PN53/f3e06XGKcS6AoupxMIMC3MCDABJq1phDFhTBiTRiCMSeMVPSaMCWPSCIQxabyix4QxF9OYbgziW1q8s89ueildwgO8whAu49fZ47a/sqlgruIpZvIoK1jGfvvROpvZNDDDeIYn+IE5rOOgs5jpq5sAJjvDKF7gLnZzIJ/wJz1SOSvqBNOLccziBj5iETvlROtslzrAXMFjPEc/lvAOe51FKXd11WDGkJVINjJT1qq6ZVKxVQ0ma67vcScvmXl8rrOXtAJWNZjiHLcwhYf4jgVs4nfqnz2v+XWBKfJcx0T+gDvEG6zi53kFbnffusEU5+zDo/xBdw0f8BZf2g1S9rymgCly9eAeXmIEW3mZbeNv2eH/tV/TwBw/621M56C+4jU2qoLTZDAFgwFM4j5uVnW9/w9gqpLkxHcCTAvsASbApFVkGBPGhDFpBMKYNF7RY8KYMCaNQBiTxit6TAteR75YLyyndV0xAAAAAElFTkSuQmCC" data-latex="&lt;" &gt; 区别在于处于自身业务需要，把_src字段去掉了。这样有什么问题呢？ 看一下ueditor的getPlainTxt方法是如何实现的 123456789101112getPlainTxt: function () &#123; var reg = new RegExp(domUtils.fillChar, 'g'), html = this.body.innerHTML.replace(/[\n\r]/g, '');//ie要先去了\n在处理 html = html.replace(/&lt;(p|div)[^&gt;]*&gt;(&lt;br\/?&gt;|&amp;nbsp;)&lt;\/\1&gt;/gi, '\n') .replace(/&lt;br\/?&gt;/gi, '\n') .replace(/&lt;[^&gt;/]+&gt;/g, '') .replace(/(\n)?&lt;\/([^&gt;]+)&gt;/g, function (a, b, c) &#123; return dtd.$block[c] ? '' : b ? b : ''; &#125;); //取出来的空格会有c2a0会变成乱码，处理这种情况\u00a0 return html.replace(reg, '').replace(/\u00a0/g, ' ').replace(/&amp;nbsp;/g, ' ');&#125;, 重点是这个.replace(/&lt;[^&gt;/]+&gt;/g, &#39;&#39;)，它是把所有&lt;开头&gt;结束（里面不能包含&gt;或/）里面的内容（包含括号）全部置空。 而如果公式图片的data-latex字段里包含&lt;，会被识别，并与img的结束&gt;（不知道为啥这个img不是以/&gt;结束)配成一对符合上述正则表达式的内容清除掉，就会得到上面getPlainTxt的错误结果。 - 为什么没有清理img标签呢？ 因为img的src里总会含有/符号。所以这个getPlainTxt有bug 如何解决呢？ 方案1： 把_src加回去，这样匹配的时候有/就正常了。但是把_src加回去，base64的字符串很长啊，算了。当然，也可以加一个别的字段，类似_src=”/“只带个/，就ok了 方案2： 类似方案1的思路，把src放在data-latex的后面不就得了。修改ueditor/kityformulaDialog.html中的 1234567 editor.execCommand('inserthtml', '&lt;img class="kfformula" src="'+ data.img +'" data-latex="' + latex + '" style="zoom: 65%; max-width: 100%" /&gt;');``` 改为：```js editor.execCommand('inserthtml', '&lt;img class="kfformula" data-latex="' + latex + '" src="' + data.img +'" style="zoom: 65%; max-width: 100%" /&gt;'); 方案3： 改造getPlainTxt中的正则表达式，识别data-latex中的&lt;不处理]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[antd-modal源码解析]]></title>
     <url>%2F%2Fblog%2F2019%2F11%2Fantd-modal%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.html</url>
     <content type="text"><![CDATA[antd modal弹窗模块，是基于rc-dialog进行二次开发的。代码部分在src/components/modal中就是modal部分的源码。 将antd modal源码扒下来，ts改为js，代码在这里：https://github.com/handv/antd-modal rc-dialog参数 name type default description getContainer HTMLElement | () =&gt; HTMLElement | Selectors | false document.body 指定 Modal 挂载的 HTML 节点, false 为挂载在当前 dom prefixCls string rc-dialog dialog节点的类名前缀 wrapClassName string 无 对话框外层容器的类名 footer string|ReactNode 确定取消按钮 底部内容，当不需要默认底部按钮时，可以设为 footer={null} visible boolean false 对话框是否可见 mousePosition {x:number,y:number} 无 设置当前鼠标的坐标pageX和pageY onClose function 无 点击关闭图标或蒙层时调用 closeIcon ReactNode 无 自定义关闭图标 原理 footer modal有一个默认footer，带确定和取消的两个ActionButton ActionButton 二次封装后的antd-Button，带一个onClick方法 123456789101112131415161718192021222324252627282930313233onClick = () =&gt; &#123; const &#123; actionFn, closeModal &#125; = this.props; if (actionFn) &#123; let ret; if (actionFn.length) &#123; ret = actionFn(closeModal); &#125; else &#123; ret = actionFn(); if (!ret) &#123; closeModal(); &#125; &#125; if (ret &amp;&amp; ret.then) &#123; this.setState(&#123; loading: true &#125;); ret.then( (...args) =&gt; &#123; // It's unnecessary to set loading=false, for the Modal will be unmounted after close. // this.setState(&#123; loading: false &#125;); closeModal(...args); &#125;, (e) =&gt; &#123; // Emit error when catch promise reject // eslint-disable-next-line no-console console.error(e); // See: https://github.com/ant-design/ant-design/issues/6183 this.setState(&#123; loading: false &#125;); &#125;, ); &#125; &#125; else &#123; closeModal(); &#125;&#125;; Modal.info / Modal.error / Modal.warn / Modal.success 代码见src/components/modal/index.js, footer={null} 此部分实现了一个confirm(…props)方法。 confirm里有个visible的参数，还有一个render的方法。在执行confirm()的时候，会调用render()生成一个 confirm里还有一个close方法，在点击右上角关闭的时候，会调用close(),生成一个]]></content>
@@ -155,8 +160,8 @@
         <category>javascript</category>
       </categories>
       <tags>
-        <tag>Canvas</tag>
         <tag>Literallycanvas</tag>
+        <tag>Canvas</tag>
       </tags>
   </entry>
   <entry>
@@ -205,6 +210,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[科里化]]></title>
+    <url>%2F%2Fblog%2F2018%2F11%2F%E7%A7%91%E9%87%8C%E5%8C%96.html</url>
+    <content type="text"><![CDATA[bind的概念 12var result = fun.bind(thisArg[, arg1[, arg2[, ...]]]) result(newArg1, newArg2...) bind返回一个新的函数，这个函数要绑定的this对象指向第一个参数，后面的参数是传入新函数的参数。这个函数的功能和fun函数的功能一样。所以，上面的bind函数可以等价于：1result(newArg1, newArg2...) = thisArg.fun(newArg1, newArg2...) 科里化的概念 1）科里化的目的123把func(arg1, arg2, arg3...)类型的函数转换成func(arg1)(arg2)(arg3)(...)类型 2）科里化的返回值 所以科里化的返回值仍然是一个函数，这样才能继续执行后面的参数(arg2)(arg3)(…) 3）科里化的定义 将函数与其参数的一个子集绑定起来后返回个新函数。 所以要绑定，就需要bind方法 4）科里化的实现1234567var currying = function(fn) &#123; var args = [].slice.call(arguments, 1); return function() &#123; var newArgs = args.concat([].slice.call(arguments)); return fn.apply(null, newArgs); &#125;;&#125;;]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>js基础</tag>
+        <tag>curry</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[redux-thunk的原理解析]]></title>
     <url>%2F%2Fblog%2F2018%2F11%2Fredux-thunk%E7%9A%84%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90.html</url>
     <content type="text"><![CDATA[参考文档：redux-thunk的原理解析 个人理解：1、首先了解redux的中间件原理const store = createStore(reducer, applyMiddleware(thunk))在createStore的时候，如果应用了中间件，那么store的属性dispatch、getState可能会被重写而在redux-thunk中，dispatch就被重写了2、redux-thunk 1234567891011121314function createThunkMiddleware(extraArgument) &#123; return (&#123; dispatch, getState &#125;) =&gt; next =&gt; action =&gt; &#123; if (typeof action === 'function') &#123; return action(dispatch, getState, extraArgument); &#125; return next(action); &#125;;&#125;const thunk = createThunkMiddleware();thunk.withExtraArgument = createThunkMiddleware;export default thunk; 应用了redux-thunk后，dispatch变成了一个可以传function参数的dispatch，当遇到action为function时，执行该function的action，如果是正常的action，则执行dispatch 12345678dispatch=function(store.dispatch)&#123; action =&gt; &#123; if (typeof action === 'function') &#123; return action(store.dispatch, getState, extraArgument); &#125; return store.dispatch(action); &#125;; &#125;]]></content>
@@ -215,18 +232,6 @@
         <tag>React</tag>
         <tag>Redux-thunk</tag>
         <tag>Redux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[科里化]]></title>
-    <url>%2F%2Fblog%2F2018%2F11%2F%E7%A7%91%E9%87%8C%E5%8C%96.html</url>
-    <content type="text"><![CDATA[bind的概念 12var result = fun.bind(thisArg[, arg1[, arg2[, ...]]]) result(newArg1, newArg2...) bind返回一个新的函数，这个函数要绑定的this对象指向第一个参数，后面的参数是传入新函数的参数。这个函数的功能和fun函数的功能一样。所以，上面的bind函数可以等价于：1result(newArg1, newArg2...) = thisArg.fun(newArg1, newArg2...) 科里化的概念 1）科里化的目的123把func(arg1, arg2, arg3...)类型的函数转换成func(arg1)(arg2)(arg3)(...)类型 2）科里化的返回值 所以科里化的返回值仍然是一个函数，这样才能继续执行后面的参数(arg2)(arg3)(…) 3）科里化的定义 将函数与其参数的一个子集绑定起来后返回个新函数。 所以要绑定，就需要bind方法 4）科里化的实现1234567var currying = function(fn) &#123; var args = [].slice.call(arguments, 1); return function() &#123; var newArgs = args.concat([].slice.call(arguments)); return fn.apply(null, newArgs); &#125;;&#125;;]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>js基础</tag>
-        <tag>curry</tag>
       </tags>
   </entry>
   <entry>
@@ -262,8 +267,8 @@
         <category>javascript</category>
       </categories>
       <tags>
-        <tag>Literallycanvas</tag>
         <tag>React</tag>
+        <tag>Literallycanvas</tag>
       </tags>
   </entry>
 </search>
