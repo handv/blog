@@ -90,7 +90,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="antd,">
+  <meta name="keywords" content="handv">
 
 
 
@@ -106,18 +106,17 @@
 
 
 
-<meta name="description" content="antd modal弹窗模块，是基于rc-dialog进行二次开发的。代码部分在src/components/modal中就是modal部分的源码。 将antd modal源码扒下来，ts改为js，代码在这里：https://github.com/handv/antd-modal rc-dialog参数                name        type        default">
-<meta name="keywords" content="antd">
-<meta property="og:type" content="article">
-<meta property="og:title" content="antd-modal源码解析">
-<meta property="og:url" content="https://handv.github.io/blog/2019/11/antd-modal源码解析.html">
+<meta name="description" content="前端小知识">
+<meta name="keywords" content="handv JavaScript">
+<meta property="og:type" content="website">
+<meta property="og:title" content="han&#39;s bolg - 年糕記">
+<meta property="og:url" content="https://handv.github.io/archives/2020/02/index.html">
 <meta property="og:site_name" content="han&#39;s bolg - 年糕記">
-<meta property="og:description" content="antd modal弹窗模块，是基于rc-dialog进行二次开发的。代码部分在src/components/modal中就是modal部分的源码。 将antd modal源码扒下来，ts改为js，代码在这里：https://github.com/handv/antd-modal rc-dialog参数                name        type        default">
+<meta property="og:description" content="前端小知识">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-29T10:25:12.206Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="antd-modal源码解析">
-<meta name="twitter:description" content="antd modal弹窗模块，是基于rc-dialog进行二次开发的。代码部分在src/components/modal中就是modal部分的源码。 将antd modal源码扒下来，ts改为js，代码在这里：https://github.com/handv/antd-modal rc-dialog参数                name        type        default">
+<meta name="twitter:title" content="han&#39;s bolg - 年糕記">
+<meta name="twitter:description" content="前端小知识">
 
 
 
@@ -145,7 +144,7 @@
 
 
 
-  <link rel="canonical" href="https://handv.github.io/blog/2019/11/antd-modal源码解析.html">
+  <link rel="canonical" href="https://handv.github.io/archives/2020/02/">
 
 
 
@@ -168,7 +167,7 @@
 </style>
 
 
-  <title> antd-modal源码解析 | han's bolg - 年糕記 </title>
+  <title> 归档 | han's bolg - 年糕記 </title>
 </head>
 
   	 <!-- custom analytics part create by xiamo -->
@@ -282,7 +281,7 @@ $(function() {
     
   
 
-  <div class="container one-collumn sidebar-position-right page-post-detail ">
+  <div class="container one-collumn sidebar-position-right  page-archive  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -407,274 +406,63 @@ $(function() {
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  <section id="posts" class="posts-collapse">
+    <span class="archive-move-on"></span>
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://handv.github.io/blog/2019/11/antd-modal源码解析.html">
-
-  <span style="display:none" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="handv">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="han's bolg - 年糕記">
-    <span style="display:none" itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="han's bolg - 年糕記" src="/images/avatar.jpg">
+    <span class="archive-page-counter">
+      
+      
+       
+      
+      OK! 目前共计 32 篇日志。 继续努力。
     </span>
-  </span>
 
     
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                antd-modal源码解析
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-29T18:22:44+08:00">
-                2019-11-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/javascript/" itemprop="url" rel="index">
-                    <span itemprop="name">javascript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-		  
-			 
-          
-          
-             <span id="/blog/2019/11/antd-modal源码解析.html" class="leancloud_visitors" data-flag-title="antd-modal源码解析">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">热度 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-				 <span>℃</span>
-             </span>
-          
-		   
-          
-
-		  
-            <div class="post-wordcount">
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  434
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-		  
-          
- 
-        
-
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
 
       
       
-
       
-        <p>antd modal弹窗模块，是基于<a href="https://github.com/react-component/dialog" target="_blank" rel="noopener">rc-dialog</a>进行二次开发的。代码部分在<code>src/components/modal</code>中就是modal部分的源码。</p>
-<p>将antd modal源码扒下来，ts改为js，代码在这里：<a href="https://github.com/handv/antd-modal" target="_blank" rel="noopener">https://github.com/handv/antd-modal</a></p>
-<h4 id="rc-dialog参数"><a href="#rc-dialog参数" class="headerlink" title="rc-dialog参数"></a>rc-dialog参数</h4><table class="table table-bordered table-striped"><br>    <thead><br>    <tr><br>        <th style="width: 100px;">name</th><br>        <th style="width: 50px;">type</th><br>        <th style="width: 50px;">default</th><br>        <th>description</th><br>    </tr><br>    </thead><br>    <tbody><br>        <tr><br>          <td>getContainer</td><br>          <td>HTMLElement | () =&gt; HTMLElement | Selectors | false</td><br>          <td>document.body</td><br>          <td>指定 Modal 挂载的 HTML 节点, false 为挂载在当前 dom</td><br>        </tr><br>        <tr><br>          <td>prefixCls</td><br>          <td>string</td><br>          <td>rc-dialog</td><br>          <td>dialog节点的类名前缀</td><br>        </tr><br>        <tr><br>          <td>wrapClassName</td><br>          <td>string</td><br>          <td>无</td><br>          <td>对话框外层容器的类名</td><br>        </tr><br>        <tr><br>          <td>footer</td><br>          <td>string|ReactNode</td><br>          <td>确定取消按钮</td><br>          <td>底部内容，当不需要默认底部按钮时，可以设为 footer={null}</td><br>        </tr><br>        <tr><br>          <td>visible</td><br>          <td>boolean</td><br>          <td>false</td><br>          <td>对话框是否可见</td><br>        </tr><br>        <tr><br>          <td>mousePosition</td><br>          <td>{x:number,y:number}</td><br>          <td>无</td><br>          <td>设置当前鼠标的坐标pageX和pageY</td><br>        </tr><br>        <tr><br>          <td>onClose</td><br>          <td>function</td><br>          <td>无</td><br>          <td>点击关闭图标或蒙层时调用</td><br>        </tr><br>        <tr><br>          <td>closeIcon</td><br>          <td>ReactNode</td><br>          <td>无</td><br>          <td>自定义关闭图标</td><br>        </tr><br>    </tbody><br></table>
 
-<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><ul>
-<li>footer</li>
-</ul>
-<p>modal有一个默认footer，带<code>确定</code>和<code>取消</code>的两个<code>ActionButton</code></p>
-<ul>
-<li>ActionButton</li>
-</ul>
-<p>二次封装后的<code>antd-Button</code>，带一个onClick方法</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">onClick = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; actionFn, closeModal &#125; = <span class="keyword">this</span>.props;</span><br><span class="line">  <span class="keyword">if</span> (actionFn) &#123;</span><br><span class="line">    <span class="keyword">let</span> ret;</span><br><span class="line">    <span class="keyword">if</span> (actionFn.length) &#123;</span><br><span class="line">      ret = actionFn(closeModal);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      ret = actionFn();</span><br><span class="line">      <span class="keyword">if</span> (!ret) &#123;</span><br><span class="line">        closeModal();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (ret &amp;&amp; ret.then) &#123;</span><br><span class="line">      <span class="keyword">this</span>.setState(&#123; loading: <span class="literal">true</span> &#125;);</span><br><span class="line">      ret.then(</span><br><span class="line">        (...args) =&gt; &#123;</span><br><span class="line">          <span class="comment">// It's unnecessary to set loading=false, for the Modal will be unmounted after close.</span></span><br><span class="line">          <span class="comment">// this.setState(&#123; loading: false &#125;);</span></span><br><span class="line">          closeModal(...args);</span><br><span class="line">        &#125;,</span><br><span class="line">        (e) =&gt; &#123;</span><br><span class="line">          <span class="comment">// Emit error when catch promise reject</span></span><br><span class="line">          <span class="comment">// eslint-disable-next-line no-console</span></span><br><span class="line">          <span class="built_in">console</span>.error(e);</span><br><span class="line">          <span class="comment">// See: https://github.com/ant-design/ant-design/issues/6183</span></span><br><span class="line">          <span class="keyword">this</span>.setState(&#123; loading: <span class="literal">false</span> &#125;);</span><br><span class="line">        &#125;,</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    closeModal();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Modal.info / Modal.error / Modal.warn / Modal.success</li>
-</ul>
-<p>代码见<code>src/components/modal/index.js</code>, footer={null}</p>
-<p>此部分实现了一个confirm(…props)方法。</p>
-<ul>
-<li>confirm里有个visible的参数，还有一个render的方法。在执行confirm()的时候，会调用render()生成一个<rc-dialog visible="{true}"></rc-dialog></li>
-<li>confirm里还有一个close方法，在点击右上角关闭的时候，会调用close(),生成一个<rc-dialog visible="{false}"></rc-dialog></li>
-</ul>
-
-      
-    </div>
-
-    <div>
       
         
-
-      
-    </div>
-  
-        <div class="post-tags">
-          
-            <a href="/tags/antd/" rel="tag"># antd</a>
-          
+        <div class="collection-title">
+          <h2 class="archive-year motion-element" id="archive-year-2020">2020</h2>
         </div>
       
-
-
-    <div>
       
+
+      
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
         
-
-      
-    </div>
-
-
-    <footer class="post-footer">
+            <a class="post-title-link" href="/blog/2020/02/2020年的魔幻开局.html" itemprop="url">
+              
+                <span itemprop="name">2020年的魔幻开局</span>
+              
+            </a>
         
-     <div>    
-      
-      <ul class="post-copyright">
-         <li class="post-copyright-link">
-          <strong>本文作者：</strong>
-          <a href="/" title="欢迎访问 handv 的个人博客">handv</a>
-        </li>
+      </h2>
 
-        <li class="post-copyright-link">
-          <strong>本文标题：</strong>
-          <a href="https://handv.github.io/blog/2019/11/antd-modal源码解析.html" title="antd-modal源码解析">antd-modal源码解析</a>
-        </li>
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2020-02-19T01:34:53+08:00" content="2020-02-19">
+          02-19
+        </time>
+      </div>
 
-        <li class="post-copyright-link">
-          <strong>本文链接：</strong>
-          <a href="https://handv.github.io/blog/2019/11/antd-modal源码解析.html" title="antd-modal源码解析">https://handv.github.io/blog/2019/11/antd-modal源码解析.html</a>
-        </li>
-
-        <li class="post-copyright-date">
-            <strong>发布时间：</strong>2019年11月29日 - 18时11分
-        </li>  
-
-        <li class="post-copyright-license">
-          <strong>版权声明： </strong>
-          本文由 handv 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="license" target="_blank">保留署名-非商业性使用-禁止演绎 4.0-国际许可协议</a> <br>转载请保留以上声明信息！
-        </li>
-      </ul>
-    
-  </div>  
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/blog/2019/10/2019-10前端月报.html" rel="next" title="2019-10前端月报">
-                <i class="fa fa-chevron-left"></i> 2019-10前端月报
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/blog/2019/11/2019-11前端月报.html" rel="prev" title="2019-11前端月报">
-                2019-11前端月报 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+    </header>
   </article>
 
 
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+    
+
+  </section>
+
+  
+
 
           
           </div>
@@ -682,12 +470,6 @@ $(function() {
 
 
           
-  <div class="comments" id="comments">
-    
-      <div id="lv-container" data-id="city" data-uid="MTAyMC80MjAyNi8xODU3Mw"></div>
-    
-  </div>
-
 
         </div>
         
@@ -707,17 +489,8 @@ $(function() {
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="handv">
           <p class="site-author-name" itemprop="name">handv</p>
@@ -782,22 +555,6 @@ $(function() {
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#rc-dialog参数"><span class="nav-number">1.</span> <span class="nav-text">rc-dialog参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原理"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
     </div>
@@ -916,9 +673,11 @@ $(function() {
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
-
+  
+    <script type="text/javascript" id="motion.page.archive">
+      $('.archive-year').velocity('transition.slideLeftIn');
+    </script>
+  
 
 
   
@@ -951,10 +710,6 @@ $(function() {
 
   
 
-  
-      <!-- UY BEGIN -->
-      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
-      <!-- UY END -->
   
 
 
