@@ -114,7 +114,7 @@
 <meta property="og:site_name" content="han&#39;s bolg - 年糕記">
 <meta property="og:description" content="最近的项目里，有这样一个需求： 在 A 页面里插入 B 页面的内容，且要求：  B 的内容格式不能乱 A 的内容和 B 的内容要无缝衔接，像一个页面一样 B 页面里有很多script标签，功能要正常可用。 B 页面不会为了适配 A 页面，去做改动优化  方案 1：iframe要在一个页面插入另一个页面的内容，首先想到的方案肯定是 iframe，只要简单填一个 src 就 ok 了。但存在三个问题：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-22T17:27:57.330Z">
+<meta property="og:updated_time" content="2020-02-22T17:31:01.042Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="比iframe和dangerouslySetInnerHTML更好用的插入其他网站的方式">
 <meta name="twitter:description" content="最近的项目里，有这样一个需求： 在 A 页面里插入 B 页面的内容，且要求：  B 的内容格式不能乱 A 的内容和 B 的内容要无缝衔接，像一个页面一样 B 页面里有很多script标签，功能要正常可用。 B 页面不会为了适配 A 页面，去做改动优化  方案 1：iframe要在一个页面插入另一个页面的内容，首先想到的方案肯定是 iframe，只要简单填一个 src 就 ok 了。但存在三个问题：">
@@ -524,7 +524,7 @@ $(function() {
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  699
+                  708
                 </span>
               
 
@@ -588,15 +588,15 @@ $(function() {
 </li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script language=<span class="string">"JavaScript"</span>&gt;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">window</span> != top) top.location.href = location.href;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-<p>但因为需求4以及B页面存在大量我们无法预知的跳转方式，这些无法满足。</p>
+<p>但因为需求 4 以及 B 页面存在大量我们无法预知的跳转方式，这些无法满足。</p>
 <ol start="3">
 <li>跨域问题</li>
 </ol>
-<p>这个是更大的问题，如果A、B两个页面存在跨域问题，那么A页面处理问题1，2的方案就不可用😭</p>
-<h3 id="方案2：react的dangerouslySetInnerHTML"><a href="#方案2：react的dangerouslySetInnerHTML" class="headerlink" title="方案2：react的dangerouslySetInnerHTML"></a>方案2：react的dangerouslySetInnerHTML</h3><p>让我们靠谱的后端同学，在接口返回数据里直接把B页面的内容返回给A，然后在A里使用dangerouslySetInnerHTML，但这样子可以满足需求1，2，4，但是需求3出问题了。</p>
-<p>因为dangerouslySetInnerHTML无法解析出里面的script标签，并进行执行。<br>dangerouslySetInnerHTML其实就是react给我们写的一个<code>dom.innerHMTL = xxx</code>的语法糖，innerHTML是不会执行script标签里的内容的。</p>
-<h3 id="方案3：createContextualFragment-appendChild"><a href="#方案3：createContextualFragment-appendChild" class="headerlink" title="方案3：createContextualFragment + appendChild"></a>方案3：createContextualFragment + appendChild</h3><p>仍然让我们靠谱的后端同学，把B页面的内容用接口的形式发给我们，然后</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useEffect, useRef &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">DangerouslySetHtmlContent</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; html &#125; = props</span><br><span class="line">  <span class="keyword">const</span> divRef = useRef(<span class="literal">null</span>)</span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> slotHtml = <span class="built_in">document</span>.createRange().createContextualFragment(html) <span class="comment">// Create a 'tiny' document and parse the html string</span></span><br><span class="line">    divRef.current.innerHTML = <span class="string">''</span> <span class="comment">// Clear the container</span></span><br><span class="line">    divRef.current.appendChild(slotHtml) <span class="comment">// Append the new content</span></span><br><span class="line">  &#125;, [html])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div ref=&#123;divRef&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> DangerouslySetHtmlContent</span><br></pre></td></tr></table></figure>
+<p>这个是更大的问题，如果 A、B 两个页面存在跨域问题，那么 A 页面处理问题 1，2 的方案就不可用 😭</p>
+<h3 id="方案-2：react-的-dangerouslySetInnerHTML"><a href="#方案-2：react-的-dangerouslySetInnerHTML" class="headerlink" title="方案 2：react 的 dangerouslySetInnerHTML"></a>方案 2：react 的 dangerouslySetInnerHTML</h3><p>让我们靠谱的后端同学，在接口返回数据里直接把 B 页面的内容返回给 A，然后在 A 里使用 dangerouslySetInnerHTML，但这样子可以满足需求 1，2，4，但是需求 3 出问题了。</p>
+<p>因为 dangerouslySetInnerHTML 无法解析出里面的 script 标签，并进行执行。<br>dangerouslySetInnerHTML 其实就是 react 给我们写的一个<code>dom.innerHMTL = xxx</code>的语法糖，innerHTML 是不会执行 script 标签里的内容的。</p>
+<h3 id="方案-3：createContextualFragment-appendChild"><a href="#方案-3：createContextualFragment-appendChild" class="headerlink" title="方案 3：createContextualFragment + appendChild"></a>方案 3：createContextualFragment + appendChild</h3><p>仍然让我们靠谱的后端同学，把 B 页面的内容用接口的形式发给我们，然后</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123;useEffect, useRef&#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">DangerouslySetHtmlContent</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123;html&#125; = props</span><br><span class="line">  <span class="keyword">const</span> divRef = useRef(<span class="literal">null</span>)</span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> slotHtml = <span class="built_in">document</span>.createRange().createContextualFragment(html) <span class="comment">// Create a 'tiny' document and parse the html string</span></span><br><span class="line">    divRef.current.innerHTML = <span class="string">''</span> <span class="comment">// Clear the container</span></span><br><span class="line">    divRef.current.appendChild(slotHtml) <span class="comment">// Append the new content</span></span><br><span class="line">  &#125;, [html])</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">&#123;divRef&#125;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> DangerouslySetHtmlContent</span><br></pre></td></tr></table></figure>
 <p>完美！</p>
 <h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
 <li><p><a href="https://github.com/christo-pr/dangerously-set-html-content/blob/master/src/index.js" target="_blank" rel="noopener">https://github.com/christo-pr/dangerously-set-html-content/blob/master/src/index.js</a></p>
@@ -682,6 +682,10 @@ $(function() {
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/blog/2020/02/react-hook使用感受.html" rel="prev" title="react hook使用感受">
+                react hook使用感受 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -750,7 +754,7 @@ $(function() {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -768,7 +772,7 @@ $(function() {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -814,7 +818,7 @@ $(function() {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#方案-1：iframe"><span class="nav-number">1.</span> <span class="nav-text">方案 1：iframe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案2：react的dangerouslySetInnerHTML"><span class="nav-number">2.</span> <span class="nav-text">方案2：react的dangerouslySetInnerHTML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案3：createContextualFragment-appendChild"><span class="nav-number">3.</span> <span class="nav-text">方案3：createContextualFragment + appendChild</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#方案-1：iframe"><span class="nav-number">1.</span> <span class="nav-text">方案 1：iframe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案-2：react-的-dangerouslySetInnerHTML"><span class="nav-number">2.</span> <span class="nav-text">方案 2：react 的 dangerouslySetInnerHTML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案-3：createContextualFragment-appendChild"><span class="nav-number">3.</span> <span class="nav-text">方案 3：createContextualFragment + appendChild</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
             
 
           </div>
