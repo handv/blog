@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[从堆栈角度讲闭包]]></title>
+    <url>%2F%2Fblog%2F2020%2F08%2F%E4%BB%8E%E5%A0%86%E6%A0%88%E8%A7%92%E5%BA%A6%E8%AE%B2%E9%97%AD%E5%8C%85.html</url>
+    <content type="text"><![CDATA[内存空间要理解 JavaScript 在运行过程中数据是如何存储的，你就得先搞清楚其存储空间的种类。 在 JavaScript 的执行过程中， 主要有三种类型内存空间，分别是代码空间、栈空间和堆空间。 其中的代码空间主要是存储可执行代码的，这个我们后面再做介绍，今天主要来说说栈空间和堆空间。 原始类型的数据值都是直接保存在“栈”中的，引用类型的值是存放在“堆”中的。不过你也许会好奇，为什么一定要分“堆”和“栈”两个存储空间呢？所有数据直接存放在“栈”中不就可以了吗？]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>闭包</tag>
+        <tag>堆栈</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[antd select选择器使用]]></title>
     <url>%2F%2Fblog%2F2020%2F06%2Fantd-select%E9%80%89%E6%8B%A9%E5%99%A8%E4%BD%BF%E7%94%A8.html</url>
     <content type="text"><![CDATA[之前一直使用select组件，却没得要领，每次写起来都贼复杂。原来人家有这么多好的属性你不会用啊。给你你不中用啊[手动刘华强] 点击链接查看，就是这么简单实用123456789101112131415161718192021222324252627const &#123; Select &#125; = antd;const &#123; Option &#125; = Select;const children = [];for (let i = 10; i &lt; 36; i++) &#123; children.push(&lt;Option key=&#123;i&#125; value=&#123;i&#125;&gt;&#123;i.toString(36) &#125;:&#123;i&#125;&lt;/Option&gt;);&#125;function handleChange(value) &#123; console.log(`selected $&#123;value&#125;`);&#125;ReactDOM.render( &lt;Select showArrow showSearch style=&#123;&#123; width: '100%' &#125;&#125; placeholder="Please select" optionFilterProp="children" //设置为 children 表示对内嵌内容进行搜索 onChange=&#123;handleChange&#125; defaultValue=&#123;11&#125; &gt; &#123;children&#125; &lt;/Select&gt;, mountNode,);]]></content>
