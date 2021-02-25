@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[canvas生成base64图片失败的问题]]></title>
     <url>%2F%2Fblog%2F2021%2F02%2Fcanvas%E7%94%9F%E6%88%90base64%E5%9B%BE%E7%89%87%E5%A4%B1%E8%B4%A5%E7%9A%84%E9%97%AE%E9%A2%98.html</url>
-    <content type="text"><![CDATA[bug最近在做需求的时候，需要自行把生成图片，自然而然的用到了canvas.toDataURL这个api来生成base64的图片。 但是在实际测试过程中，却发现在某些ios手机中，无论是safari还是微信环境，都无法正常生成base64内容，而只是生成”data:,”就结束了。但无论是ios版本号还是手机型号，都比较随机。 debug经过调试，发现当更改canvas画布的高度尺寸，设置高度&lt;1500时，就正常生成图片了，但是&gt;1500就有问题。 查找资料和做试验发现，所有浏览器都对canvas画布尺寸有一定的宽高限制，都超过这个尺寸时，生成canvas就显示图裂了，自然也无法生成base64。!image大家可以在chrome里打开如下代码试一下： 123456789var canvas = document.createElement("canvas");canvas.width = 100000;canvas.height = 100000;var ctx = canvas.getContext('2d');ctx.fillStyle = '#f00';ctx.fillRect(0, 0, 2000, 2000);var base = canvas.toDataURL();console.log(base);document.body.appendChild(canvas); 看来，ios的safari对宽高的限制要求比较高。 fix如此一来，我们的解决方案就是限制canvas画布的宽高尺寸，而且不能丢失图片的内容，那就只能用缩放手段了。解决方案大致如下： 12345678910var canvas = document.createElement("canvas");var scale = 0.1;canvas.width = 100000 * scale;canvas.height = 100000 * scale;var ctx = canvas.getContext('2d');ctx.fillStyle = '#f00';ctx.fillRect(0, 0, 2000, 2000);var base = canvas.toDataURL();console.log(base);document.body.appendChild(canvas);]]></content>
+    <content type="text"><![CDATA[bug最近在做需求的时候，需要自行把生成图片，自然而然的用到了canvas.toDataURL这个api来生成base64的图片。 但是在实际测试过程中，却发现在某些ios手机中，无论是safari还是微信环境，都无法正常生成base64内容，而只是生成”data:,”就结束了。但出问题的设备环境，无论是ios版本号还是iphone手机型号，都比较随机。 debug经过调试，发现当更改canvas画布的高度尺寸，设置高度&lt;1500时，就正常生成图片了，但是&gt;1500就有问题。 查找资料和做试验发现，所有浏览器都对canvas画布尺寸有一定的宽高限制，都超过这个尺寸时，生成canvas就图裂了（如下图↓），自然也无法生成base64。 大家可以在pc的chrome里打开如下代码试一下： 123456789var canvas = document.createElement("canvas");canvas.width = 100000;canvas.height = 100000;var ctx = canvas.getContext('2d');ctx.fillStyle = '#f00';ctx.fillRect(0, 0, 2000, 2000);var base = canvas.toDataURL();console.log(base);document.body.appendChild(canvas); 看来，ios的safari对宽高的限制要求比较高。 fix如此一来，我们的解决方案就是限制canvas画布的宽高尺寸，而且不能丢失图片的内容，那就只能用缩放手段了。解决方案大致如下： 12345678910var canvas = document.createElement("canvas");var scale = 0.1;canvas.width = 100000 * scale;canvas.height = 100000 * scale;var ctx = canvas.getContext('2d');ctx.fillStyle = '#f00';ctx.fillRect(0, 0, 2000, 2000);var base = canvas.toDataURL();console.log(base);document.body.appendChild(canvas); 参考资料 https://www.cnblogs.com/shuchong/p/5948542.html https://segmentfault.com/q/1010000007675294]]></content>
       <categories>
         <category>前端</category>
       </categories>
@@ -61,8 +61,8 @@
       </categories>
       <tags>
         <tag>javascript</tag>
-        <tag>备忘</tag>
         <tag>知识点</tag>
+        <tag>备忘</tag>
         <tag>react</tag>
         <tag>react hook</tag>
       </tags>
@@ -400,8 +400,8 @@
       </categories>
       <tags>
         <tag>javascript</tag>
-        <tag>备忘</tag>
         <tag>知识点</tag>
+        <tag>备忘</tag>
         <tag>Canvas</tag>
         <tag>Literallycanvas</tag>
       </tags>
