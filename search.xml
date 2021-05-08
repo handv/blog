@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[useState和setState]]></title>
+    <url>%2F%2Fblog%2F2021%2F04%2FuseState%E5%92%8CsetState.html</url>
+    <content type="text"><![CDATA[先来思考一个老生常谈的问题，setState是同步还是异步? 再深入思考一下，useState是同步还是异步呢？ 我们来写几个 demo 试验一下。 先看 useState同步和异步情况下，连续执行两个 useState 示例12345678910111213141516171819202122232425262728function Component() &#123; const [a, setA] = useState(1) const [b, setB] = useState('b') console.log('render') function handleClickWithPromise() &#123; Promise.resolve().then(() =&gt; &#123; setA((a) =&gt; a + 1) setB('bb') &#125;) &#125; function handleClickWithoutPromise() &#123; setA((a) =&gt; a + 1) setB('bb') &#125; return ( &lt;Fragment&gt; &lt;button onClick=&#123;handleClickWithPromise&#125;&gt; &#123;a&#125;-&#123;b&#125; 异步执行 &lt;/button&gt; &lt;button onClick=&#123;handleClickWithoutPromise&#125;&gt; &#123;a&#125;-&#123;b&#125; 同步执行 &lt;/button&gt; &lt;/Fragment&gt; )&#125; 结论： 当点击同步执行按钮时，只重新 render 了一次 当点击异步执行按钮时，render 了两次 同步和异步情况下，连续执行两次同一个 useState 示例1234567891011121314151617181920212223function Component() &#123; const [a, setA] = useState(1) console.log('a', a) function handleClickWithPromise() &#123; Promise.resolve().then(() =&gt; &#123; setA((a) =&gt; a + 1) setA((a) =&gt; a + 1) &#125;) &#125; function handleClickWithoutPromise() &#123; setA((a) =&gt; a + 1) setA((a) =&gt; a + 1) &#125; return ( &lt;Fragment&gt; &lt;button onClick=&#123;handleClickWithPromise&#125;&gt;&#123;a&#125; 异步执行&lt;/button&gt; &lt;button onClick=&#123;handleClickWithoutPromise&#125;&gt;&#123;a&#125; 同步执行&lt;/button&gt; &lt;/Fragment&gt; )&#125; 当点击同步执行按钮时，两次 setA 都执行，但合并 render 了一次，打印 3 当点击异步执行按钮时，两次 setA 各自 render 一次，分别打印 2，3 再看 setState同步和异步情况下，连续执行两个 setState 示例12345678910111213141516171819202122232425262728293031class Component extends React.Component &#123; constructor(props) &#123; super(props) this.state = &#123; a: 1, b: 'b', &#125; &#125; handleClickWithPromise = () =&gt; &#123; Promise.resolve().then(() =&gt; &#123; this.setState(&#123;...this.state, a: 'aa'&#125;) this.setState(&#123;...this.state, b: 'bb'&#125;) &#125;) &#125; handleClickWithoutPromise = () =&gt; &#123; this.setState(&#123;...this.state, a: 'aa'&#125;) this.setState(&#123;...this.state, b: 'bb'&#125;) &#125; render() &#123; console.log('render') return ( &lt;Fragment&gt; &lt;button onClick=&#123;this.handleClickWithPromise&#125;&gt;异步执行&lt;/button&gt; &lt;button onClick=&#123;this.handleClickWithoutPromise&#125;&gt;同步执行&lt;/button&gt; &lt;/Fragment&gt; ) &#125;&#125; 当点击同步执行按钮时，只重新 render 了一次 当点击异步执行按钮时，render 了两次 跟useState的结果一样 同步和异步情况下，连续执行两次同一个 setState 示例123456789101112131415161718192021222324252627282930class Component extends React.Component &#123; constructor(props) &#123; super(props) this.state = &#123; a: 1, &#125; &#125; handleClickWithPromise = () =&gt; &#123; Promise.resolve().then(() =&gt; &#123; this.setState(&#123;a: this.state.a + 1&#125;) this.setState(&#123;a: this.state.a + 1&#125;) &#125;) &#125; handleClickWithoutPromise = () =&gt; &#123; this.setState(&#123;a: this.state.a + 1&#125;) this.setState(&#123;a: this.state.a + 1&#125;) &#125; render() &#123; console.log('a', this.state.a) return ( &lt;Fragment&gt; &lt;button onClick=&#123;this.handleClickWithPromise&#125;&gt;异步执行&lt;/button&gt; &lt;button onClick=&#123;this.handleClickWithoutPromise&#125;&gt;同步执行&lt;/button&gt; &lt;/Fragment&gt; ) &#125;&#125; 当点击同步执行按钮时，两次 setState 合并，只执行了最后一次，打印 2 当点击异步执行按钮时，两次 setState 各自 render 一次，分别打印 2，3 这里跟useState不同，同步执行时useState也会对state进行逐个处理，而setState则只会处理最后一次 为什么会有同步执行和异步执行结果不同呢？这里就涉及到 react 的 batchUpdate 机制，合并更新。 首先，为什么需要合并更新呢？ 如果没有合并更新，在每次执行 useState 的时候，组件都要重新 render 一次，会造成无效渲染，浪费时间（因为最后一次渲染会覆盖掉前面所有的渲染效果）。所以 react 会把一些可以一起更新的 useState/setState 放在一起，进行合并更新。 怎么进行合并更新 这里 react 用到了事务机制。 React 中的 Batch Update 是通过「Transaction」实现的。在 React 源码关于 Transaction 的部分，用一大段文字及一幅字符画解释了 Transaction 的作用： 12345678910111213141516171819202122* wrappers (injected at creation time)* + +* | |* +-----------------|--------|--------------+* | v | |* | +---------------+ | |* | +--| wrapper1 |---|----+ |* | | +---------------+ v | |* | | +-------------+ | |* | | +----| wrapper2 |--------+ |* | | | +-------------+ | | |* | | | | | |* | v v v v | wrapper* | +---+ +---+ +---------+ +---+ +---+ | invariants* perform(anyMethod) | | | | | | | | | | | | maintained* +-----------------&gt;|-|---|-|---|--&gt;|anyMethod|---|---|-|---|-|--------&gt;* | | | | | | | | | | | |* | | | | | | | | | | | |* | | | | | | | | | | | |* | +---+ +---+ +---------+ +---+ +---+ |* | initialize close |* +-----------------------------------------+ 用大白话说就是在实际的 useState/setState 前后各加了段逻辑给包了起来。只要是在同一个事务中的 setState 会进行合并（注意，useState不会进行state的合并）处理。 为什么 setTimeout 不能进行事务操作 由于 react 的事件委托机制，调用 onClick 执行的事件，是处于 react 的控制范围的。 而 setTimeout 已经超出了 react 的控制范围，react 无法对 setTimeout 的代码前后加上事务逻辑（除非 react 重写 setTimeout）。 所以当遇到 setTimeout/setInterval/Promise.then(fn)/fetch 回调/xhr 网络回调时，react 都是无法控制的。 相关react 源码如下 12345678if (executionContext === NoContext) &#123; // Flush the synchronous work now, unless we're already working or inside // a batch. This is intentionally inside scheduleUpdateOnFiber instead of // scheduleCallbackForFiber to preserve the ability to schedule a callback // without immediately flushing it. We only do this for user-initiated // updates, to preserve historical behavior of legacy mode. flushSyncCallbackQueue()&#125; executionContext 代表了目前 react 所处的阶段，而 NoContext 你可以理解为是 react 已经没活干了的状态。而 flushSyncCallbackQueue 里面就会去同步调用我们的 this.setState ，也就是说会同步更新我们的 state 。所以，我们知道了，当 executionContext 为 NoContext 的时候，我们的 setState 就是同步的 总结我们来总结一下上述实验的结果： 在同步事件中 多次执行setState和useState，只会调用一次重新渲染render 不同的是，setState会进行state的合并，而useState则不会 在异步的事件中（如setTimeout，Promise.then) 多次执行setState和useState，每一次的执行setState和useState，都会调用一次render 参考资料 https://github.com/facebook/react/blob/b1768b5a48d1f82e4ef4150e0036c5f846d3758a/src/renderers/shared/stack/reconciler/Transaction.js#L19-L54 https://zhuanlan.zhihu.com/p/78516581 https://github.com/facebook/react/issues/10231 https://zhuanlan.zhihu.com/p/28532725 https://medium.com/swlh/react-state-batch-update-b1b61bd28cd2 https://zhuanlan.zhihu.com/p/350332132 https://juejin.cn/post/6844903886407352334]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>javascript</tag>
+        <tag>源码</tag>
+        <tag>知识点</tag>
+        <tag>react</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[canvas生成base64图片失败的问题]]></title>
     <url>%2F%2Fblog%2F2021%2F02%2Fcanvas%E7%94%9F%E6%88%90base64%E5%9B%BE%E7%89%87%E5%A4%B1%E8%B4%A5%E7%9A%84%E9%97%AE%E9%A2%98.html</url>
     <content type="text"><![CDATA[bug最近在做需求的时候，需要自行把生成图片，自然而然的用到了canvas.toDataURL这个api来生成base64的图片。 但是在实际测试过程中，却发现在某些ios手机中，无论是safari还是微信环境，都无法正常生成base64内容，而只是生成”data:,”就结束了。但出问题的设备环境，无论是ios版本号还是iphone手机型号，都比较随机。 debug经过调试，发现当更改canvas画布的高度尺寸，设置高度&lt;1500时，就正常生成图片了，但是&gt;1500就有问题。 查找资料和做试验发现，所有浏览器都对canvas画布尺寸有一定的宽高限制，都超过这个尺寸时，生成canvas就图裂了（如下图↓），自然也无法生成base64。 大家可以在pc的chrome里打开如下代码试一下： 123456789var canvas = document.createElement("canvas");canvas.width = 100000;canvas.height = 100000;var ctx = canvas.getContext('2d');ctx.fillStyle = '#f00';ctx.fillRect(0, 0, 2000, 2000);var base = canvas.toDataURL();console.log(base);document.body.appendChild(canvas); 看来，ios的safari对宽高的限制要求比较高。 fix如此一来，我们的解决方案就是限制canvas画布的宽高尺寸，而且不能丢失图片的内容，那就只能用缩放手段了。解决方案大致如下： 12345678910var canvas = document.createElement("canvas");var scale = 0.1;canvas.width = 100000 * scale;canvas.height = 100000 * scale;var ctx = canvas.getContext('2d');ctx.fillStyle = '#f00';ctx.fillRect(0, 0, 2000, 2000);var base = canvas.toDataURL();console.log(base);document.body.appendChild(canvas); 参考资料 https://www.cnblogs.com/shuchong/p/5948542.html https://segmentfault.com/q/1010000007675294]]></content>
@@ -9,8 +23,8 @@
       </categories>
       <tags>
         <tag>javascript</tag>
-        <tag>备忘</tag>
         <tag>Canvas</tag>
+        <tag>备忘</tag>
       </tags>
   </entry>
   <entry>
@@ -101,8 +115,8 @@
         <category>前端</category>
       </categories>
       <tags>
-        <tag>javascript</tag>
         <tag>antd</tag>
+        <tag>javascript</tag>
         <tag>备忘</tag>
       </tags>
   </entry>
@@ -200,8 +214,8 @@
         <category>前端</category>
       </categories>
       <tags>
-        <tag>javascript</tag>
         <tag>antd</tag>
+        <tag>javascript</tag>
         <tag>源码</tag>
         <tag>知识点</tag>
       </tags>
@@ -401,9 +415,9 @@
       <tags>
         <tag>javascript</tag>
         <tag>知识点</tag>
-        <tag>备忘</tag>
         <tag>Canvas</tag>
         <tag>Literallycanvas</tag>
+        <tag>备忘</tag>
       </tags>
   </entry>
   <entry>
@@ -448,9 +462,9 @@
         <category>前端</category>
       </categories>
       <tags>
-        <tag>React</tag>
         <tag>javascript</tag>
         <tag>源码</tag>
+        <tag>React</tag>
         <tag>Redux-thunk</tag>
         <tag>Redux</tag>
       </tags>
@@ -476,9 +490,9 @@
         <category>前端</category>
       </categories>
       <tags>
+        <tag>javascript</tag>
         <tag>React</tag>
         <tag>单元测试</tag>
-        <tag>javascript</tag>
       </tags>
   </entry>
   <entry>
@@ -502,10 +516,10 @@
         <category>前端</category>
       </categories>
       <tags>
-        <tag>React</tag>
         <tag>javascript</tag>
         <tag>知识点</tag>
         <tag>Literallycanvas</tag>
+        <tag>React</tag>
       </tags>
   </entry>
 </search>
